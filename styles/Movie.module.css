@@ -1,0 +1,148 @@
+.row {
+    width: 100%;
+    min-height: 400px;
+    padding-left: 50px;
+    margin: 40px auto;
+    position: relative;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.left_arrow {
+    position: absolute;
+    width: 70px;
+    height: 80%;
+    padding-top: 7%;
+    text-align: center;
+    left: 50px;
+    top: 12%;
+    z-index: 20;
+    color: #ffffff;
+    font-size: 50px;
+}
+
+.right_arrow {
+    position: absolute;
+    width: 70px;
+    height: 80%;
+    padding-top: 7%;
+    text-align: center;
+    right: 0;
+    top: 12%;
+    z-index: 20;
+    color: #ffffff;
+    font-size: 50px;
+}
+
+.left_arrow_icon {
+    font-size: 40px;
+    margin-top: 20%;
+    color: rgb(221, 221, 221);
+    z-index: 30;
+    cursor: pointer;
+}
+
+.right_arrow_icon {
+    font-size: 40px;
+    margin-top: 20%;
+    color: rgb(221, 221, 221);
+    z-index: 30;
+    cursor: pointer;
+}
+
+.left_arrow:hover {
+    background-color: rgba(0, 0, 0, .7);
+    -webkit-mask-image: linear-gradient(to right, black 72%, transparent 100%);
+    mask-image: linear-gradient(to right, black 72%, transparent 100%);
+}
+
+.right_arrow:hover {
+    background-color: rgba(0, 0, 0, .7);
+    -webkit-mask-image: linear-gradient(to left, black 72%, transparent 100%);
+    mask-image: linear-gradient(to left, black 72%, transparent 100%);
+}
+
+.title {
+    font-size: 1.5rem;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.row_posters {
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    padding: 20px;
+    transition: all .9s ease-in-out;
+}
+
+.row_inline_posters {
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    padding: 20px;
+}
+
+.posters {
+    width: 243px;
+    object-fit: contain;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all .3s ease-in-out;
+}
+
+.posters:hover {
+    transform: scale(1.07);
+}
+
+.text_box {
+    width: 10%;
+    height: 100%;
+    background-color: rosybrown;
+    text-align: center;
+}
+
+@media screen and (max-width:1080px) {
+    .left_arrow {
+        visibility: hidden;
+    }
+    .right_arrow {
+        visibility: hidden;
+    }
+    .left_arrow_icon {
+        display: none;
+    }
+    .right_arrow_icon {
+        display: none;
+    }
+}
+
+@media screen and (max-width:780px) {
+    .row {
+        padding-left: 10px;
+        min-height: 200px;
+    }
+    .posters {
+        width: 150px;
+    }
+    .left_arrow {
+        visibility: hidden;
+    }
+    .right_arrow {
+        visibility: hidden;
+    }
+    .left_arrow_icon {
+        display: none;
+    }
+    .right_arrow_icon {
+        display: none;
+    }
+}
