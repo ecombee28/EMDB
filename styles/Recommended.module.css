@@ -71,6 +71,8 @@
 }
 
 .right_arrow_icon {
+    width: 30px;
+    object-fit: contain;
     font-size: 40px;
     margin-top: 20%;
     color: rgb(117, 117, 117);
