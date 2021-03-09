@@ -1,16 +1,19 @@
 .rec_wrapper {
     width: 100%;
     height: auto;
-    position: absolute;
-    top: 90vh;
+    display: block;
+    margin-top: 50px;
+    position: relative;
+    /* position: absolute; */
+    /* top: 90vh; */
 }
 
 .row {
     display: flex;
     overflow-y: hidden;
     overflow-x: scroll;
-    padding: 20px;
-    margin-bottom: 30px;
+    padding: 15px;
+    margin-bottom: 10px;
 }
 
 .hide {
@@ -31,7 +34,6 @@
     top: 12%;
     z-index: 100;
     cursor: pointer;
-    color: #ffffff;
     font-size: 50px;
     -webkit-mask-image: linear-gradient(to right, black 72%, transparent 100%);
     mask-image: linear-gradient(to right, black 72%, transparent 100%);
@@ -43,17 +45,18 @@
     height: 100%;
     padding-top: 7%;
     text-align: center;
-    right: 0;
+    right: 15px;
     top: 12%;
     z-index: 100;
     cursor: pointer;
-    color: #ffffff;
     font-size: 50px;
     -webkit-mask-image: linear-gradient(to left, black 72%, transparent 100%);
     mask-image: linear-gradient(to left, black 72%, transparent 100%);
 }
 
 .left_arrow_icon {
+    width: 30px;
+    object-fit: contain;
     font-size: 40px;
     margin-top: 20%;
     color: rgb(117, 117, 117);

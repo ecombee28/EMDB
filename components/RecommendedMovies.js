@@ -20,7 +20,9 @@ const Recommended = ({ movies }) => {
 
     element.scrollLeft += length;
 
-    if (element.scrollLeft == ttl) {
+    //console.log("right element:" + element.scrollLeft + " ttl:" + ttl);
+
+    if (parseInt(element.scrollLeft, 10) == ttl) {
       setRightEnd(true);
     } else {
       setRightEnd(false);
@@ -32,7 +34,9 @@ const Recommended = ({ movies }) => {
     const element = document.getElementById("row");
     element.scrollLeft -= length;
 
-    if (element.scrollLeft == 0) {
+    //console.log("left element:" + element.scrollLeft + " ttl:" + ttl);
+
+    if (parseInt(element.scrollLeft, 10) == 0) {
       setLeftEnd(true);
     } else {
       setLeftEnd(false);

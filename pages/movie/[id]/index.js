@@ -104,9 +104,9 @@ const movieInfo = ({ movie, movie2, trailer, recommended }) => {
         <div className={`${movieInfoStyle.plot_wrapper}`}>
           <p className={movieInfoStyle.plot}> {movie.overview}</p>
         </div>
-      </div>
-      <div className={movieInfoStyle.recommended}>
-        <RecommendedMovies movies={recommended.results} />
+        <div className={movieInfoStyle.recommended}>
+          <RecommendedMovies movies={recommended.results} />
+        </div>
       </div>
     </>
   );
