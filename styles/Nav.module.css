@@ -73,6 +73,8 @@
 }
 
 .icons {
+    width: 30px;
+    object-fit: contain;
     font-size: .8em;
     margin-right: 5px;
     cursor: pointer;

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import movieInfoStyle from "../../../styles/MovieInfo.module.css";
-import Image from "next/image";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlay, faSitemap } from "@fortawesome/free-solid-svg-icons";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
@@ -24,8 +23,6 @@ const TvInfo = ({ movie, trailer, recommended }) => {
 
   const firstYear = startDate.getFullYear();
   const lastYear = endDate.getFullYear();
-
-  console.log(inProduction);
 
   function toggle() {
     const doc = document.getElementById("trailer");
@@ -120,9 +117,9 @@ const TvInfo = ({ movie, trailer, recommended }) => {
         <div className={`${movieInfoStyle.plot_wrapper}`}>
           <p className={movieInfoStyle.plot}> {movie.overview}</p>
         </div>
-      </div>
-      <div className={movieInfoStyle.recommended}>
-        <RecommendedTv movies={recommended.results} />
+        <div className={movieInfoStyle.recommended}>
+          <RecommendedTv movies={recommended.results} />
+        </div>
       </div>
     </>
   );

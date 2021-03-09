@@ -55,10 +55,11 @@
 }
 
 .left_arrow_icon {
-    width: 30px;
+    width: 55px;
     object-fit: contain;
     font-size: 40px;
-    margin-top: 20%;
+    margin-top: 50%;
+    transform: translateY(-50%);
     color: rgb(117, 117, 117);
 }
 
@@ -71,10 +72,11 @@
 }
 
 .right_arrow_icon {
-    width: 30px;
+    width: 55px;
     object-fit: contain;
     font-size: 40px;
-    margin-top: 20%;
+    margin-top: 50%;
+    transform: translateY(-50%);
     color: rgb(117, 117, 117);
 }
 

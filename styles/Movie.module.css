@@ -41,6 +41,8 @@
 }
 
 .left_arrow_icon {
+    width: 55px;
+    object-fit: contain;
     font-size: 40px;
     margin-top: 20%;
     color: rgb(221, 221, 221);
@@ -49,6 +51,8 @@
 }
 
 .right_arrow_icon {
+    width: 55px;
+    object-fit: contain;
     font-size: 40px;
     margin-top: 20%;
     color: rgb(221, 221, 221);
@@ -100,7 +104,7 @@
 }
 
 .posters:hover {
-    transform: scale(1.07);
+    transform: scale(1.02);
 }
 
 .text_box {
