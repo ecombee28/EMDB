@@ -47,6 +47,7 @@ const search = () => {
       <Head>
         <title>Search/EMDB</title>
         <meta name="keywords" content="web dev" />
+        <link rel="shortcut icon" href="logo.ico" />
       </Head>
 
       <div className={searchStyles.search_bar}>

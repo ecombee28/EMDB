@@ -40,6 +40,7 @@ const movieInfo = ({ movie, movie2, trailer, recommended }) => {
       <Head>
         <title>{`${movie.title}/EMDB`}</title>
         <meta name="keywords" content="web dev" />
+        <link rel="shortcut icon" href="logo.ico" />
       </Head>
       <div id="trailer" className={movieInfoStyle.trailer}>
         <span id="closeVideo" className={movieInfoStyle.close} onClick={toggle}>
