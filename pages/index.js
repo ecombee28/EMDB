@@ -22,6 +22,7 @@ export default function Home({
       <Head>
         <title>EMDB</title>
         <meta name="keywords" content="web dev" />
+        <link rel="shortcut icon" href="logo.ico" />
       </Head>
       <LandingImage />
       <section style={mystyle}>
