@@ -38,7 +38,6 @@ const search = () => {
     }
   };
   const nextPage = () => {
-    console.log("nextPage");
     page = 2;
     check();
   };

@@ -70,6 +70,8 @@
 }
 
 .left_arrow {
+    width: 40px;
+    object-fit: contain;
     position: absolute;
     left: 12%;
     top: 78vh;
@@ -80,6 +82,8 @@
 }
 
 .right_arrow {
+    width: 40px;
+    object-fit: contain;
     position: absolute;
     right: 16%;
     top: 78vh;

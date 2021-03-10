@@ -32,12 +32,12 @@
     top: 43%;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
+    width: 90%;
     padding: 10px;
     min-height: 40vh;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -159,13 +159,13 @@
         top: 40%;
         left: 50%;
         transform: translateX(-50%);
-        width: 91%;
+        width: 99%;
         padding: 10px;
         min-height: 40vh;
         margin-top: 40px;
         display: flex;
         flex-wrap: wrap;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
     }
 }
@@ -205,12 +205,12 @@
         top: 40%;
         left: 50%;
         transform: translateX(-50%);
-        width: 90%;
+        width: 97%;
         padding: 10px;
         min-height: 40vh;
         display: flex;
         flex-wrap: wrap;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
     }
     .search_posters {
@@ -225,7 +225,7 @@
     }
     .explore_posters {
         width: 100%;
-        max-width: 370px;
+        max-width: 320px;
         height: 220px;
         font-size: 25px;
         margin-left: 0px;
