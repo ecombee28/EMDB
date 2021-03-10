@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import movieInfoStyle from "../../../styles/MovieInfo.module.css";
-import Image from "next/image";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
@@ -8,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RecommendedMovies from "../../../components/RecommendedMovies";
 import Head from "next/head";
 
-const movieInfo = ({ movie, movie2, trailer, recommended }) => {
+const movieInfo = ({ movie, trailer, recommended }) => {
   const [showMe, setShowMe] = useState(false);
   let trailerLink;
   trailer.results.length === 0
@@ -33,6 +32,41 @@ const movieInfo = ({ movie, movie2, trailer, recommended }) => {
   function showTrailer() {
     const doc = document.getElementById("trailer");
     doc.style.display = "block";
+  }
+
+  function getRating() {
+    let movieRating;
+    const releaseDates = movie.release_dates.results;
+
+    movie.release_dates.results.map((movieMap) => {
+      movieMap.iso_3166_1 === "US"
+        ? movieMap.release_dates[0].certification.length < 1
+          ? (movieRating = "N/A")
+          : (movieRating = movieMap.release_dates[0].certification)
+        : "N/A";
+    });
+
+    return movieRating;
+  }
+  function getGenre() {
+    let genre = "";
+    let newGenre;
+
+    movie.genres.map((genreMap) => {
+      genre += genreMap.name + ", ";
+    });
+
+    newGenre = genre.substring(0, genre.length - 2);
+
+    return newGenre;
+  }
+  function getYear() {
+    let year, d;
+
+    d = new Date(movie.release_date);
+    year = d.getFullYear();
+
+    return year;
   }
 
   return (
@@ -71,37 +105,14 @@ const movieInfo = ({ movie, movie2, trailer, recommended }) => {
           Trailer
         </button>
         <div className={movieInfoStyle.movie_info}>
-          <li className={movieInfoStyle.rated}>{movie2.Rated}</li>
-          <li className={movieInfoStyle.year}>{movie2.Year}</li>
-          <li className={movieInfoStyle.runtime}>{movie2.Runtime}</li>
-          <li className={movieInfoStyle.genre}>{movie2.Genre}</li>
+          <li className={movieInfoStyle.rated}>{getRating()}</li>
+          <li className={movieInfoStyle.year}>{getYear()}</li>
+          <li
+            className={movieInfoStyle.runtime}
+          >{`${movie.runtime} minutes`}</li>
+          <li className={movieInfoStyle.genre}>{getGenre()}</li>
+          {console.log(movie.title)}
         </div>
-        <div className={movieInfoStyle.movie_ratings_wrapper}>
-          {movie2.Ratings.map((rating) =>
-            rating.Source === "Internet Movie Database" ? (
-              <div className={movieInfoStyle.wrap}>
-                <img
-                  src="/imdb.png"
-                  alt="IMDB logo"
-                  className={movieInfoStyle.rating_logo}
-                />
-                <p className={movieInfoStyle.rating}>{rating.Value}</p>
-              </div>
-            ) : rating.Source === "Metacritic" ? (
-              <div className={movieInfoStyle.wrap}>
-                <img
-                  src="/Metacritic.svg"
-                  alt="meta logo"
-                  className={movieInfoStyle.rating_logo}
-                />
-                <p className={movieInfoStyle.rating}>{rating.Value}</p>
-              </div>
-            ) : (
-              ""
-            )
-          )}
-        </div>
-
         <div className={`${movieInfoStyle.plot_wrapper}`}>
           <p className={movieInfoStyle.plot}> {movie.overview}</p>
         </div>
@@ -115,14 +126,9 @@ const movieInfo = ({ movie, movie2, trailer, recommended }) => {
 
 export const getServerSideProps = async (context) => {
   const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${context.params.id}?api_key=0f2af5a67e7fbe4db3bc573d65f3724b`
+    `https://api.themoviedb.org/3/movie/${context.params.id}?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&append_to_response=release_dates`
   );
   const movie = await res.json();
-
-  const res2 = await fetch(
-    `https://www.omdbapi.com/?i=${movie.imdb_id}&apikey=ed47902e&plot=full`
-  );
-  const movie2 = await res2.json();
 
   const res3 = await fetch(
     `https://api.themoviedb.org/3/movie/${context.params.id}/videos?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-U`
@@ -135,7 +141,7 @@ export const getServerSideProps = async (context) => {
   const recommended = await res4.json();
 
   return {
-    props: { movie, movie2, trailer, recommended },
+    props: { movie, trailer, recommended },
   };
 };
 

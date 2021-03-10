@@ -41,6 +41,19 @@ const TvInfo = ({ movie, trailer, recommended }) => {
     doc.style.display = "block";
   }
 
+  function getGenre() {
+    let genre = "";
+    let newGenre;
+
+    movie.genres.map((genreMap) => {
+      genre += genreMap.name + ", ";
+    });
+
+    newGenre = genre.substring(0, genre.length - 2);
+
+    return newGenre;
+  }
+
   return (
     <>
       <Head>
@@ -87,10 +100,7 @@ const TvInfo = ({ movie, trailer, recommended }) => {
           <li
             className={movieInfoStyle.episodes}
           >{`${movie.number_of_episodes} episodes`}</li>
-
-          <li className={movieInfoStyle.genre}>
-            {movie.genres.map((genres) => genres.name + "  ")}
-          </li>
+          <li className={movieInfoStyle.genre}>{getGenre()}</li>
         </div>
         <div className={movieInfoStyle.movie_ratings_wrapper}>
           {inProduction ? (
