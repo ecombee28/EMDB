@@ -16,36 +16,29 @@ const Nav = () => {
         setShow(false);
       }
     });
-    // return () => {
-    //   window.removeEventListener("scroll");
-    // };
   }, []);
 
   return (
     <header className={`${navStyles.header} ${show && navStyles.header_black}`}>
-      <div className={navStyles.left_half}>
-        <div className={navStyles.logo_wrapper}>
-          <Link href="/">
-            <p className={navStyles.logo}>EMDB</p>
-          </Link>
-        </div>
-      </div>
-      <div className={navStyles.right_half}>
-        <nav className={navStyles.header_nav}>
-          <div className={navStyles.nav_links}>
+      <nav className={navStyles.nav_list}>
+        <Link href="/">
+          <li className={navStyles.logo}>EMDB</li>
+        </Link>
+
+        <Link href="/">
+          <li className={navStyles.nav_links}>
             {<FontAwesomeIcon icon={faHome} className={navStyles.icons} />}
-            <Link href="/">
-              <p className={navStyles.nav_links_text}>Home</p>
-            </Link>
-          </div>
-          <div className={navStyles.nav_links}>
+            <p className={navStyles.nav_text}>Home</p>
+          </li>
+        </Link>
+
+        <Link href="/search">
+          <li className={navStyles.nav_links}>
             {<FontAwesomeIcon icon={faSearch} className={navStyles.icons} />}
-            <Link href="/search">
-              <p className={navStyles.nav_links_text}>Search</p>
-            </Link>
-          </div>
-        </nav>
-      </div>
+            <p className={navStyles.nav_text}>Search</p>
+          </li>
+        </Link>
+      </nav>
     </header>
   );
 };

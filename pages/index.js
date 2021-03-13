@@ -14,7 +14,7 @@ export default function Home({
   const mystyle = {
     width: "100%",
     position: "absolute",
-    top: "74vh",
+    top: "84vh",
   };
 
   return (

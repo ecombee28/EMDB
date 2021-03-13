@@ -64,7 +64,10 @@ const search = () => {
 
       {div === true ? (
         <>
-          <h1 id="search_title" className={searchStyles.title}>
+          <h1
+            id="search_title"
+            className={`${searchStyles.title} ${searchStyles.title_container}`}
+          >
             {`Search Results for: ${search}`}
           </h1>
 
@@ -104,7 +107,11 @@ const search = () => {
           <div
             className={`${searchStyles.search_posters} ${searchStyles.explore_posters} ${searchStyles.dc}`}
           >
-            <img src="/dc.png" alt="" className={searchStyles.explore_img} />
+            <img
+              src="/dc.png"
+              alt=""
+              className={`${searchStyles.explore_img} ${searchStyles.dc_img}`}
+            />
             <p className={searchStyles.explore_text}>Movie Collection</p>
           </div>
         </Link>{" "}
