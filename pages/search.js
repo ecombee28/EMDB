@@ -7,6 +7,7 @@ import Link from "next/link";
 const search = () => {
   const [movies, setMovies] = useState(false);
   const [div, setDiv] = useState(false);
+  const [search, setSearch] = useState();
 
   let i = 0;
 
@@ -20,6 +21,7 @@ const search = () => {
       explore.style.display = "none";
       title.style.display = "none";
       let done = false;
+      setSearch(query);
 
       let movie;
 
@@ -63,7 +65,7 @@ const search = () => {
       {div === true ? (
         <>
           <h1 id="search_title" className={searchStyles.title}>
-            Search Results
+            {`Search Results for: ${search}`}
           </h1>
 
           <main id="search_results" className={searchStyles.search_results}>

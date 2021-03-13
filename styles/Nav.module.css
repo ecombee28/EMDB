@@ -125,8 +125,15 @@
         display: flex;
         flex-direction: row;
         color: #ffffff;
-        font-size: 23px;
+        font-size: 18px;
         margin-right: 15px;
+    }
+    .icons {
+        width: 22px;
+        object-fit: contain;
+        font-size: .8em;
+        margin-right: 5px;
+        cursor: pointer;
     }
 }
 
