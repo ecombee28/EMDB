@@ -79,7 +79,10 @@ const search = () => {
         ""
       )}
 
-      <h1 id="title" className={searchStyles.title}>
+      <h1
+        id="title"
+        className={`${searchStyles.title} ${searchStyles.title_container}`}
+      >
         Explore
       </h1>
       <main id="explore" className={searchStyles.search_results}>
