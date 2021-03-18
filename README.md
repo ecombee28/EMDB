@@ -4,7 +4,7 @@ Erics Movie Database
 
 # Project Overview
 
-This application uses the TMDB(The movie database) API together with all of its data. The home page displays trending movies, tv shows, popular movies, trending on Netflix's, and top-rated movies of all time.
+This application uses the TMDB(The movie database) API to gather all of its data. The home page displays trending movies, tv shows, popular movies, trending on Netflix's, and top-rated movies of all time.
 
 ![](home.png)
 
