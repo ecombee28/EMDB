@@ -6,8 +6,10 @@ import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RecommendedMovies from "../../../components/RecommendedMovies";
 import Head from "next/head";
+import RatingsLogo from "../../../components/RatingsLogo";
+import Cast from "../../../components/Cast";
 
-const movieInfo = ({ movie, trailer, recommended }) => {
+const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
   const [showMe, setShowMe] = useState(false);
   let trailerLink;
   trailer.results.length === 0
@@ -29,12 +31,12 @@ const movieInfo = ({ movie, trailer, recommended }) => {
     setShowMe(!showMe);
   }
 
-  function showTrailer() {
+  const showTrailer = () => {
     const doc = document.getElementById("trailer");
     doc.style.display = "block";
-  }
+  };
 
-  function getRating() {
+  const getRating = () => {
     let movieRating;
     const releaseDates = movie.release_dates.results;
 
@@ -47,8 +49,8 @@ const movieInfo = ({ movie, trailer, recommended }) => {
     });
 
     return movieRating;
-  }
-  function getGenre() {
+  };
+  const getGenre = () => {
     let genre = "";
     let newGenre;
 
@@ -59,15 +61,21 @@ const movieInfo = ({ movie, trailer, recommended }) => {
     newGenre = genre.substring(0, genre.length - 2);
 
     return newGenre;
-  }
-  function getYear() {
+  };
+  const getYear = () => {
     let year, d;
 
     d = new Date(movie.release_date);
     year = d.getFullYear();
 
     return year;
-  }
+  };
+
+  const buildCast = () => {
+    for (let i = 0; i < 8; i++) {
+      <Cast key={cast.cast[i].id} castMember={cast.cast[i]} />;
+    }
+  };
 
   return (
     <>
@@ -111,11 +119,27 @@ const movieInfo = ({ movie, trailer, recommended }) => {
             className={movieInfoStyle.runtime}
           >{`${movie.runtime} minutes`}</li>
           <li className={movieInfoStyle.genre}>{getGenre()}</li>
-          {console.log(movie.title)}
         </div>
+        <div className={movieInfoStyle.movie_ratings_wrapper}>
+          {imdb.Ratings.map((logo) => (
+            <RatingsLogo source={logo.Source} value={logo.Value} />
+          ))}
+        </div>
+
         <div className={`${movieInfoStyle.plot_wrapper}`}>
           <p className={movieInfoStyle.plot}> {movie.overview}</p>
         </div>
+
+        <div className={movieInfoStyle.cast_wrapper}>
+          <Cast castMember={cast.cast[0]} />
+          <Cast castMember={cast.cast[1]} />
+          <Cast castMember={cast.cast[2]} />
+          <Cast castMember={cast.cast[3]} />
+          <Cast castMember={cast.cast[4]} />
+          <Cast castMember={cast.cast[5]} />
+          <Cast castMember={cast.cast[6]} />
+        </div>
+
         <div className={movieInfoStyle.recommended}>
           <RecommendedMovies movies={recommended.results} />
         </div>
@@ -140,8 +164,18 @@ export const getServerSideProps = async (context) => {
   );
   const recommended = await res4.json();
 
+  const res5 = await fetch(
+    `https://www.omdbapi.com/?i=${movie.imdb_id}&apikey=ed47902e&plot=full`
+  );
+  const imdb = await res5.json();
+
+  const res6 = await fetch(
+    `https://api.themoviedb.org/3/movie/${context.params.id}/credits?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-US`
+  );
+  const cast = await res6.json();
+
   return {
-    props: { movie, trailer, recommended },
+    props: { movie, trailer, recommended, imdb, cast },
   };
 };
 

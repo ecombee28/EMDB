@@ -5,14 +5,13 @@ const MovieList = ({ movies, title }) => {
   return (
     <div className={movieStyles.row}>
       <h2 className={movieStyles.title}>{title}</h2>
-      {/* <div className={movieStyles.text_box}></div> */}
       <div className={movieStyles.row_inline_posters}>
-        {movies.map(
-          (movie) =>
-            movie.original_language === "en" &&
-            movie.vote_count > 50 && (
-              <MoviePoster key={movie.id} movies={movie} />
-            )
+        {movies.map((movie) =>
+          movie.original_language === "en" && movie.vote_count > 50 ? (
+            <MoviePoster key={movie.id} movies={movie} />
+          ) : (
+            ""
+          )
         )}
       </div>
     </div>

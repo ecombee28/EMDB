@@ -1,0 +1,43 @@
+.cast_node_wrapper {
+    width: 170px;
+    height: 300px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-right: 60px;
+    margin-top: 30px;
+}
+
+.image_wrapper {
+    width: 100%;
+    height: 80%;
+}
+
+.info_wrapper {
+    width: 100%;
+    height: 19%;
+}
+
+.info_wrapper p {
+    color: #fff;
+}
+
+.actor_name {
+    font-size: 18px;
+}
+
+.character_name {
+    font-size: 15px;
+}
+
+.cast__img {
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width:880px) {
+    .cast_node_wrapper {
+        margin: 30px auto;
+    }
+}

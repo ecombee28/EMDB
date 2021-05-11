@@ -10,6 +10,9 @@ export default function Home({
   topRatedMovies,
   bestMovies,
   bestTv,
+  action,
+  comedies,
+  romance,
 }) {
   const mystyle = {
     width: "100%",
@@ -34,10 +37,13 @@ export default function Home({
           title="Trending on Netflix"
           id={4}
         />
+        <MovieList movies={action.results} title="Action" id={5} />
+        <MovieList movies={comedies.results} title="Comedies" id={6} />
+        <MovieList movies={romance.results} title="Romance" id={7} />
         <MovieList
           movies={bestMovies.results}
           title="Top Rated Movies"
-          id={5}
+          id={8}
         />
       </section>
     </div>
@@ -60,6 +66,15 @@ export const getStaticProps = async () => {
   const res5 = await fetch(Requests.fetchPopularTv);
   const bestTv = await res5.json();
 
+  const res6 = await fetch(Requests.fetchActionMovies);
+  const action = await res6.json();
+
+  const res7 = await fetch(Requests.fetchComedyMovies);
+  const comedies = await res7.json();
+
+  const res8 = await fetch(Requests.fetchRomanceMovies);
+  const romance = await res8.json();
+
   return {
     props: {
       movies,
@@ -67,6 +82,9 @@ export const getStaticProps = async () => {
       topRatedMovies,
       bestMovies,
       bestTv,
+      action,
+      comedies,
+      romance,
     },
   };
 };
