@@ -137,7 +137,6 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
           <Cast castMember={cast.cast[3]} />
           <Cast castMember={cast.cast[4]} />
           <Cast castMember={cast.cast[5]} />
-          <Cast castMember={cast.cast[6]} />
         </div>
 
         <div className={movieInfoStyle.recommended}>

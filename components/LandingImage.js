@@ -13,7 +13,7 @@ const LandingImage = () => {
   const backImagePath = "https://image.tmdb.org/t/p/original";
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchMovies = async () => {
       const res = await axios.get(Request.fetchPopularMovie);
 
       setMovies(
@@ -23,7 +23,7 @@ const LandingImage = () => {
       );
     };
 
-    fetchPosts();
+    fetchMovies();
   }, []);
 
   return (
