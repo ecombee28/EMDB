@@ -1,55 +1,33 @@
 import React, { useState } from "react";
 import movieInfoStyle from "../../../styles/MovieInfo.module.css";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RecommendedMovies from "../../../components/RecommendedMovies";
 import Head from "next/head";
 import RatingsLogo from "../../../components/RatingsLogo";
 import Cast from "../../../components/Cast";
+import Trailer from "../../../components/Trailer";
 
 const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
-  const [showMe, setShowMe] = useState(false);
-  let trailerLink;
-  trailer.results.length === 0
-    ? (trailerLink = " ")
-    : (trailerLink = trailer.results[0].key);
-  const youTubeLink = "https://www.youtube.com/embed/" + trailerLink;
   const imagePath = "https://image.tmdb.org/t/p/original";
 
-  function toggle() {
-    const doc = document.getElementById("trailer");
-    const containerElement = document.getElementById("trailer");
-    const iframe_tag = containerElement.querySelector("iframe");
-    // const video_tag = containerElement.querySelector('video');
-    const iframeSrc = iframe_tag.src;
-
-    !showMe
-      ? ((doc.style.display = "none"), (iframe_tag.src = iframeSrc))
-      : (doc.style.display = "block");
-    setShowMe(!showMe);
-  }
-
-  const showTrailer = () => {
-    const doc = document.getElementById("trailer");
-    doc.style.display = "block";
-  };
-
+  // getRating fetches the movie rating from the API
   const getRating = () => {
     let movieRating;
-    const releaseDates = movie.release_dates.results;
 
-    movie.release_dates.results.map((movieMap) => {
-      movieMap.iso_3166_1 === "US"
-        ? movieMap.release_dates[0].certification.length < 1
+    movie.release_dates.results
+      .filter((list) => list.iso_3166_1 === "US")
+      .map((movieMap) => {
+        movieMap.release_dates[0].certification.length < 1
           ? (movieRating = "N/A")
-          : (movieRating = movieMap.release_dates[0].certification)
-        : "N/A";
-    });
+          : (movieRating = movieMap.release_dates[0].certification);
+      });
 
     return movieRating;
   };
+
+  // getGenre retrieves and returns a string of genres fetch
+  // from the API
   const getGenre = () => {
     let genre = "";
     let newGenre;
@@ -62,6 +40,8 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
 
     return newGenre;
   };
+
+  // getYear returns just the year of the release date that the API returns
   const getYear = () => {
     let year, d;
 
@@ -71,10 +51,9 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
     return year;
   };
 
-  const buildCast = () => {
-    for (let i = 0; i < 8; i++) {
-      <Cast key={cast.cast[i].id} castMember={cast.cast[i]} />;
-    }
+  const showTrailer = () => {
+    const doc = document.getElementById("trailer");
+    doc.style.display = "block";
   };
 
   return (
@@ -84,23 +63,7 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
         <meta name="keywords" content="web dev" />
         <link rel="shortcut icon" href="logo.ico" />
       </Head>
-      <div id="trailer" className={movieInfoStyle.trailer}>
-        <span id="closeVideo" className={movieInfoStyle.close} onClick={toggle}>
-          <FontAwesomeIcon
-            icon={faTimesCircle}
-            className={movieInfoStyle.close}
-          />
-        </span>
-        <iframe
-          id="ytVideo"
-          width="100%"
-          height="100%"
-          src={youTubeLink}
-          frameBorder="0"
-          gesture="media"
-          allow="encrypted-media"
-        ></iframe>
-      </div>
+      <Trailer trailer={trailer} />
       <img
         src={`${imagePath}${movie.backdrop_path}`}
         className={movieInfoStyle.backdrop}
@@ -121,8 +84,8 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
           <li className={movieInfoStyle.genre}>{getGenre()}</li>
         </div>
         <div className={movieInfoStyle.movie_ratings_wrapper}>
-          {imdb.Ratings.map((logo) => (
-            <RatingsLogo source={logo.Source} value={logo.Value} />
+          {imdb.Ratings.map((logo, i) => (
+            <RatingsLogo key={i} source={logo.Source} value={logo.Value} />
           ))}
         </div>
 
@@ -146,6 +109,14 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
     </>
   );
 };
+
+/**
+ *
+ * @param {*} context
+ * @returns
+ * getServerSideProps makes all the API calls when the app is loaded.
+ * All results from the API calls are collected and sent to movieInfo as props
+ */
 
 export const getServerSideProps = async (context) => {
   const res = await fetch(

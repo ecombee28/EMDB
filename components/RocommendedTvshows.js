@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import recStyle from "../styles/Recommended.module.css";
 import Link from "next/link";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faArrowCircleRight,
   faArrowCircleLeft,

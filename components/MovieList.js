@@ -45,7 +45,7 @@ const MovieList = ({ movies, title, id }) => {
         <h2 className={movieStyles.title}>{title}</h2>
 
         <div
-          className={`${movieStyles.left_arrow} ${
+          className={` ${movieStyles.left_arrow} ${
             leftEnd ? movieStyles.hide : movieStyles.show
           }`}
         >
@@ -64,7 +64,7 @@ const MovieList = ({ movies, title, id }) => {
         </div>
 
         <div
-          className={`${movieStyles.right_arrow} ${
+          className={` ${movieStyles.right_arrow} ${
             rightEnd ? movieStyles.hide : movieStyles.show
           }`}
         >

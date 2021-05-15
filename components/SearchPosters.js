@@ -9,7 +9,7 @@ const SearchPosters = ({ movies }) => {
       {movies.map((movies) =>
         movies.original_language === "en" && movies.vote_count > 300 ? (
           movies.media_type === "movie" ? (
-            <Link href="/movie/[id]" as={`/movie/${movies.id}`}>
+            <Link href="/movie/[id]" as={`/movie/${movies.id}`} key={movies.id}>
               <div className={searchStyles.search_posters}>
                 <img
                   src={`${imagePath}${movies.poster_path}`}
@@ -20,7 +20,7 @@ const SearchPosters = ({ movies }) => {
               </div>
             </Link>
           ) : (
-            <Link href="/tv/[id]" as={`/tv/${movies.id}`}>
+            <Link href="/tv/[id]" as={`/tv/${movies.id}`} key={movies.id}>
               <div className={searchStyles.search_posters}>
                 <img
                   src={`${imagePath}${movies.poster_path}`}

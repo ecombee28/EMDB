@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import recStyle from "../styles/Recommended.module.css";
 import Link from "next/link";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faArrowCircleRight,
   faArrowCircleLeft,
@@ -20,8 +19,6 @@ const Recommended = ({ movies }) => {
 
     element.scrollLeft += length;
 
-    //console.log("right element:" + element.scrollLeft + " ttl:" + ttl);
-
     if (parseInt(element.scrollLeft, 10) == ttl) {
       setRightEnd(true);
     } else {
@@ -33,8 +30,6 @@ const Recommended = ({ movies }) => {
   const slideLeft = () => {
     const element = document.getElementById("row");
     element.scrollLeft -= length;
-
-    //console.log("left element:" + element.scrollLeft + " ttl:" + ttl);
 
     if (parseInt(element.scrollLeft, 10) == 0) {
       setLeftEnd(true);
@@ -62,10 +57,11 @@ const Recommended = ({ movies }) => {
       </div>
 
       <div id="row" className={recStyle.row}>
-        {movies.map((movies) => (
-          <Link href="/movie/[id]" as={`/movie/${movies.id}`}>
+        {movies.map((movie) => (
+          <Link href="/movie/[id]" as={`/movie/${movie.id}`} key={movie.id}>
             <img
-              src={`${imagePath}${movies.poster_path}`}
+              key={movie.id}
+              src={`${imagePath}${movie.poster_path}`}
               alt=""
               className={recStyle.posters}
             />

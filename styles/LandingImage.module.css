@@ -81,6 +81,10 @@
     font-size: 25px;
 }
 
+/***************************** 
+   Media query's up to 1080px
+ *******************************/
+
 @media screen and (max-width:1080px) {
     .movie_info {
         width: 90%;
@@ -109,6 +113,10 @@
         font-size: 15px;
     }
 }
+
+/***************************** 
+   Media query's up to 800px
+ *******************************/
 
 @media screen and (max-width:800px) {
     .wrapper {

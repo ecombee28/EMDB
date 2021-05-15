@@ -14,6 +14,10 @@
     display: block;
 }
 
+/***********************
+ Navigation arrows 
+ ***********************/
+
 .left_arrow {
     position: absolute;
     width: 70px;
@@ -74,7 +78,7 @@
 
 .title {
     font-size: 1.5rem;
-    color: white;
+    color: #ffffff;
     margin-top: 10px;
     margin-bottom: 5px;
 }
@@ -114,6 +118,10 @@
     text-align: center;
 }
 
+/***************************** 
+   Media query's up to 1080px
+ *******************************/
+
 @media screen and (max-width:1080px) {
     .left_arrow {
         visibility: hidden;
@@ -128,6 +136,10 @@
         display: none;
     }
 }
+
+/***************************** 
+   Media query's up to 780px
+ *******************************/
 
 @media screen and (max-width:780px) {
     .row {
