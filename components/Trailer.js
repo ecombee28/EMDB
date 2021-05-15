@@ -5,13 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Trailer = ({ trailer }) => {
   const [showMe, setShowMe] = useState(false);
-  let trailerLink;
-
-  trailer.results.length === 0
-    ? (trailerLink = " ")
-    : (trailerLink = trailer.results[0].key);
-
-  const youTubeLink = "https://www.youtube.com/embed/" + trailerLink;
 
   function toggle() {
     const doc = document.getElementById("trailer");
@@ -37,7 +30,7 @@ const Trailer = ({ trailer }) => {
         id="ytVideo"
         width="100%"
         height="100%"
-        src={youTubeLink}
+        src={trailer}
         frameBorder="0"
         gesture="media"
         allow="encrypted-media"

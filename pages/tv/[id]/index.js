@@ -1,83 +1,49 @@
-import React, { useState } from "react";
-import Link from "next/link";
+import React from "react";
 import movieInfoStyle from "../../../styles/MovieInfo.module.css";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPlay, faSitemap } from "@fortawesome/free-solid-svg-icons";
-import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import RecommendedTv from "../../../components/RocommendedTvshows";
+import Recommended from "../../../components/Recommended";
 import Head from "next/head";
+import Trailer from "../../../components/Trailer";
 
 const TvInfo = ({ movie, trailer, recommended }) => {
-  const [showMe, setShowMe] = useState(false);
-  let trailerLink;
-  trailer.results.length === 0
-    ? (trailerLink = " ")
-    : (trailerLink = trailer.results[0].key);
-  const youTubeLink = "https://www.youtube.com/embed/" + trailerLink;
   const imagePath = "https://image.tmdb.org/t/p/original";
   const logoPath = "https://image.tmdb.org/t/p/w500";
   const inProduction = movie.in_production;
-  const startDate = new Date(movie.first_air_date);
-  const endDate = new Date(movie.last_air_date);
+  const firstYear = new Date(movie.first_air_date).getFullYear();
+  const lastYear = new Date(movie.last_air_date).getFullYear();
 
-  const firstYear = startDate.getFullYear();
-  const lastYear = endDate.getFullYear();
+  const getTrailerLink = () => {
+    if (trailer.results.length === 0) {
+      return " ";
+    } else {
+      return `https://www.youtube.com/embed/${trailer.results[0].key}`;
+    }
+  };
 
-  function toggle() {
-    const doc = document.getElementById("trailer");
-    const containerElement = document.getElementById("trailer");
-    const iframe_tag = containerElement.querySelector("iframe");
-    const iframeSrc = iframe_tag.src;
-
-    !showMe
-      ? ((doc.style.display = "none"), (iframe_tag.src = iframeSrc))
-      : (doc.style.display = "block");
-    setShowMe(!showMe);
-  }
-
-  function showTrailer() {
+  const showTrailer = () => {
     const doc = document.getElementById("trailer");
     doc.style.display = "block";
-  }
+  };
 
-  function getGenre() {
+  const getGenre = () => {
     let genre = "";
-    let newGenre;
 
     movie.genres.map((genreMap) => {
       genre += genreMap.name + ", ";
     });
 
-    newGenre = genre.substring(0, genre.length - 2);
-
-    return newGenre;
-  }
+    return genre.substring(0, genre.length - 2);
+  };
 
   return (
-    <>
+    <div>
       <Head>
         <title>{`${movie.name}/EMDB`}</title>
         <meta name="keywords" content="web dev" />
         <link rel="shortcut icon" href="logo.ico" />
       </Head>
-      <div id="trailer" className={movieInfoStyle.trailer}>
-        <span id="closeVideo" className={movieInfoStyle.close} onClick={toggle}>
-          <FontAwesomeIcon
-            icon={faTimesCircle}
-            className={movieInfoStyle.close}
-          />
-        </span>
-        <iframe
-          id="ytVideo"
-          width="100%"
-          height="100%"
-          src={youTubeLink}
-          frameBorder="0"
-          gesture="media"
-          allow="encrypted-media"
-        ></iframe>
-      </div>
+      <Trailer trailer={getTrailerLink()} />
       <img
         src={`${imagePath}${movie.backdrop_path}`}
         className={movieInfoStyle.backdrop}
@@ -104,10 +70,9 @@ const TvInfo = ({ movie, trailer, recommended }) => {
         </div>
         <div className={movieInfoStyle.movie_ratings_wrapper}>
           {inProduction ? (
-            <>
-              {" "}
+            <div>
               <p className={movieInfoStyle.logo_text}>Streaming on: </p>
-              <Link href={movie.homepage} target={`_blank`}>
+              <a href={movie.homepage} target={`_blank`}>
                 <img
                   className={`${movieInfoStyle.logo}  ${
                     movie.networks[0].name === "Netflix" ||
@@ -118,8 +83,8 @@ const TvInfo = ({ movie, trailer, recommended }) => {
                   src={`${logoPath}${movie.networks[0].logo_path}`}
                   alt=""
                 ></img>
-              </Link>
-            </>
+              </a>
+            </div>
           ) : (
             ""
           )}
@@ -129,15 +94,14 @@ const TvInfo = ({ movie, trailer, recommended }) => {
           <p className={movieInfoStyle.plot}> {movie.overview}</p>
         </div>
         <div className={movieInfoStyle.recommended}>
-          <RecommendedTv movies={recommended.results} />
+          <Recommended type="tv" item={recommended.results} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
 export const getServerSideProps = async (context) => {
-  console.log(context);
   const res = await fetch(
     `https://api.themoviedb.org/3/tv/${context.params.id}?api_key=0f2af5a67e7fbe4db3bc573d65f3724b`
   );

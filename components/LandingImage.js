@@ -12,6 +12,11 @@ const LandingImage = () => {
 
   const backImagePath = "https://image.tmdb.org/t/p/original";
 
+  /* When the app renders useEffect is called
+   * setMovies randomly selects a movie from the
+   * results of the API call
+   */
+
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await axios.get(Request.fetchPopularMovie);

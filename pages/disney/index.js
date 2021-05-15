@@ -42,7 +42,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchMovies = async () => {
       const res = await axios.get(
         `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&vote_count.gte=500&with_companies=2&with_original_language=en`
       );
@@ -50,8 +50,9 @@ export default function Home() {
       setPageCrt(res.data.total_pages);
     };
 
-    fetchPosts();
+    fetchMovies();
   }, [page]);
+
   const style = {
     backgroundImage: 'url("/disney_background.jpg")',
   };

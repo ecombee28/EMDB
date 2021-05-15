@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Recommended = ({ movies }) => {
+const Recommended = ({ item, type }) => {
   const imagePath = "https://image.tmdb.org/t/p/w500";
   const [leftEnd, setLeftEnd] = useState(true);
   const [rightEnd, setRightEnd] = useState(false);
@@ -57,8 +57,12 @@ const Recommended = ({ movies }) => {
       </div>
 
       <div id="row" className={recStyle.row}>
-        {movies.map((movie) => (
-          <Link href="/movie/[id]" as={`/movie/${movie.id}`} key={movie.id}>
+        {item.map((movie) => (
+          <Link
+            href={`/${type}/[id]`}
+            as={`/${type}/${movie.id}`}
+            key={movie.id}
+          >
             <img
               key={movie.id}
               src={`${imagePath}${movie.poster_path}`}

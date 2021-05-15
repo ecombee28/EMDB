@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import movieInfoStyle from "../../../styles/MovieInfo.module.css";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import RecommendedMovies from "../../../components/RecommendedMovies";
+import Recommended from "../../../components/Recommended";
 import Head from "next/head";
 import RatingsLogo from "../../../components/RatingsLogo";
 import Cast from "../../../components/Cast";
@@ -103,7 +103,7 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
         </div>
 
         <div className={movieInfoStyle.recommended}>
-          <RecommendedMovies movies={recommended.results} />
+          <Recommended type="movie" item={recommended.results} />
         </div>
       </div>
     </>
