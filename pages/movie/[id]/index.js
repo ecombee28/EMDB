@@ -67,14 +67,12 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
 
   const createCastArray = () => {
     if (cast.cast.length > 0) {
-      castMembersArray = [
-        <Cast castMember={cast.cast[0]} />,
-        <Cast castMember={cast.cast[1]} />,
-        <Cast castMember={cast.cast[2]} />,
-        <Cast castMember={cast.cast[3]} />,
-        <Cast castMember={cast.cast[4]} />,
-        <Cast castMember={cast.cast[5]} />,
-      ];
+      for (let i = 0; i < 6; i++) {
+        castMembersArray = [
+          ...castMembersArray,
+          <Cast castMember={cast.cast[i]} />,
+        ];
+      }
     }
   };
 
