@@ -11,6 +11,16 @@ import Trailer from "../../../components/Trailer";
 const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
   const imagePath = "https://image.tmdb.org/t/p/original";
 
+  console.log(trailer);
+
+  const getTrailerLink = () => {
+    if (trailer.results.length === 0) {
+      return " ";
+    } else {
+      return `https://www.youtube.com/embed/${trailer.results[0].key}`;
+    }
+  };
+
   // getRating fetches the movie rating from the API
   const getRating = () => {
     let movieRating;
@@ -63,7 +73,7 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
         <meta name="keywords" content="web dev" />
         <link rel="shortcut icon" href="logo.ico" />
       </Head>
-      <Trailer trailer={trailer} />
+      <Trailer trailer={getTrailerLink()} />
       <img
         src={`${imagePath}${movie.backdrop_path}`}
         className={movieInfoStyle.backdrop}
