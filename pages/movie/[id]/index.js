@@ -10,8 +10,7 @@ import Trailer from "../../../components/Trailer";
 
 const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
   const imagePath = "https://image.tmdb.org/t/p/original";
-
-  console.log(trailer);
+  var castMembersArray = [];
 
   const getTrailerLink = () => {
     if (trailer.results.length === 0) {
@@ -66,6 +65,21 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
     doc.style.display = "block";
   };
 
+  const createCastArray = () => {
+    if (cast.cast.length > 0) {
+      castMembersArray = [
+        <Cast castMember={cast.cast[0]} />,
+        <Cast castMember={cast.cast[1]} />,
+        <Cast castMember={cast.cast[2]} />,
+        <Cast castMember={cast.cast[3]} />,
+        <Cast castMember={cast.cast[4]} />,
+        <Cast castMember={cast.cast[5]} />,
+      ];
+    }
+  };
+
+  createCastArray();
+
   return (
     <>
       <Head>
@@ -94,9 +108,10 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
           <li className={movieInfoStyle.genre}>{getGenre()}</li>
         </div>
         <div className={movieInfoStyle.movie_ratings_wrapper}>
-          {imdb.Ratings.map((logo, i) => (
-            <RatingsLogo key={i} source={logo.Source} value={logo.Value} />
-          ))}
+          {imdb.Response !== "False" &&
+            imdb.Ratings.map((logo, i) => (
+              <RatingsLogo key={i} source={logo.Source} value={logo.Value} />
+            ))}
         </div>
 
         <div className={`${movieInfoStyle.plot_wrapper}`}>
@@ -104,12 +119,7 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
         </div>
 
         <div className={movieInfoStyle.cast_wrapper}>
-          <Cast castMember={cast.cast[0]} />
-          <Cast castMember={cast.cast[1]} />
-          <Cast castMember={cast.cast[2]} />
-          <Cast castMember={cast.cast[3]} />
-          <Cast castMember={cast.cast[4]} />
-          <Cast castMember={cast.cast[5]} />
+          {castMembersArray.map((list) => list)}
         </div>
 
         <div className={movieInfoStyle.recommended}>

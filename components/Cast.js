@@ -3,15 +3,16 @@ import style from "../styles/Cast.module.css";
 
 const Cast = ({ castMember }) => {
   const imagePath = "https://image.tmdb.org/t/p/w500";
-  //const blankImage = "";
   const castImage = imagePath + castMember.profile_path;
+  const blankImage = "/blank-profile-picture.png";
+
   return (
     <div className={style.cast_node_wrapper}>
       <div className={style.image_wrapper}>
         <img
           className={style.cast__img}
-          src={castImage}
-          alt="/blank-profile-picture.png"
+          src={castMember.profile_path === null ? blankImage : castImage}
+          alt="No Image"
         />
       </div>
       <div className={style.info_wrapper}>
