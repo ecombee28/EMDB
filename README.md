@@ -24,5 +24,5 @@ I used the Next.js framework to build this application. It is also fully mobile 
 
 I am still fairly new to react and next.js frameworks so by building this application it has grown my knowledge of client-side rendering vs server-side rendering. I was also able to continue to learn and develop my skills in HTML, CSS, Javascript, and working with API's.
 
-#Live site
+# Live site
 https://emdb-8mwrn.ondigitalocean.app/
