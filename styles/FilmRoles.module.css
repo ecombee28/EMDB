@@ -1,0 +1,26 @@
+.main_wrapper {
+    width: 85%;
+    height: auto;
+    padding-bottom: 10px;
+    margin: 20px auto 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid rgb(187, 187, 187);
+}
+
+.movie_link {
+    font-size: 1.4em;
+    color: rgb(57, 57, 235);
+    cursor: pointer;
+}
+
+.character {
+    font-size: 1.1em;
+    color: rgb(0, 0, 0);
+}
+
+.year {
+    font-size: 1.4em;
+    color: rgb(0, 0, 0);
+}
