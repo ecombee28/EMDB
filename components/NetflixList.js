@@ -1,5 +1,6 @@
 import movieStyles from "../styles/Movie.module.css";
 import MoviePoster from "./MoviePoster";
+import Request from "./Requests";
 
 const MovieList = ({ movies, title }) => {
   return (
@@ -21,7 +22,7 @@ export const getStaticProps = async () => {
   const API_KEY = "0f2af5a67e7fbe4db3bc573d65f3724b";
 
   const res = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=vote_count.desc&include_adult=false&include_video=false&page=1&with_original_language=en`
+    `https://api.themoviedb.org/3/discover/movie?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-US&sort_by=vote_count.desc&include_adult=false&include_video=false&page=1&with_original_language=en`
   );
 
   const movies = await res.json();

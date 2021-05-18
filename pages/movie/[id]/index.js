@@ -7,9 +7,9 @@ import Head from "next/head";
 import RatingsLogo from "../../../components/RatingsLogo";
 import Cast from "../../../components/Cast";
 import Trailer from "../../../components/Trailer";
+import ImagePaths from "../../../components/ImagePaths";
 
 const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
-  const imagePath = "https://image.tmdb.org/t/p/original";
   var castMembersArray = [];
 
   const getTrailerLink = () => {
@@ -87,7 +87,7 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
       </Head>
       <Trailer trailer={getTrailerLink()} />
       <img
-        src={`${imagePath}${movie.backdrop_path}`}
+        src={`${ImagePaths.original}${movie.backdrop_path}`}
         className={movieInfoStyle.backdrop}
       />
       <div className={movieInfoStyle.blackout}></div>

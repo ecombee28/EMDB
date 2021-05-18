@@ -6,11 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import Request from "../components/Requests";
 import axios from "axios";
+import ImagePaths from "./ImagePaths";
 
 const LandingImage = () => {
   const [movies, setMovies] = useState({});
-
-  const backImagePath = "https://image.tmdb.org/t/p/original";
 
   /* When the app renders useEffect is called
    * setMovies randomly selects a movie from the
@@ -36,7 +35,7 @@ const LandingImage = () => {
       <div
         className={landingStyles.wrapper}
         style={{
-          backgroundImage: `url("${backImagePath}${movies.backdrop_path}")`,
+          backgroundImage: `url("${ImagePaths.original}${movies.backdrop_path}")`,
         }}
       ></div>
       <div className={landingStyles.blackout}></div>

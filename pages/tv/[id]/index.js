@@ -5,10 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Recommended from "../../../components/Recommended";
 import Head from "next/head";
 import Trailer from "../../../components/Trailer";
+import ImagePaths from "../../../components/ImagePaths";
 
 const TvInfo = ({ movie, trailer, recommended }) => {
-  const imagePath = "https://image.tmdb.org/t/p/original";
-  const logoPath = "https://image.tmdb.org/t/p/w500";
   const inProduction = movie.in_production;
   const firstYear = new Date(movie.first_air_date).getFullYear();
   const lastYear = new Date(movie.last_air_date).getFullYear();
@@ -45,7 +44,7 @@ const TvInfo = ({ movie, trailer, recommended }) => {
       </Head>
       <Trailer trailer={getTrailerLink()} />
       <img
-        src={`${imagePath}${movie.backdrop_path}`}
+        src={`${ImagePaths.original}${movie.backdrop_path}`}
         className={movieInfoStyle.backdrop}
       />
       <div className={movieInfoStyle.blackout}></div>
@@ -80,7 +79,7 @@ const TvInfo = ({ movie, trailer, recommended }) => {
                       ? movieInfoStyle.non_filter
                       : ""
                   }`}
-                  src={`${logoPath}${movie.networks[0].logo_path}`}
+                  src={`${ImagePaths.w500}${movie.networks[0].logo_path}`}
                   alt=""
                 ></img>
               </a>

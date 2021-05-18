@@ -1,10 +1,10 @@
 import React from "react";
 import style from "../styles/Cast.module.css";
 import Link from "next/link";
+import ImagePaths from "./ImagePaths";
 
 const Cast = ({ castMember }) => {
-  const imagePath = "https://image.tmdb.org/t/p/w500";
-  const castImage = imagePath + castMember.profile_path;
+  const castImage = ImagePaths.w500 + castMember.profile_path;
   const blankImage = "/blank-profile-picture.png";
 
   return (
