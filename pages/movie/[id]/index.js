@@ -68,10 +68,7 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
   const createCastArray = () => {
     if (cast.cast.length > 0) {
       for (let i = 0; i < 6; i++) {
-        castMembersArray = [
-          ...castMembersArray,
-          <Cast castMember={cast.cast[i]} />,
-        ];
+        castMembersArray[i] = cast.cast[i];
       }
     }
   };
@@ -117,7 +114,9 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
         </div>
 
         <div className={movieInfoStyle.cast_wrapper}>
-          {castMembersArray.map((list) => list)}
+          {castMembersArray.map((list) => (
+            <Cast castMember={list} />
+          ))}
         </div>
 
         <div className={movieInfoStyle.recommended}>

@@ -6,11 +6,13 @@ import Recommended from "../../../components/Recommended";
 import Head from "next/head";
 import Trailer from "../../../components/Trailer";
 import ImagePaths from "../../../components/ImagePaths";
+import Cast from "../../../components/Cast";
 
-const TvInfo = ({ movie, trailer, recommended }) => {
+const TvInfo = ({ movie, trailer, recommended, cast }) => {
   const inProduction = movie.in_production;
   const firstYear = new Date(movie.first_air_date).getFullYear();
   const lastYear = new Date(movie.last_air_date).getFullYear();
+  var castMembersArray = [];
 
   const getTrailerLink = () => {
     if (trailer.results.length === 0) {
@@ -34,6 +36,20 @@ const TvInfo = ({ movie, trailer, recommended }) => {
 
     return genre.substring(0, genre.length - 2);
   };
+
+  const createCastArray = () => {
+    if (cast.cast.length > 0 && cast.cast.length > 6) {
+      for (let i = 0; i < 6; i++) {
+        castMembersArray[i] = cast.cast[i];
+      }
+    } else if (cast.cast.length <= 6) {
+      cast.cast.map((item, i) => {
+        castMembersArray[i] = item;
+      });
+    }
+  };
+
+  createCastArray();
 
   return (
     <div>
@@ -92,6 +108,13 @@ const TvInfo = ({ movie, trailer, recommended }) => {
         <div className={`${movieInfoStyle.plot_wrapper}`}>
           <p className={movieInfoStyle.plot}> {movie.overview}</p>
         </div>
+
+        <div className={movieInfoStyle.cast_wrapper}>
+          {castMembersArray.map((list) => (
+            <Cast castMember={list} />
+          ))}
+        </div>
+
         <div className={movieInfoStyle.recommended}>
           <Recommended type="tv" item={recommended.results} />
         </div>
@@ -106,18 +129,23 @@ export const getServerSideProps = async (context) => {
   );
   const movie = await res.json();
 
-  const res3 = await fetch(
+  const res2 = await fetch(
     `https://api.themoviedb.org/3/tv/${context.params.id}/videos?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-U`
   );
-  const trailer = await res3.json();
+  const trailer = await res2.json();
 
-  const res4 = await fetch(
+  const res3 = await fetch(
     `https://api.themoviedb.org/3/tv/${context.params.id}/recommendations?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&with_original_language=en&language=en-US&page=1`
   );
-  const recommended = await res4.json();
+  const recommended = await res3.json();
+
+  const res4 = await fetch(
+    `https://api.themoviedb.org/3/tv/${context.params.id}/credits?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-US`
+  );
+  const cast = await res4.json();
 
   return {
-    props: { movie, trailer, recommended },
+    props: { movie, trailer, recommended, cast },
   };
 };
 

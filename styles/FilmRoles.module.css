@@ -11,7 +11,8 @@
 
 .movie_link {
     font-size: 1.4em;
-    color: rgb(57, 57, 235);
+    font-weight: 500;
+    color: rgb(224, 13, 13);
     cursor: pointer;
 }
 
