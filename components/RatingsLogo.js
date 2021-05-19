@@ -3,7 +3,11 @@ import movieInfoStyle from "../styles/MovieInfo.module.css";
 
 const RatingsLogo = ({ source, value }) => {
   const getRating = () => {
-    let rating = value.substring(0, 2);
+    let rating;
+
+    value.length === 4
+      ? (rating = value.substring(0, 3))
+      : (rating = value.substring(0, 2));
 
     if (rating > 50) {
       return "/good-rotton.png";

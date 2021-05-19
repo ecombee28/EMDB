@@ -38,12 +38,12 @@
     margin: 0;
 }
 
-.trailer {
+.btn_more_info {
     font-size: 1.7rem;
     color: white;
     padding: 3px 13px;
-    background-color: rgba(61, 61, 61, .8);
-    border-radius: 5px;
+    background-color: rgba(61, 61, 61, .7);
+    border-radius: 12px;
     margin-top: 15px;
     cursor: pointer;
     outline: none;
@@ -52,7 +52,7 @@
     align-items: center;
 }
 
-.trailer:hover {
+.btn_more_info:hover {
     background-color: rgba(61, 61, 61, 1);
 }
 
@@ -64,20 +64,20 @@
 }
 
 .plot {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: #ffffff;
 }
 
 .wrap {
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 }
 
 .icon {
     width: 28px;
     object-fit: contain;
-    margin-left: 10px;
+    margin-right: 10px;
     font-size: 25px;
 }
 

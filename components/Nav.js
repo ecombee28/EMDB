@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import navStyles from "../styles/Nav.module.css";
 import Link from "next/link";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import { faHome, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

@@ -22,15 +22,17 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
 
   // getRating fetches the movie rating from the API
   const getRating = () => {
-    let movieRating;
+    let movieRatingArr, movieRating;
 
-    movie.release_dates.results
-      .filter((list) => list.iso_3166_1 === "US")
-      .map((movieMap) => {
-        movieMap.release_dates[0].certification.length < 1
-          ? (movieRating = "N/A")
-          : (movieRating = movieMap.release_dates[0].certification);
-      });
+    movieRatingArr = movie.release_dates.results.filter(
+      (list) => list.iso_3166_1 === "US"
+    );
+
+    movieRatingArr[0].release_dates.map((rating) => {
+      rating.certification === ""
+        ? (movieRating = "N/A")
+        : (movieRating = rating.certification);
+    });
 
     return movieRating;
   };

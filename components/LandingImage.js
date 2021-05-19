@@ -1,7 +1,10 @@
 import landingStyles from "../styles/LandingImage.module.css";
 import React, { useState, useEffect } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faArrowCircleRight, faPlay } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowCircleRight,
+  faInfoCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import Request from "../components/Requests";
@@ -44,12 +47,12 @@ const LandingImage = () => {
         <p className={landingStyles.title}>{movies.title}</p>
 
         <Link href="/movie/[id]" as={`/movie/${movies.id}`}>
-          <button className={landingStyles.trailer}>
-            More Info
+          <button className={landingStyles.btn_more_info}>
             <FontAwesomeIcon
-              icon={faArrowCircleRight}
+              icon={faInfoCircle}
               className={landingStyles.icon}
             />
+            More Info
           </button>
         </Link>
 
