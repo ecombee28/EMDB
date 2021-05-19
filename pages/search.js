@@ -39,10 +39,7 @@ const search = () => {
       setDiv(false);
     }
   };
-  const nextPage = () => {
-    page = 2;
-    check();
-  };
+
   return (
     <div>
       <Head>
