@@ -16,6 +16,10 @@
     cursor: pointer;
 }
 
+.movie_link:hover {
+    color: rgb(21, 93, 248);
+}
+
 .character {
     font-size: 1.1em;
     color: rgb(0, 0, 0);
