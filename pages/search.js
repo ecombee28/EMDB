@@ -24,13 +24,16 @@ const search = () => {
       setSearch(query);
 
       let movie;
+      try {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/search/multi?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&with_original_language=en&language=en-US&query=${query}&page=1&include_adult=false`
+        );
 
-      const res = await fetch(
-        `https://api.themoviedb.org/3/search/multi?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&with_original_language=en&language=en-US&query=${query}&page=1&include_adult=false`
-      );
-
-      movie = await res.json();
-      setMovies(movie.results);
+        movie = await res.json();
+        setMovies(movie.results);
+      } catch (err) {
+        console.log(err);
+      }
 
       setDiv(true);
     } else {

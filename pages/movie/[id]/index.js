@@ -97,7 +97,7 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
           Trailer
         </button>
         <div className={movieInfoStyle.movie_info}>
-          <li className={movieInfoStyle.rated}>{getRating()}</li>
+          <li className={movieInfoStyle.rated}>{imdb.Rated}</li>
           <li className={movieInfoStyle.year}>{getYear()}</li>
           <li
             className={movieInfoStyle.runtime}
@@ -138,34 +138,38 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
  */
 
 export const getServerSideProps = async (context) => {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${context.params.id}?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&append_to_response=release_dates`
-  );
-  const movie = await res.json();
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/movie/${context.params.id}?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&append_to_response=release_dates`
+    );
+    const movie = await res.json();
 
-  const res3 = await fetch(
-    `https://api.themoviedb.org/3/movie/${context.params.id}/videos?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-U`
-  );
-  const trailer = await res3.json();
+    const res3 = await fetch(
+      `https://api.themoviedb.org/3/movie/${context.params.id}/videos?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-U`
+    );
+    const trailer = await res3.json();
 
-  const res4 = await fetch(
-    `https://api.themoviedb.org/3/movie/${context.params.id}/recommendations?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&with_original_language=en&language=en-US&page=1`
-  );
-  const recommended = await res4.json();
+    const res4 = await fetch(
+      `https://api.themoviedb.org/3/movie/${context.params.id}/recommendations?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&with_original_language=en&language=en-US&page=1`
+    );
+    const recommended = await res4.json();
 
-  const res5 = await fetch(
-    `https://www.omdbapi.com/?i=${movie.imdb_id}&apikey=ed47902e&plot=full`
-  );
-  const imdb = await res5.json();
+    const res5 = await fetch(
+      `https://www.omdbapi.com/?i=${movie.imdb_id}&apikey=ed47902e&plot=full`
+    );
+    const imdb = await res5.json();
 
-  const res6 = await fetch(
-    `https://api.themoviedb.org/3/movie/${context.params.id}/credits?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-US`
-  );
-  const cast = await res6.json();
+    const res6 = await fetch(
+      `https://api.themoviedb.org/3/movie/${context.params.id}/credits?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-US`
+    );
+    const cast = await res6.json();
 
-  return {
-    props: { movie, trailer, recommended, imdb, cast },
-  };
+    return {
+      props: { movie, trailer, recommended, imdb, cast },
+    };
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export default movieInfo;
