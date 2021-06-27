@@ -26,11 +26,13 @@ export const userSlice = createSlice({
     setMovies: (state, action) => {
       state.movies = [...state.movies, action.payload];
       localStorage.setItem("movies", JSON.stringify(state.movies));
-      console.log(state.movies);
     },
 
     logOutUser: (state, action) => {
       state.id = null;
+      state.user = null;
+      state.movies = [];
+      localStorage.clear();
     },
   },
 });

@@ -26,6 +26,7 @@
     align-items: center;
     flex-grow: 1;
     gap: 2vw;
+    position: relative;
 }
 
 .nav_list li {
@@ -36,7 +37,7 @@
     display: flex;
     flex-direction: row;
     color: #ffffff;
-    font-size: clamp(1.4em, 1.2vw, 1.5vw);
+    font-size: clamp(1em, 1vw, 1.2vw);
 }
 
 .logo {
@@ -70,7 +71,7 @@
 }
 
 .icons {
-    width: clamp(1.2em, 1.3vw, 1.3vw);
+    width: clamp(.9em, 1vw, 1vw);
     object-fit: contain;
     font-size: .8em;
     margin-right: 5px;

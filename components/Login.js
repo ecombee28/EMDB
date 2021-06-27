@@ -103,7 +103,6 @@ const login = ({ changeView }) => {
     const addUser = (id, username, avatar, movies) => {
       dispatch(setUserId(id));
       dispatch(loginUser(username));
-      dispatch(setAvatarId(avatar));
 
       if (movies) {
         movies.map((m) => {

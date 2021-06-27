@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { selectId } from "../slices/userSlice";
 import { selectMovies } from "../slices/userSlice";
@@ -34,11 +34,12 @@ const AddMovies = ({ id, media_type }) => {
           movieId: id,
           type: media_type,
         });
+
+        dispatch(setMovies({ movie_id: id, media_type: media_type }));
+        setSelected(true);
       } catch (err) {
         console.log(err);
       }
-      dispatch(setMovies({ movie_id: id, media_type: media_type }));
-      setSelected(true);
     }
   };
 
@@ -56,4 +57,4 @@ const AddMovies = ({ id, media_type }) => {
   );
 };
 
-export default AddMovies;
+export default React.memo(AddMovies);
