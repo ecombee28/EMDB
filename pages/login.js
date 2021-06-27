@@ -6,23 +6,25 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../slices/userSlice";
 import { setUserId } from "../slices/userSlice";
 import { setAvatarId } from "../slices/userSlice";
-import cookie from "js-cookie";
+import { setMovies } from "../slices/userSlice";
+import MovieList from "../components/MovieList";
 
 const login = () => {
-  const [userInfo, setUserInfo] = useState({
-    id: null,
-    username: null,
-    avatarImg: null,
-  });
+  // const [userInfo, setUserInfo] = useState({
+  //   id: null,
+  //   username: null,
+  //   avatarImg: null,
+  // });
   const [userNameInput, setUserNameInput] = useState("");
   const [password, setPassword] = useState("");
   const [userInput, setUserInput] = useState(true);
   const [passInput, setPassInput] = useState(true);
   const [formValid, setFormValid] = useState(false);
-  const [login, setLogin] = useState(false);
+  // const [login, setLogin] = useState(false);
   const [error, setError] = useState(false);
   const [userError, setUserError] = useState("");
   const [passError, setPassError] = useState("");
+  // const [movies, setMovies] = useState({});
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -68,13 +70,20 @@ const login = () => {
         })
         .then((response) => {
           if (response.data.status === "success") {
-            addUser(
-              response.data.id,
-              response.data.user,
-              response.data.avatar_img
-            );
+            axios
+              .post(`https://combeecreations.com/emdbapi/public/api/movies`, {
+                userId: response.data.id,
+              })
+              .then((res) => {
+                addUser(
+                  response.data.id,
+                  response.data.user,
+                  response.data.avatar_img,
+                  res.data.Movies
+                );
 
-            router.push("/");
+                router.push("/");
+              });
           } else {
             localStorage.setItem(
               "error_message",
@@ -90,10 +99,14 @@ const login = () => {
         });
     }
 
-    const addUser = (id, username, avatar) => {
+    const addUser = (id, username, avatar, movies) => {
       dispatch(setUserId(id));
       dispatch(loginUser(username));
       dispatch(setAvatarId(avatar));
+
+      movies.map((m) => {
+        dispatch(setMovies(m));
+      });
     };
   };
 

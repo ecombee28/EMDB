@@ -12,6 +12,7 @@ import { setUserId } from "../slices/userSlice";
 import { setAvatarId } from "../slices/userSlice";
 import AvatarImg from "./AvatarImg";
 import { useDispatch } from "react-redux";
+import { setMovies } from "../slices/userSlice";
 
 const Nav = () => {
   const [show, setShow] = useState(false);
@@ -35,12 +36,22 @@ const Nav = () => {
     const localId = localStorage.getItem("id");
     const localUserName = localStorage.getItem("username");
     const localAvatar = localStorage.getItem("avatar");
+    const localMovies = JSON.parse(localStorage.getItem("movies"));
+    console.log(localMovies);
 
-    if (localId) {
-      dispatch(setUserId(localId));
-      dispatch(loginUser(localUserName));
-      dispatch(setAvatarId(localAvatar));
-    }
+    const restoreData = async () => {
+      if (localId) {
+        dispatch(setUserId(localId));
+        dispatch(loginUser(localUserName));
+        dispatch(setAvatarId(localAvatar));
+
+        localMovies.map((m) => {
+          dispatch(setMovies(m));
+        });
+      }
+    };
+
+    restoreData();
   }, []);
 
   return (

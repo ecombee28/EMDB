@@ -8,6 +8,7 @@ import RatingsLogo from "../../../components/RatingsLogo";
 import Cast from "../../../components/Cast";
 import Trailer from "../../../components/Trailer";
 import ImagePaths from "../../../components/ImagePaths";
+import AddMovie from "../../../components/AddMovies";
 
 const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
   var castMembersArray = [];
@@ -85,6 +86,7 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
         <link rel="shortcut icon" href="logo.ico" />
       </Head>
       <Trailer trailer={getTrailerLink()} />
+
       <img
         src={`${ImagePaths.original}${movie.backdrop_path}`}
         className={movieInfoStyle.backdrop}
@@ -92,10 +94,19 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
       <div className={movieInfoStyle.blackout}></div>
       <div className={movieInfoStyle.movie_info_wrapper}>
         <h1 className={movieInfoStyle.title}>{movie.title}</h1>
-        <button className={movieInfoStyle.trailer_button} onClick={showTrailer}>
-          <FontAwesomeIcon icon={faPlay} className={movieInfoStyle.icon} />
-          Trailer
-        </button>
+        <div className={movieInfoStyle.trailer_wrapper}>
+          <button
+            className={movieInfoStyle.trailer_button}
+            onClick={showTrailer}
+          >
+            <FontAwesomeIcon icon={faPlay} className={movieInfoStyle.icon} />
+            Trailer
+          </button>
+          <div className={movieInfoStyle.add_movie}>
+            <AddMovie id={movie.id} media_type={"movie"} />
+          </div>
+        </div>
+
         <div className={movieInfoStyle.movie_info}>
           <li className={movieInfoStyle.rated}>{imdb.Rated}</li>
           <li className={movieInfoStyle.year}>{getYear()}</li>
