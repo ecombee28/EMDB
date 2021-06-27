@@ -7,6 +7,7 @@ import Head from "next/head";
 import Trailer from "../../../components/Trailer";
 import ImagePaths from "../../../components/ImagePaths";
 import Cast from "../../../components/Cast";
+import AddMovie from "../../../components/AddMovies";
 
 const TvInfo = ({ movie, trailer, recommended, cast }) => {
   const inProduction = movie.in_production;
@@ -66,10 +67,18 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
       <div className={movieInfoStyle.blackout}></div>
       <div className={movieInfoStyle.movie_info_wrapper}>
         <h1 className={movieInfoStyle.title}>{movie.name}</h1>
-        <button className={movieInfoStyle.trailer_button} onClick={showTrailer}>
-          <FontAwesomeIcon icon={faPlay} className={movieInfoStyle.icon} />
-          Trailer
-        </button>
+        <div className={movieInfoStyle.trailer_wrapper}>
+          <button
+            className={movieInfoStyle.trailer_button}
+            onClick={showTrailer}
+          >
+            <FontAwesomeIcon icon={faPlay} className={movieInfoStyle.icon} />
+            Trailer
+          </button>
+          <div className={movieInfoStyle.add_movie}>
+            <AddMovie id={movie.id} media_type={"tv"} />
+          </div>
+        </div>
         <div className={movieInfoStyle.movie_info}>
           <li className={movieInfoStyle.year}>
             {inProduction
