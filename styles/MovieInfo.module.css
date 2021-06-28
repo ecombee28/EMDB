@@ -84,7 +84,8 @@
 }
 
 .trailer_wrapper {
-    width: 15%;
+    max-width: 15%;
+    min-width: 230px;
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
@@ -457,6 +458,10 @@
         z-index: 100;
         display: none;
     }
+    .trailer_button {
+        padding: 6px 10px;
+        font-size: 1em;
+    }
     .movie_info_wrapper {
         width: 100%;
         padding: 15px;
@@ -496,10 +501,6 @@
     }
     .plot {
         font-size: .9em;
-    }
-    .trailer_button {
-        padding: 8px 10px;
-        font-size: 1em;
     }
     .icon {
         width: 15px;

@@ -123,8 +123,9 @@
         background-position: center center;
     }
     .movie_info {
-        width: 90%;
+        width: 97%;
         height: auto;
+        top: 15vh;
     }
     .title {
         font-size: 2rem;

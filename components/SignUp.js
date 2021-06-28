@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../slices/userSlice";
 import { setUserId } from "../slices/userSlice";
-import { setAvatarId } from "../slices/userSlice";
 import { setMovies } from "../slices/userSlice";
 import Head from "next/head";
 
@@ -37,6 +36,7 @@ const login = ({ changeView }) => {
   };
 
   const handleValidation = () => {
+    setError(false);
     const uLen = userNameInput.length;
     const pLen = password.length;
     const conPLen = confirmPassword.length;

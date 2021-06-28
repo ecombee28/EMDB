@@ -48,7 +48,7 @@
 }
 
 .title {
-    font-size: 2.3rem;
+    font-size: clamp(1.2rem, 1.2rem, 1.2vw);
     color: rgb(255, 255, 255);
 }
 
@@ -117,16 +117,61 @@
 }
 
 .signup_txt {
-    font-size: 1.2rem;
+    font-size: clamp(1.2rem, 1.2rem, 1.2vw);
     color: rgb(134, 134, 134);
 }
 
 .signup {
-    font-size: 1.2rem;
+    font-size: clamp(1.2rem, 1.2rem, 1.2vw);
     color: #fff;
     margin-left: 10px;
 }
 
 .signup:hover {
     text-decoration: underline;
+}
+
+@media screen and (max-width:480px) {
+    .signup_container {
+        width: 300px;
+        height: 440px;
+    }
+    .login_container {
+        width: 300px;
+        height: 400px;
+    }
+    .login_wrapper {
+        width: 90%;
+        height: 90%;
+        position: relative;
+    }
+    .input_wrapper {
+        margin-bottom: 20px;
+    }
+    .input {
+        width: 100%;
+        height: 20px;
+    }
+    .error {
+        font-size: .7rem;
+    }
+    .invalid_login {
+        font-size: .7rem;
+        position: absolute;
+        top: 41%;
+        left: 1%;
+    }
+    .submit_btn {
+        font-size: 1.2rem;
+        margin-top: 25px;
+    }
+    .signup_txt {
+        font-size: 1rem;
+        color: rgb(134, 134, 134);
+    }
+    .signup {
+        font-size: 1rem;
+        color: #fff;
+        margin-left: 10px;
+    }
 }

@@ -10,6 +10,7 @@ import Link from "next/link";
 import style from "../styles/Bottom.module.css";
 import { useSelector } from "react-redux";
 import { selectId } from "../slices/userSlice";
+import { selectUserName } from "../slices/userSlice";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { logOutUser } from "../slices/userSlice";
@@ -18,10 +19,15 @@ const BottomNav = () => {
   const id = useSelector(selectId);
   const router = useRouter();
   const dispatch = useDispatch();
+  const username = useSelector(selectUserName);
 
   const logout = () => {
     dispatch(logOutUser());
     router.push("/");
+  };
+
+  const mystyle = {
+    color: "#ff0000",
   };
 
   return (
@@ -46,10 +52,16 @@ const BottomNav = () => {
           </div>
         </Link>
         <div className={style.nav_link_container}>
-          {<FontAwesomeIcon icon={faUser} className={style.icons} />}
+          {
+            <FontAwesomeIcon
+              icon={faUser}
+              className={style.icons}
+              style={id && { color: "#ff0000" }}
+            />
+          }
           {id ? (
             <li className={style.nav_links} onClick={logout}>
-              Sign Out
+              {username}
             </li>
           ) : (
             <Link href="/login">
