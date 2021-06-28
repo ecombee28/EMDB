@@ -1,4 +1,5 @@
 import Nav from "./Nav";
+import BottomNav from "./BottomNav";
 
 const Layout = ({ children }) => {
   return (
@@ -7,6 +8,7 @@ const Layout = ({ children }) => {
       <div>
         <main>{children}</main>
       </div>
+      <BottomNav />
     </>
   );
 };

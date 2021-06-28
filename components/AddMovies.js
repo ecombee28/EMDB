@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectId } from "../slices/userSlice";
 import { selectMovies } from "../slices/userSlice";
@@ -16,13 +16,14 @@ const AddMovies = ({ id, media_type }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setSelected(false);
     const checkMovies = async () => {
       const foundMovie = movies.find((t) => t.movie_id == id);
       foundMovie && setSelected(true);
     };
 
     checkMovies();
-  }, [id]);
+  });
 
   const addMovie = () => {
     const foundMovie = movies.find((t) => t.movie_id == id);

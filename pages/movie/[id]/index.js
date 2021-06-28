@@ -8,7 +8,7 @@ import RatingsLogo from "../../../components/RatingsLogo";
 import Cast from "../../../components/Cast";
 import Trailer from "../../../components/Trailer";
 import ImagePaths from "../../../components/ImagePaths";
-import AddMovie from "../../../components/AddMovies";
+import AddMovieMain from "../../../components/AddMovies";
 
 const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
   var castMembersArray = [];
@@ -103,7 +103,7 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
             Trailer
           </button>
           <div className={movieInfoStyle.add_movie}>
-            <AddMovie id={movie.id} media_type={"movie"} />
+            <AddMovieMain id={movie.id} media_type={"movie"} />
           </div>
         </div>
 
