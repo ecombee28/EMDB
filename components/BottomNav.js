@@ -26,10 +26,6 @@ const BottomNav = () => {
     router.push("/");
   };
 
-  const mystyle = {
-    color: "#ff0000",
-  };
-
   return (
     <div>
       <nav className={style.nav}>
