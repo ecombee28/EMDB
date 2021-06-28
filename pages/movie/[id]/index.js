@@ -8,10 +8,13 @@ import RatingsLogo from "../../../components/RatingsLogo";
 import Cast from "../../../components/Cast";
 import Trailer from "../../../components/Trailer";
 import ImagePaths from "../../../components/ImagePaths";
-import AddMovieMain from "../../../components/AddMovies";
+import AddMovie from "../../../components/AddMovies";
+import { useSelector } from "react-redux";
+import { selectId } from "../../../slices/userSlice";
 
 const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
   var castMembersArray = [];
+  const id = useSelector(selectId);
 
   const getTrailerLink = () => {
     if (trailer.results.length === 0) {
@@ -21,22 +24,22 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
     }
   };
 
-  // getRating fetches the movie rating from the API
-  const getRating = () => {
-    let movieRatingArr, movieRating;
+  // // getRating fetches the movie rating from the API
+  // const getRating = () => {
+  //   let movieRatingArr, movieRating;
 
-    movieRatingArr = movie.release_dates.results.filter(
-      (list) => list.iso_3166_1 === "US"
-    );
+  //   movieRatingArr = movie.release_dates.results.filter(
+  //     (list) => list.iso_3166_1 === "US"
+  //   );
 
-    movieRatingArr[0].release_dates.map((rating) => {
-      rating.certification === ""
-        ? (movieRating = "N/A")
-        : (movieRating = rating.certification);
-    });
+  //   movieRatingArr[0].release_dates.map((rating) => {
+  //     rating.certification === ""
+  //       ? (movieRating = "N/A")
+  //       : (movieRating = rating.certification);
+  //   });
 
-    return movieRating;
-  };
+  //   return movieRating;
+  // };
 
   // getGenre retrieves and returns a string of genres fetch
   // from the API
@@ -102,9 +105,11 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
             <FontAwesomeIcon icon={faPlay} className={movieInfoStyle.icon} />
             Trailer
           </button>
-          <div className={movieInfoStyle.add_movie}>
-            <AddMovieMain id={movie.id} media_type={"movie"} />
-          </div>
+          {id && (
+            <div className={movieInfoStyle.add_movie}>
+              <AddMovie id={movie.id} media_type={"movie"} />
+            </div>
+          )}
         </div>
 
         <div className={movieInfoStyle.movie_info}>

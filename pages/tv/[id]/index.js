@@ -8,12 +8,15 @@ import Trailer from "../../../components/Trailer";
 import ImagePaths from "../../../components/ImagePaths";
 import Cast from "../../../components/Cast";
 import AddMovie from "../../../components/AddMovies";
+import { useSelector } from "react-redux";
+import { selectId } from "../../../slices/userSlice";
 
 const TvInfo = ({ movie, trailer, recommended, cast }) => {
   const inProduction = movie.in_production;
   const firstYear = new Date(movie.first_air_date).getFullYear();
   const lastYear = new Date(movie.last_air_date).getFullYear();
   var castMembersArray = [];
+  const id = useSelector(selectId);
 
   const getTrailerLink = () => {
     if (trailer.results.length === 0) {
@@ -75,9 +78,11 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
             <FontAwesomeIcon icon={faPlay} className={movieInfoStyle.icon} />
             Trailer
           </button>
-          <div className={movieInfoStyle.add_movie}>
-            <AddMovie id={movie.id} media_type={"tv"} />
-          </div>
+          {id && (
+            <div className={movieInfoStyle.add_movie}>
+              <AddMovie id={movie.id} media_type={"tv"} />
+            </div>
+          )}
         </div>
         <div className={movieInfoStyle.movie_info}>
           <li className={movieInfoStyle.year}>

@@ -93,6 +93,9 @@
 }
 
 @media screen and (max-width:780px) {
+    .rec_wrapper {
+        margin-bottom: 30px;
+    }
     .row {
         margin-bottom: 0px;
     }

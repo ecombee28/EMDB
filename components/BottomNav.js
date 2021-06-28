@@ -48,13 +48,7 @@ const BottomNav = () => {
           </div>
         </Link>
         <div className={style.nav_link_container}>
-          {
-            <FontAwesomeIcon
-              icon={faUser}
-              className={style.icons}
-              style={id && { color: "#ff0000" }}
-            />
-          }
+          {<FontAwesomeIcon icon={faUser} className={style.icons} />}
           {id ? (
             <li className={style.nav_links} onClick={logout}>
               {username}

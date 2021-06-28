@@ -128,10 +128,13 @@
         top: 15vh;
     }
     .title {
-        font-size: 2rem;
+        font-size: 1.7rem;
         color: #ffffff;
         font-weight: bold;
         margin: 0;
+    }
+    .btn_more_info {
+        font-size: 1.2rem;
     }
     .trailer {
         font-size: 1.3rem;
@@ -144,7 +147,7 @@
         max-height: 150px;
     }
     .plot {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
     .icon {
         font-size: 15px;
