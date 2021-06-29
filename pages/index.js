@@ -104,6 +104,7 @@ export const getStaticProps = async () => {
     const res8 = await fetch(Requests.fetchRomanceMovies);
     const romance = await res8.json();
 
+    //Randomly selects a movie for the landingImage component
     const randomMovie =
       movies.results[Math.floor(Math.random() * movies.results.length - 1)];
 
