@@ -11,6 +11,7 @@ import { setUserId } from "../slices/userSlice";
 import { useDispatch } from "react-redux";
 import { setMovies } from "../slices/userSlice";
 import Username from "../components/UserName";
+import Cookie from "js-cookie";
 
 const Nav = () => {
   const [show, setShow] = useState(false);
@@ -35,7 +36,7 @@ const Nav = () => {
     const localUserName = localStorage.getItem("username");
     const localMovies = JSON.parse(localStorage.getItem("movies"));
 
-    const restoreData = async () => {
+    const restoreData = () => {
       if (localId) {
         dispatch(setUserId(localId));
         dispatch(loginUser(localUserName));
