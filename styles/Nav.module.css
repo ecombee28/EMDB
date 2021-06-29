@@ -90,7 +90,7 @@
     margin-right: 5px;
 }
 
-@media screen and (max-width:700px) {
+@media screen and (max-width:1000px) {
     .header_black {
         display: none;
     }
