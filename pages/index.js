@@ -13,6 +13,7 @@ export default function Home({
   action,
   comedies,
   romance,
+  randomMovie,
 }) {
   const mystyle = {
     width: "100%",
@@ -27,7 +28,7 @@ export default function Home({
         <meta name="keywords" content="web dev" />
         <link rel="shortcut icon" href="logo.ico" />
       </Head>
-      <LandingImage />
+      <LandingImage movie={randomMovie} />
       <section style={mystyle}>
         <MovieList
           movies={movies.results}
@@ -103,6 +104,9 @@ export const getStaticProps = async () => {
     const res8 = await fetch(Requests.fetchRomanceMovies);
     const romance = await res8.json();
 
+    const randomMovie =
+      movies.results[Math.floor(Math.random() * movies.results.length - 1)];
+
     return {
       props: {
         movies,
@@ -113,6 +117,7 @@ export const getStaticProps = async () => {
         action,
         comedies,
         romance,
+        randomMovie,
       },
     };
   } catch (err) {

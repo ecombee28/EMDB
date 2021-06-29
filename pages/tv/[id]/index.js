@@ -80,7 +80,7 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
           </button>
           {id && (
             <div className={movieInfoStyle.add_movie}>
-              <AddMovie id={movie.id} media_type={"tv"} />
+              <AddMovie key={movie.id} id={movie.id} media_type={"tv"} />
             </div>
           )}
         </div>
