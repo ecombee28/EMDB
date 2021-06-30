@@ -90,7 +90,25 @@
     margin-right: 5px;
 }
 
-@media only screen and (min-device-width: 300px) and (max-device-width: 1024px) and (orientation:portrait) and (orientation: landscape) {
+@media only screen and (max-device-width: 1024px) and (orientation:portrait) {
+    .header_black {
+        display: none;
+    }
+    .nav_list {
+        display: none;
+    }
+    .logo {
+        display: none;
+    }
+    .mobile_logo {
+        display: block;
+    }
+    .nav_links {
+        display: none;
+    }
+}
+
+@media only screen and (max-device-width: 1024px) and (orientation: landscape) {
     .header_black {
         display: none;
     }
