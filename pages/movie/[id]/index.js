@@ -12,8 +12,7 @@ import AddMovie from "../../../components/AddMovies";
 import { useSelector } from "react-redux";
 import { selectId } from "../../../slices/userSlice";
 
-const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
-  var castMembersArray = [];
+const movieInfo = ({ movie, trailer, recommended, imdb, castMembersArray }) => {
   const id = useSelector(selectId);
 
   const getTrailerLink = () => {
@@ -23,23 +22,6 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
       return `https://www.youtube.com/embed/${trailer.results[0].key}`;
     }
   };
-
-  // // getRating fetches the movie rating from the API
-  // const getRating = () => {
-  //   let movieRatingArr, movieRating;
-
-  //   movieRatingArr = movie.release_dates.results.filter(
-  //     (list) => list.iso_3166_1 === "US"
-  //   );
-
-  //   movieRatingArr[0].release_dates.map((rating) => {
-  //     rating.certification === ""
-  //       ? (movieRating = "N/A")
-  //       : (movieRating = rating.certification);
-  //   });
-
-  //   return movieRating;
-  // };
 
   // getGenre retrieves and returns a string of genres fetch
   // from the API
@@ -71,15 +53,19 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
     doc.style.display = "block";
   };
 
-  const createCastArray = () => {
-    if (cast.cast.length > 0) {
-      for (let i = 0; i < 6; i++) {
-        castMembersArray[i] = cast.cast[i];
-      }
-    }
-  };
-
-  createCastArray();
+  // const createCastArray = () => {
+  //   if (cast.cast.length > 6) {
+  //     for (let i = 0; i < 6; i++) {
+  //       castMembersArray[i] = cast.cast[i];
+  //     }
+  //   } else if (cast.cast.length > 1 && cast.cast.length <= 6) {
+  //     cast.cast.map((item, i) => {
+  //       castMembersArray[i] = item;
+  //     });
+  //   } else if (cast.cast.length == 1) {
+  //     castMembersArray.push(cast.cast);
+  //   }
+  // };
 
   return (
     <>
@@ -138,7 +124,9 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
         </div>
 
         <div className={movieInfoStyle.recommended}>
-          <Recommended type="movie" item={recommended.results} />
+          {recommended.total_results > 0 && (
+            <Recommended type="movie" item={recommended.results} />
+          )}
         </div>
       </div>
     </>
@@ -154,6 +142,8 @@ const movieInfo = ({ movie, trailer, recommended, imdb, cast }) => {
  */
 
 export const getServerSideProps = async (context) => {
+  var castMembersArray = [];
+
   try {
     const res = await fetch(
       `https://api.themoviedb.org/3/movie/${context.params.id}?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&append_to_response=release_dates`
@@ -180,8 +170,20 @@ export const getServerSideProps = async (context) => {
     );
     const cast = await res6.json();
 
+    if (cast.cast.length > 6) {
+      for (let i = 0; i < 6; i++) {
+        castMembersArray[i] = cast.cast[i];
+      }
+    } else if (cast.cast.length > 1 && cast.cast.length <= 6) {
+      cast.cast.map((item, i) => {
+        castMembersArray[i] = item;
+      });
+    } else if (cast.cast.length == 1) {
+      castMembersArray.push(cast.cast[0]);
+    }
+
     return {
-      props: { movie, trailer, recommended, imdb, cast },
+      props: { movie, trailer, recommended, imdb, castMembersArray },
     };
   } catch (err) {
     console.log(err);

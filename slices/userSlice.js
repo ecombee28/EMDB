@@ -27,6 +27,11 @@ export const userSlice = createSlice({
       state.movies = [...state.movies, action.payload];
       localStorage.setItem("movies", JSON.stringify(state.movies));
     },
+    resetMovies: (state, action) => {
+      state.movies = [action.payload];
+      localStorage.removeItem("movies");
+      localStorage.setItem("movies", JSON.stringify(state.movies));
+    },
 
     logOutUser: (state, action) => {
       state.id = null;
@@ -37,8 +42,14 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserId, loginUser, setAvatarId, setMovies, logOutUser } =
-  userSlice.actions;
+export const {
+  setUserId,
+  loginUser,
+  setAvatarId,
+  setMovies,
+  resetMovies,
+  logOutUser,
+} = userSlice.actions;
 
 export const selectId = (state) => state.user.id;
 export const selectAvatarId = (state) => state.user.avatar;

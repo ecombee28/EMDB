@@ -92,9 +92,9 @@
     border-radius: 10px;
 }
 
-@media screen and (max-width:780px) {
+@media screen and (max-width:1024px) {
     .rec_wrapper {
-        margin-bottom: 30px;
+        margin-bottom: 100px;
     }
     .row {
         margin-bottom: 0px;

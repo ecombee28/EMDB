@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Request from "../components/Requests";
 import axios from "axios";
 import Link from "next/link";
-import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import RemoveMovie from "../components/RemoveMovie";
 import style from "../styles/MovieComponent.module.css";
 
 const Movies = ({ id, type }) => {
@@ -28,7 +28,6 @@ const Movies = ({ id, type }) => {
         }
 
         setMovieImg(res);
-        console.log(res);
       } catch (error) {
         console.log(error);
       }
@@ -40,6 +39,7 @@ const Movies = ({ id, type }) => {
   return (
     <div>
       <div className={style.image_container}>
+        <RemoveMovie movieId={id} />
         <Link href={`/${type}/[id]`} as={`/${type}/${id}`}>
           <img src={`${imagePath}${movieImg}`} alt="d" className={style.img} />
         </Link>

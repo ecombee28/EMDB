@@ -48,8 +48,14 @@ const AddMovies = ({ id, media_type }) => {
 
   return (
     <div>
-      <div className={style.movie_container} onClick={addMovie}>
-        {<FontAwesomeIcon icon={icon} className={style.icons} />}
+      <div className={style.movie_container}>
+        {
+          <FontAwesomeIcon
+            icon={icon}
+            className={style.icons}
+            onClick={addMovie}
+          />
+        }
         <span className={style.tooltiptext}>{`${
           selected ? "Added to list" : `Add to watch list`
         }`}</span>

@@ -8,6 +8,8 @@
     border-radius: 6px;
     padding: 5px 0;
     position: absolute;
+    right: 10%;
+    top: 5%;
     z-index: 1;
     top: -1px;
     right: 120%;
@@ -36,6 +38,9 @@
     border-radius: 50%;
     cursor: pointer;
     font-size: 30px;
+    position: absolute;
+    left: 85%;
+    top: -5%;
     display: flex;
     justify-content: center;
     align-items: center;

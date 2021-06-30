@@ -10,7 +10,11 @@ const MoviePoster = ({ type, item }) => {
 
   return (
     <div className={style.poster_container}>
-      {user_id && <AddMovie id={item.id} media_type={type} />}
+      {user_id && (
+        <div className={style.add_container}>
+          <AddMovie id={item.id} media_type={type} />
+        </div>
+      )}
       <Link href={`/${type}/[id]`} as={`/${type}/${item.id}`}>
         <img
           src={`${imagePath}${item.poster_path}`}

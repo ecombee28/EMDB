@@ -7,14 +7,12 @@ import { selectMovies } from "../slices/userSlice";
 import { setMovies } from "../slices/userSlice";
 import { useDispatch } from "react-redux";
 import Movies from "../components/Movies";
+
 import style from "../styles/WatchList.module.css";
-import { set } from "lodash";
 
 const watchlist = () => {
   const userId = useSelector(selectId);
   const movies = useSelector(selectMovies);
-
-  console.log(movies);
 
   return (
     <div>

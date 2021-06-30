@@ -3,6 +3,7 @@ import Requests from "../components/Requests";
 import LandingImage from "../components/LandingImage";
 import TvList from "../components/List";
 import Head from "next/head";
+import style from "../styles/MainPage.module.css";
 
 export default function Home({
   movies,
@@ -15,12 +16,6 @@ export default function Home({
   romance,
   randomMovie,
 }) {
-  const mystyle = {
-    width: "100%",
-    position: "absolute",
-    top: "84vh",
-  };
-
   return (
     <div>
       <Head>
@@ -29,7 +24,7 @@ export default function Home({
         <link rel="shortcut icon" href="logo.ico" />
       </Head>
       <LandingImage movie={randomMovie} />
-      <section style={mystyle}>
+      <section className={style.main_container}>
         <MovieList
           movies={movies.results}
           title="Trending"

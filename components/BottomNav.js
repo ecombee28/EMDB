@@ -50,7 +50,7 @@ const BottomNav = () => {
         <div className={style.nav_link_container}>
           {<FontAwesomeIcon icon={faUser} className={style.icons} />}
           {id ? (
-            <li className={style.nav_links} onClick={logout}>
+            <li className={style.username} onClick={logout}>
               {username}
             </li>
           ) : (

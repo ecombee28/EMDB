@@ -114,11 +114,77 @@
     }
 }
 
+@media screen and (max-device-width: 1024px) and (orientation:portrait) {
+    .movie_info {
+        width: 90%;
+        height: auto;
+        padding: 10px;
+        position: absolute;
+        top: 35vh;
+        left: 2%;
+    }
+    .title {
+        font-size: 4rem;
+        color: #ffffff;
+        font-weight: bold;
+        margin: 0;
+    }
+    .trailer {
+        font-size: 1.8rem;
+        color: white;
+        padding: 3px 13px;
+        background-color: rgba(61, 61, 61, .8);
+    }
+    .plot_wrapper {
+        width: 90%;
+        max-height: 150px;
+    }
+    .plot {
+        font-size: 1.3rem;
+    }
+    .icon {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-device-width: 1024px) and (orientation:landscape) {
+    .movie_info {
+        width: 80%;
+        height: auto;
+        padding: 10px;
+        position: absolute;
+        top: 30vh;
+        left: 2%;
+    }
+    .title {
+        font-size: 4rem;
+        color: #ffffff;
+        font-weight: bold;
+        margin: 0;
+    }
+    .trailer {
+        font-size: 1.8rem;
+        color: white;
+        padding: 3px 13px;
+        background-color: rgba(61, 61, 61, .8);
+    }
+    .plot_wrapper {
+        width: 90%;
+        max-height: 150px;
+    }
+    .plot {
+        font-size: 1.3rem;
+    }
+    .icon {
+        font-size: 15px;
+    }
+}
+
 /***************************** 
    Media query's up to 800px
  *******************************/
 
-@media screen and (max-width:800px) {
+@media screen and (max-device-width: 700px) and (orientation:landscape) {
     .wrapper {
         background-position: center center;
     }
@@ -126,6 +192,42 @@
         width: 97%;
         height: auto;
         top: 15vh;
+    }
+    .title {
+        font-size: 1.7rem;
+        color: #ffffff;
+        font-weight: bold;
+        margin: 0;
+    }
+    .btn_more_info {
+        font-size: 1.2rem;
+    }
+    .trailer {
+        font-size: 1.3rem;
+        color: white;
+        padding: 3px 13px;
+        background-color: rgba(61, 61, 61, .8);
+    }
+    .plot_wrapper {
+        width: 90%;
+        max-height: 150px;
+    }
+    .plot {
+        font-size: 1.1rem;
+    }
+    .icon {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-device-width: 700px) and (orientation:portrait) {
+    .wrapper {
+        background-position: center center;
+    }
+    .movie_info {
+        width: 97%;
+        height: auto;
+        top: 20vh;
     }
     .title {
         font-size: 1.7rem;

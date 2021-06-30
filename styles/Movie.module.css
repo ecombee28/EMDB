@@ -102,6 +102,15 @@
     position: relative;
 }
 
+.add_container {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 75%;
+    top: 5%;
+    z-index: 20;
+}
+
 .posters {
     width: 245px;
     object-fit: contain;
@@ -150,6 +159,10 @@
     .row {
         padding-left: 10px;
         min-height: 200px;
+    }
+    .add_container {
+        left: 65%;
+        top: 5%;
     }
     .posters {
         width: 150px;

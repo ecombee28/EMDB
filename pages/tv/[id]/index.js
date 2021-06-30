@@ -42,14 +42,16 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
   };
 
   const createCastArray = () => {
-    if (cast.cast.length > 0 && cast.cast.length > 6) {
+    if (cast.cast.length > 6) {
       for (let i = 0; i < 6; i++) {
         castMembersArray[i] = cast.cast[i];
       }
-    } else if (cast.cast.length <= 6) {
+    } else if (cast.cast.length > 1 && cast.cast.length <= 6) {
       cast.cast.map((item, i) => {
         castMembersArray[i] = item;
       });
+    } else if (cast.cast.length == 1) {
+      castMembersArray.push(cast.cast);
     }
   };
 
@@ -130,7 +132,9 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
         </div>
 
         <div className={movieInfoStyle.recommended}>
-          <Recommended type="tv" item={recommended.results} />
+          {recommended.total_results > 0 && (
+            <Recommended type="tv" item={recommended.results} />
+          )}
         </div>
       </div>
     </div>
