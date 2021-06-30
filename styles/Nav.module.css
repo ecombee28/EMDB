@@ -90,7 +90,7 @@
     margin-right: 5px;
 }
 
-@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) and (orientation: landscape) {
+@media only screen and (min-device-width: 300px) and (max-device-width: 1024px) and (orientation:portrait) and (orientation: landscape) {
     .header_black {
         display: none;
     }
