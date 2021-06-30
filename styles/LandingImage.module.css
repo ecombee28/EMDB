@@ -23,7 +23,7 @@
 }
 
 .movie_info {
-    width: 50%;
+    width: 70%;
     height: auto;
     padding: 10px;
     position: absolute;
@@ -184,7 +184,7 @@
    Media query's up to 800px
  *******************************/
 
-@media screen and (max-device-width: 700px) and (orientation:landscape) {
+@media screen and (max-device-width: 800px) and (orientation:landscape) {
     .wrapper {
         background-position: center center;
     }
@@ -220,7 +220,7 @@
     }
 }
 
-@media screen and (max-device-width: 700px) and (orientation:portrait) {
+@media screen and (max-device-width: 800px) and (orientation:portrait) {
     .wrapper {
         background-position: center center;
     }

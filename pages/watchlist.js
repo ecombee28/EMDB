@@ -3,11 +3,7 @@ import { useSelector } from "react-redux";
 import { selectId } from "../slices/userSlice";
 import Link from "next/link";
 import { selectMovies } from "../slices/userSlice";
-
-import { setMovies } from "../slices/userSlice";
-import { useDispatch } from "react-redux";
 import Movies from "../components/Movies";
-
 import style from "../styles/WatchList.module.css";
 
 const watchlist = () => {
@@ -33,9 +29,8 @@ const watchlist = () => {
         <div>
           <h1 className={style.empty_list}>
             <span>
-              {" "}
               You have to be signed in to see your list of movies.
-              <br />{" "}
+              <br />
               <Link href="/login">
                 <p className={style.link}>Sign In</p>
               </Link>

@@ -3,8 +3,14 @@
     margin-top: -50px;
 }
 
-@media screen and (max-device-width: 700px) and (orientation:landscape) {
+@media screen and (max-device-width: 800px) and (orientation:landscape) {
     .main_container {
-        margin-top: -20px;
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-device-width: 700px) and (orientation:portrait) {
+    .main_container {
+        margin-top: 0px;
     }
 }

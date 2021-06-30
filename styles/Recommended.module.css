@@ -94,7 +94,7 @@
 
 @media screen and (max-width:1024px) {
     .rec_wrapper {
-        margin-bottom: 100px;
+        margin-bottom: 10vw;
     }
     .row {
         margin-bottom: 0px;
