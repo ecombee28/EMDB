@@ -97,7 +97,13 @@
     .nav_list {
         display: none;
     }
+    .logo {
+        display: none;
+    }
     .mobile_logo {
         display: block;
+    }
+    .nav_links {
+        display: none;
     }
 }
