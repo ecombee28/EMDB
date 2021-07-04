@@ -155,6 +155,33 @@
    Media query's up to 780px
  *******************************/
 
+@media screen and (max-width:780px) and (orientation:landscape) {
+    .row {
+        padding-left: 10px;
+        min-height: 200px;
+        margin-top: 70px;
+    }
+    .add_container {
+        left: 65%;
+        top: 5%;
+    }
+    .posters {
+        width: 150px;
+    }
+    .left_arrow {
+        visibility: hidden;
+    }
+    .right_arrow {
+        visibility: hidden;
+    }
+    .left_arrow_icon {
+        display: none;
+    }
+    .right_arrow_icon {
+        display: none;
+    }
+}
+
 @media screen and (max-width:780px) {
     .row {
         padding-left: 10px;
