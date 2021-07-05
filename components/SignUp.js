@@ -107,6 +107,7 @@ const login = ({ changeView }) => {
           setError(true);
           setPassword("");
           setConfirmPassword("");
+          setLoading(false);
         }
       });
 

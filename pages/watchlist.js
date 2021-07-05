@@ -13,7 +13,7 @@ const Watchlist = () => {
   const movies = useSelector(selectMovies);
 
   return (
-    <div>
+    <div className={style.main_container}>
       <h1 className={style.header}>My list</h1>
       {userId ? (
         movies.length > 0 ? (
@@ -23,13 +23,12 @@ const Watchlist = () => {
             ))}
           </div>
         ) : (
-          <h1 className={style.empty_list}>
+          <div className={style.empty_list}>
             <FontAwesomeIcon icon={faPlus} className={style.icons} />
-            <br />
             You haven't added any titles to your list yet
             <br />
             Add your favorite movies or tv shows to your WatchList
-          </h1>
+          </div>
         )
       ) : (
         <div>

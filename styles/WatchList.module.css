@@ -45,6 +45,8 @@
 }
 
 .icons {
+    width: 5%;
+    object-fit: contain;
     font-size: 5rem;
     object-fit: contain;
     color: rgb(88, 88, 88);
@@ -63,6 +65,22 @@
         transform: translate(-50%, -45%);
     }
     .icons {
+        width: 15%;
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width:700px) and (orientation:landscape) {
+    .empty_list {
+        font-size: 1rem;
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -45%);
+        margin-bottom: 40px;
+    }
+    .icons {
+        width: 8%;
         font-size: 2rem;
     }
 }
