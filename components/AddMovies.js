@@ -1,67 +1,66 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectId } from "../slices/userSlice";
 import { selectMovies } from "../slices/userSlice";
-import axios from "axios";
 import style from "../styles/AddMovie.module.css";
-import { setMovies } from "../slices/userSlice";
-import { useDispatch } from "react-redux";
-import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const AddMovies = ({ id, media_type }) => {
+const AddMovies = ({ movie_id, addMovie, removeMovie }) => {
   const [selected, setSelected] = useState(false);
-  const user_id = useSelector(selectId);
+  const [loading, setLoading] = useState(false);
+  const [icon, setIcon] = useState(faPlus);
   const movies = useSelector(selectMovies);
-  const dispatch = useDispatch();
+
+  console.log(movie_id);
 
   useEffect(() => {
-    setSelected(false);
     const checkMovies = async () => {
-      const foundMovie = movies.find((t) => t.movie_id == id);
-      foundMovie && setSelected(true);
+      const foundMovie = movies.find((t) => t.movie_id === movie_id);
+      if (foundMovie) {
+        setIcon(faCheck);
+        setSelected(true);
+      } else {
+        setIcon(faPlus);
+        setSelected(false);
+      }
     };
 
     checkMovies();
   });
 
-  const addMovie = () => {
-    const foundMovie = movies.find((t) => t.movie_id == id);
-
-    if (!foundMovie) {
-      try {
-        axios.post(`https://combeecreations.com/emdbapi/public/api/addmovies`, {
-          userId: user_id,
-          movieId: id,
-          type: media_type,
-        });
-
-        dispatch(setMovies({ movie_id: id, media_type: media_type }));
-        setSelected(true);
-      } catch (err) {
-        console.log(err);
-      }
+  const handleMovie = () => {
+    setLoading(true);
+    if (!selected) {
+      addMovie();
+      setLoading(false);
+      setIcon(faCheck);
+    } else {
+      removeMovie();
+      setTimeout(() => {
+        setLoading(false);
+        setIcon(faPlus);
+      }, 3000);
     }
   };
-
-  const icon = selected ? faCheck : faPlus;
 
   return (
     <div>
       <div className={style.movie_container}>
-        {
+        {loading ? (
+          <img src="/loading.gif" alt="" className={style.loader} />
+        ) : (
           <FontAwesomeIcon
             icon={icon}
             className={style.icons}
-            onClick={addMovie}
+            onClick={handleMovie}
           />
-        }
+        )}
         <span className={style.tooltiptext}>{`${
-          selected ? "Added to list" : `Add to watch list`
+          selected ? "Remove from list" : `Add to watch list`
         }`}</span>
       </div>
     </div>
   );
 };
 
-export default React.memo(AddMovies);
+export default AddMovies;

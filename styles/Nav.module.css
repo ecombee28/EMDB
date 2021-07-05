@@ -36,6 +36,8 @@
 .nav_links {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     color: #ffffff;
     font-size: clamp(1em, 1vw, 1.2vw);
 }
@@ -87,7 +89,7 @@
     width: clamp(.9em, 1vw, 1vw);
     object-fit: contain;
     font-size: .8em;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 @media only screen and (max-device-width: 1024px) and (orientation:portrait) {

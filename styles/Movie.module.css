@@ -89,6 +89,10 @@
     overflow-x: scroll;
     padding: 20px;
     transition: all .9s ease-in-out;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
 }
 
 .row_inline_posters {
@@ -111,18 +115,27 @@
     z-index: 20;
 }
 
+.poster::before {
+    content: "";
+    display: block;
+    border-top: 2px solid rgb(255, 0, 0);
+    opacity: 1;
+    transform: scale(0, 1);
+    transition: all ease-in 400ms;
+}
+
 .posters {
     width: 245px;
     object-fit: contain;
-    margin-right: 10px;
     cursor: pointer;
     border-radius: 10px;
-    transition: all .3s ease-in-out;
+    transition: all 300ms ease-in-out;
     position: relative;
+    -webkit-font-smoothing: subpixel-antialiased;
 }
 
-.posters:hover {
-    transform: scale(1.02);
+.posters:hover, .posters:focus, .posters:focus-within {
+    transform: scale(1.07);
 }
 
 .text_box {

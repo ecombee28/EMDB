@@ -42,6 +42,7 @@
     color: #fff;
     z-index: 40;
     transition: all .4s ease-in-out;
+    position: relative;
 }
 
 .movie_container:hover {
@@ -54,6 +55,11 @@
     object-fit: contain;
     font-size: .8em;
     z-index: 50;
+}
+
+.loader {
+    width: 45px;
+    object-fit: cover;
 }
 
 @media screen and (max-width:1024px) {

@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { selectId } from "../slices/userSlice";
 import Link from "next/link";
 import { selectMovies } from "../slices/userSlice";
 import Movies from "../components/Movies";
 import style from "../styles/WatchList.module.css";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const watchlist = () => {
+const Watchlist = () => {
   const userId = useSelector(selectId);
   const movies = useSelector(selectMovies);
 
@@ -22,14 +24,18 @@ const watchlist = () => {
           </div>
         ) : (
           <h1 className={style.empty_list}>
+            <FontAwesomeIcon icon={faPlus} className={style.icons} />
+            <br />
             You haven't added any titles to your list yet
+            <br />
+            Add your favorite movies or tv shows to your WatchList
           </h1>
         )
       ) : (
         <div>
           <h1 className={style.empty_list}>
             <span>
-              You have to be signed in to see your list of movies.
+              You have to be signed in to see your WatchList.
               <br />
               <Link href="/login">
                 <p className={style.link}>Sign In</p>
@@ -42,4 +48,4 @@ const watchlist = () => {
   );
 };
 
-export default watchlist;
+export default Watchlist;

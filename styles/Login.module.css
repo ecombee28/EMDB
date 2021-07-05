@@ -87,6 +87,7 @@
     outline: none;
     text-align: center;
     cursor: pointer;
+    position: relative;
 }
 
 .submit_btn:hover {
@@ -131,6 +132,14 @@
     text-decoration: underline;
 }
 
+.loader {
+    width: 45px;
+    object-fit: cover;
+    position: absolute;
+    top: 1px;
+    left: 200px;
+}
+
 @media screen and (max-width:480px) {
     .signup_container {
         width: 300px;
@@ -173,5 +182,12 @@
         font-size: 1rem;
         color: #fff;
         margin-left: 10px;
+    }
+    .loader {
+        width: 45px;
+        object-fit: cover;
+        position: absolute;
+        bottom: 1px;
+        left: 170px;
     }
 }

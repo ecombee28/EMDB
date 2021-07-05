@@ -4,12 +4,17 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Recommended from "../../../components/Recommended";
 import Head from "next/head";
+import axios from "axios";
 import Trailer from "../../../components/Trailer";
 import ImagePaths from "../../../components/ImagePaths";
 import Cast from "../../../components/Cast";
 import AddMovie from "../../../components/AddMovies";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setMovies } from "../../../slices/userSlice";
 import { selectId } from "../../../slices/userSlice";
+import { selectMovies } from "../../../slices/userSlice";
+import { resetMovies } from "../../../slices/userSlice";
 
 const TvInfo = ({ movie, trailer, recommended, cast }) => {
   const inProduction = movie.in_production;
@@ -17,6 +22,8 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
   const lastYear = new Date(movie.last_air_date).getFullYear();
   var castMembersArray = [];
   const id = useSelector(selectId);
+  const movies = useSelector(selectMovies);
+  const dispatch = useDispatch();
 
   const getTrailerLink = () => {
     if (trailer.results.length === 0) {
@@ -39,6 +46,58 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
     });
 
     return genre.substring(0, genre.length - 2);
+  };
+
+  /**This function is called by the
+   * addMovie component. It adds a movie to
+   * the database and to global movie variable
+   */
+  const addMovie = () => {
+    try {
+      axios.post(`https://combeecreations.com/emdbapi/public/api/addmovies`, {
+        userId: id,
+        movieId: movie.id,
+        type: "tv",
+      });
+
+      dispatch(setMovies({ movie_id: movie.id, media_type: "tv" }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  /**This function is called by the
+   * addMovie component. It deletes a movie from the
+   * the database. It also removes it from the
+   * global movie variable and localstorage
+   */
+  const removeMovie = async () => {
+    try {
+      const fetchData = await axios.post(
+        `https://combeecreations.com/emdbapi/public/api/deletemovies`,
+        {
+          movieId: movie.id,
+          userId: id,
+        }
+      );
+
+      const res = await fetchData;
+
+      if (res.data.Movie_Deleted === "Successfully") {
+        localStorage.removeItem("movies");
+        dispatch(resetMovies());
+
+        setTimeout(function () {
+          res.data.movies.map((m) => {
+            dispatch(setMovies(m));
+          });
+        }, 2000);
+      } else {
+        console.log(res.data.Movie_Deleted);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const createCastArray = () => {
@@ -82,7 +141,12 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
           </button>
           {id && (
             <div className={movieInfoStyle.add_movie}>
-              <AddMovie key={movie.id} id={movie.id} media_type={"tv"} />
+              <AddMovie
+                movie_id={movie.id}
+                media_type={"tv"}
+                addMovie={addMovie}
+                removeMovie={removeMovie}
+              />
             </div>
           )}
         </div>

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Request from "../components/Requests";
 import axios from "axios";
 import Link from "next/link";
-
-import RemoveMovie from "../components/RemoveMovie";
 import style from "../styles/MovieComponent.module.css";
 
 const Movies = ({ id, type }) => {
   const [movieImg, setMovieImg] = useState("");
+
   const imagePath = "https://image.tmdb.org/t/p/w500";
   const API_KEY = "0f2af5a67e7fbe4db3bc573d65f3724b";
 
@@ -19,12 +17,12 @@ const Movies = ({ id, type }) => {
           const fetchMovie = await axios(
             `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`
           );
-          res = await fetchMovie.data.poster_path;
+          res = await fetchMovie.data.backdrop_path;
         } else {
           const fetchTv = await axios(
             `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`
           );
-          res = await fetchTv.data.poster_path;
+          res = await fetchTv.data.backdrop_path;
         }
 
         setMovieImg(res);
@@ -38,12 +36,11 @@ const Movies = ({ id, type }) => {
 
   return (
     <div>
-      <div className={style.image_container}>
-        <RemoveMovie movieId={id} />
-        <Link href={`/${type}/[id]`} as={`/${type}/${id}`}>
+      <Link href={`/${type}/[id]`} as={`/${type}/${id}`}>
+        <div className={style.image_container}>
           <img src={`${imagePath}${movieImg}`} alt="d" className={style.img} />
-        </Link>
-      </div>
+        </div>
+      </Link>
     </div>
   );
 };

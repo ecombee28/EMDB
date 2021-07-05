@@ -11,6 +11,7 @@ import Head from "next/head";
 const login = ({ changeView }) => {
   const [userNameInput, setUserNameInput] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [userInput, setUserInput] = useState(true);
   const [passInput, setPassInput] = useState(false);
@@ -80,6 +81,7 @@ const login = ({ changeView }) => {
   };
 
   const signIn = () => {
+    setLoading(true);
     axios
       .post(`https://combeecreations.com/emdbapi/public/api/adduser`, {
         username: userNameInput,
@@ -95,6 +97,7 @@ const login = ({ changeView }) => {
               addUser(response.data.id, response.data.user, res.data.Movies);
 
               router.push("/");
+              setLoading(false);
             });
         } else {
           localStorage.setItem(
@@ -183,6 +186,9 @@ const login = ({ changeView }) => {
           </label>
           <button className={style.submit_btn} onClick={handleValidation}>
             Sign Up
+            {loading && (
+              <img src="/loading.gif" alt="" className={style.loader} />
+            )}
           </button>
           <div className={style.signup_wrapper}>
             <p className={style.signup_txt}>

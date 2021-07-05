@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import movieInfoStyle from "../../../styles/MovieInfo.module.css";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Recommended from "../../../components/Recommended";
 import Head from "next/head";
+import axios from "axios";
 import RatingsLogo from "../../../components/RatingsLogo";
 import Cast from "../../../components/Cast";
 import Trailer from "../../../components/Trailer";
 import ImagePaths from "../../../components/ImagePaths";
 import AddMovie from "../../../components/AddMovies";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setMovies } from "../../../slices/userSlice";
 import { selectId } from "../../../slices/userSlice";
+import { selectMovies } from "../../../slices/userSlice";
+import { resetMovies } from "../../../slices/userSlice";
 
 const movieInfo = ({ movie, trailer, recommended, imdb, castMembersArray }) => {
   const id = useSelector(selectId);
+  const movies = useSelector(selectMovies);
+  const dispatch = useDispatch();
 
   const getTrailerLink = () => {
     if (trailer.results.length === 0) {
@@ -53,19 +60,58 @@ const movieInfo = ({ movie, trailer, recommended, imdb, castMembersArray }) => {
     doc.style.display = "block";
   };
 
-  // const createCastArray = () => {
-  //   if (cast.cast.length > 6) {
-  //     for (let i = 0; i < 6; i++) {
-  //       castMembersArray[i] = cast.cast[i];
-  //     }
-  //   } else if (cast.cast.length > 1 && cast.cast.length <= 6) {
-  //     cast.cast.map((item, i) => {
-  //       castMembersArray[i] = item;
-  //     });
-  //   } else if (cast.cast.length == 1) {
-  //     castMembersArray.push(cast.cast);
-  //   }
-  // };
+  /**This function is called by the
+   * addMovie component. It adds a movie to
+   * the database and to global movie variable
+   */
+  const addMovie = () => {
+    try {
+      axios.post(`https://combeecreations.com/emdbapi/public/api/addmovies`, {
+        userId: id,
+        movieId: movie.id,
+        type: "movie",
+      });
+
+      dispatch(setMovies({ movie_id: movie.id, media_type: "movie" }));
+    } catch (err) {
+      console.log(err);
+    }
+
+    console.log("add");
+  };
+  /**This function is called by the
+   * addMovie component. It deletes a movie from the
+   * the database. It also removes it from the
+   * global movie variable and localstorage
+   */
+  const removeMovie = async () => {
+    try {
+      const fetchData = await axios.post(
+        `https://combeecreations.com/emdbapi/public/api/deletemovies`,
+        {
+          movieId: movie.id,
+          userId: id,
+        }
+      );
+
+      const res = await fetchData;
+
+      if (res.data.Movie_Deleted === "Successfully") {
+        localStorage.removeItem("movies");
+        dispatch(resetMovies());
+
+        setTimeout(function () {
+          res.data.movies.map((m) => {
+            dispatch(setMovies(m));
+          });
+        }, 2000);
+      } else {
+        console.log(res.data.Movie_Deleted);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -93,7 +139,12 @@ const movieInfo = ({ movie, trailer, recommended, imdb, castMembersArray }) => {
           </button>
           {id && (
             <div className={movieInfoStyle.add_movie}>
-              <AddMovie id={movie.id} media_type={"movie"} />
+              <AddMovie
+                movie_id={movie.id}
+                media_type={"movie"}
+                addMovie={addMovie}
+                removeMovie={removeMovie}
+              />
             </div>
           )}
         </div>

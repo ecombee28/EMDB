@@ -10,6 +10,7 @@ import Head from "next/head";
 
 const login = ({ changeView }) => {
   const [userNameInput, setUserNameInput] = useState("");
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [userInput, setUserInput] = useState(true);
   const [passInput, setPassInput] = useState(false);
@@ -64,6 +65,7 @@ const login = ({ changeView }) => {
   };
 
   const signIn = () => {
+    setLoading(true);
     axios
       .post(`https://combeecreations.com/emdbapi/public/api/login`, {
         username: userNameInput,
@@ -84,6 +86,7 @@ const login = ({ changeView }) => {
               );
 
               router.push("/");
+              setLoading(false);
             });
         } else {
           localStorage.setItem(
@@ -158,6 +161,9 @@ const login = ({ changeView }) => {
           </label>
           <button className={style.submit_btn} onClick={handleValidation}>
             Sign In
+            {loading && (
+              <img src="/loading.gif" alt="" className={style.loader} />
+            )}
           </button>
           <div className={style.signup_wrapper}>
             <p className={style.signup_txt}>
