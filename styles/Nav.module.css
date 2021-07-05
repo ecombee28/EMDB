@@ -108,6 +108,9 @@
     .nav_links {
         display: none;
     }
+    .nav_text:hover::after {
+        opacity: 0;
+    }
 }
 
 @media only screen and (max-device-width: 1024px) and (orientation: landscape) {
@@ -125,5 +128,8 @@
     }
     .nav_links {
         display: none;
+    }
+    .nav_text:hover::after {
+        opacity: 0;
     }
 }

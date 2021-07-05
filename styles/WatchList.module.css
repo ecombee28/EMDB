@@ -52,6 +52,21 @@
     color: rgb(88, 88, 88);
 }
 
+@media screen and (max-width:1120px) {
+    .movie_container {
+        width: 97%;
+        min-height: 200px;
+        padding-top: 30px;
+        padding-bottom: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 110px;
+    }
+}
+
 @media screen and (max-width:1000px) {
     .movie_container {
         padding-bottom: 120px;
