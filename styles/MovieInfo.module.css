@@ -381,6 +381,9 @@
     .plot {
         font-size: 1.1em;
     }
+    .trailer_wrapper {
+        min-width: 200px;
+    }
     .trailer_button {
         font-size: 1em;
     }

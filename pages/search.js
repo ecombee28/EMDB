@@ -105,7 +105,7 @@ const search = () => {
             />
             <p className={searchStyles.explore_text}>Movie Collection</p>
           </div>
-        </Link>{" "}
+        </Link>
         <Link href={"/dc"}>
           <div
             className={`${searchStyles.search_posters} ${searchStyles.explore_posters} ${searchStyles.dc}`}
@@ -117,7 +117,7 @@ const search = () => {
             />
             <p className={searchStyles.explore_text}>Movie Collection</p>
           </div>
-        </Link>{" "}
+        </Link>
         <Link href={"/starwars"}>
           <div
             className={`${searchStyles.search_posters} ${searchStyles.explore_posters} ${searchStyles.starwars}`}
