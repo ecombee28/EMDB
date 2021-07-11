@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import movieInfoStyle from "../../../styles/MovieInfo.module.css";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,12 +10,6 @@ import Cast from "../../../components/Cast";
 import Trailer from "../../../components/Trailer";
 import ImagePaths from "../../../components/ImagePaths";
 import AddMovie from "../../../components/AddMovies";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { setMovies } from "../../../slices/userSlice";
-import { selectId } from "../../../slices/userSlice";
-import { selectMovies } from "../../../slices/userSlice";
-import { resetMovies } from "../../../slices/userSlice";
 import Cookies from "js-cookie";
 
 const movieInfo = ({ movie, trailer, recommended, imdb, castMembersArray }) => {

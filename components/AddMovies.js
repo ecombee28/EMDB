@@ -14,6 +14,7 @@ export default function AddMovies({ movie_id, addMovie, removeMovie }) {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const fetchData = await axios.get(
         `https://combeecreations.com/emdbapi/public/api/user/${id}/movie/${movie_id}`
       );
@@ -23,9 +24,11 @@ export default function AddMovies({ movie_id, addMovie, removeMovie }) {
       if (countNumber[0].count === 1) {
         setIcon(faCheck);
         setSelected(true);
+        setLoading(false);
       } else {
         setIcon(faPlus);
         setSelected(false);
+        setLoading(false);
       }
     };
 

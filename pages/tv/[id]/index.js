@@ -9,15 +9,11 @@ import Trailer from "../../../components/Trailer";
 import ImagePaths from "../../../components/ImagePaths";
 import Cast from "../../../components/Cast";
 import AddMovie from "../../../components/AddMovies";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setMovies } from "../../../slices/userSlice";
-import { selectId } from "../../../slices/userSlice";
-import { selectMovies } from "../../../slices/userSlice";
-import { resetMovies } from "../../../slices/userSlice";
+
 import Cookies from "js-cookie";
 
-const TvInfo = ({ movieCount, movie, trailer, recommended, cast }) => {
+const TvInfo = ({ movie, trailer, recommended, cast }) => {
   const inProduction = movie.in_production;
   const firstYear = new Date(movie.first_air_date).getFullYear();
   const lastYear = new Date(movie.last_air_date).getFullYear();
