@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Cookie from "js-cookie";
 
 const initialState = {
   id: null,
@@ -14,10 +15,15 @@ export const userSlice = createSlice({
     setUserId: (state, action) => {
       state.id = action.payload;
       localStorage.setItem("id", action.payload);
+
+      Cookie.set("id", action.payload, {
+        expires: 24,
+      });
     },
     loginUser: (state, action) => {
       state.username = action.payload;
       localStorage.setItem("username", action.payload);
+      Cookie.set("username", action.payload);
     },
     setAvatarId: (state, action) => {
       state.avatar = action.payload;
@@ -25,7 +31,6 @@ export const userSlice = createSlice({
     },
     setMovies: (state, action) => {
       state.movies = [...state.movies, action.payload];
-      localStorage.setItem("movies", JSON.stringify(state.movies));
     },
     resetMovies: (state) => {
       state.movies = [];
@@ -35,7 +40,9 @@ export const userSlice = createSlice({
       state.id = null;
       state.user = null;
       state.movies = [];
-      localStorage.clear();
+      Cookie.remove("id");
+      Cookie.remove("username");
+      Cookie.remove("movies");
     },
   },
 });

@@ -15,14 +15,15 @@ import { setMovies } from "../../../slices/userSlice";
 import { selectId } from "../../../slices/userSlice";
 import { selectMovies } from "../../../slices/userSlice";
 import { resetMovies } from "../../../slices/userSlice";
+import Cookies from "js-cookie";
 
-const TvInfo = ({ movie, trailer, recommended, cast }) => {
+const TvInfo = ({ movieCount, movie, trailer, recommended, cast }) => {
   const inProduction = movie.in_production;
   const firstYear = new Date(movie.first_air_date).getFullYear();
   const lastYear = new Date(movie.last_air_date).getFullYear();
   var castMembersArray = [];
-  const id = useSelector(selectId);
-  const movies = useSelector(selectMovies);
+  const id = Cookies.get("id");
+  //const movies = useSelector(selectMovies);
   const dispatch = useDispatch();
 
   const getTrailerLink = () => {
@@ -60,12 +61,11 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
         type: "tv",
       });
 
-      dispatch(setMovies({ movie_id: movie.id, media_type: "tv" }));
+      //dispatch(setMovies({ movie_id: movie.id, media_type: "movie" }));
     } catch (err) {
       console.log(err);
     }
   };
-
   /**This function is called by the
    * addMovie component. It deletes a movie from the
    * the database. It also removes it from the
@@ -83,17 +83,8 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
 
       const res = await fetchData;
 
-      if (res.data.Movie_Deleted === "Successfully") {
-        localStorage.removeItem("movies");
-        dispatch(resetMovies());
-
-        setTimeout(function () {
-          res.data.movies.map((m) => {
-            dispatch(setMovies(m));
-          });
-        }, 2000);
-      } else {
-        console.log(res.data.Movie_Deleted);
+      if (res.data.Movie_Deleted !== "Successfully") {
+        console.log(res.data.movies);
       }
     } catch (err) {
       console.log(err);
@@ -206,29 +197,40 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
 };
 
 export const getServerSideProps = async (context) => {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/tv/${context.params.id}?api_key=0f2af5a67e7fbe4db3bc573d65f3724b`
-  );
-  const movie = await res.json();
+  const id = Cookies.get("id");
 
-  const res2 = await fetch(
-    `https://api.themoviedb.org/3/tv/${context.params.id}/videos?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-U`
-  );
-  const trailer = await res2.json();
+  try {
+    const fetchCount = await fetch(
+      `https://combeecreations.com/emdbapi/public/api/user/${id}/movie/${context.params.id}`
+    );
+    const movieCount = await fetchCount.json();
 
-  const res3 = await fetch(
-    `https://api.themoviedb.org/3/tv/${context.params.id}/recommendations?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&with_original_language=en&language=en-US&page=1`
-  );
-  const recommended = await res3.json();
+    const res = await fetch(
+      `https://api.themoviedb.org/3/tv/${context.params.id}?api_key=0f2af5a67e7fbe4db3bc573d65f3724b`
+    );
+    const movie = await res.json();
 
-  const res4 = await fetch(
-    `https://api.themoviedb.org/3/tv/${context.params.id}/credits?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-US`
-  );
-  const cast = await res4.json();
+    const res2 = await fetch(
+      `https://api.themoviedb.org/3/tv/${context.params.id}/videos?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-U`
+    );
+    const trailer = await res2.json();
 
-  return {
-    props: { movie, trailer, recommended, cast },
-  };
+    const res3 = await fetch(
+      `https://api.themoviedb.org/3/tv/${context.params.id}/recommendations?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&with_original_language=en&language=en-US&page=1`
+    );
+    const recommended = await res3.json();
+
+    const res4 = await fetch(
+      `https://api.themoviedb.org/3/tv/${context.params.id}/credits?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-US`
+    );
+    const cast = await res4.json();
+
+    return {
+      props: { movieCount, movie, trailer, recommended, cast },
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default TvInfo;

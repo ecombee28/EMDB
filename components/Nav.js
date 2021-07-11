@@ -15,8 +15,10 @@ import Cookie from "js-cookie";
 
 const Nav = () => {
   const [show, setShow] = useState(false);
-  const id = useSelector(selectId);
-  const username = useSelector(selectUserName);
+  // const id = useSelector(selectId);
+  // const username = useSelector(selectUserName);
+  const id = Cookie.get("id");
+  const username = Cookie.get("username");
 
   const dispatch = useDispatch();
 
@@ -30,27 +32,27 @@ const Nav = () => {
     });
   });
 
-  //This takes the state from local storage and populates the state in our redux
-  useEffect(() => {
-    const localId = localStorage.getItem("id");
-    const localUserName = localStorage.getItem("username");
-    const localMovies = JSON.parse(localStorage.getItem("movies"));
+  // //This takes the state from local storage and populates the state in our redux
+  // useEffect(() => {
+  //   const localId = localStorage.getItem("id");
+  //   const localUserName = localStorage.getItem("username");
+  //   const localMovies = JSON.parse(localStorage.getItem("movies"));
 
-    const restoreData = () => {
-      if (localId) {
-        dispatch(setUserId(localId));
-        dispatch(loginUser(localUserName));
+  //   const restoreData = () => {
+  //     if (localId) {
+  //       dispatch(setUserId(localId));
+  //       dispatch(loginUser(localUserName));
 
-        if (localMovies) {
-          localMovies.map((m) => {
-            dispatch(setMovies(m));
-          });
-        }
-      }
-    };
+  //       if (localMovies) {
+  //         localMovies.map((m) => {
+  //           dispatch(setMovies(m));
+  //         });
+  //       }
+  //     }
+  //   };
 
-    restoreData();
-  }, []);
+  //   restoreData();
+  // }, []);
 
   return (
     <>

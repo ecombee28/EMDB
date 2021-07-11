@@ -7,10 +7,11 @@ import Movies from "../components/Movies";
 import style from "../styles/WatchList.module.css";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import Cookies from "js-cookie";
 
-const Watchlist = () => {
-  const userId = useSelector(selectId);
-  const movies = useSelector(selectMovies);
+export default function Watchlist({ movies }) {
+  const userId = Cookies.get("id");
 
   return (
     <div className={style.main_container}>
@@ -45,6 +46,25 @@ const Watchlist = () => {
       )}
     </div>
   );
-};
+}
 
-export default Watchlist;
+export async function getServerSideProps({ req }) {
+  try {
+    const fetchMovies = await axios.post(
+      `https://combeecreations.com/emdbapi/public/api/movies`,
+      {
+        userId: req.cookies.id,
+      }
+    );
+
+    const movies = await fetchMovies.data.Movies;
+
+    return {
+      props: {
+        movies: movies,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -64,25 +64,32 @@ export default function Home() {
         <meta name="keywords" content="web dev" />
       </Head>
 
-      <div className={collectionStyle.video_wrapper} style={style}>
-        <FontAwesomeIcon
-          icon={faChevronCircleLeft}
-          className={`${collectionStyle.left_arrow} ${
-            leftEnd ? collectionStyle.hide : collectionStyle.show
-          }`}
-          onClick={goLeft}
-        />
-        <FontAwesomeIcon
-          icon={faChevronCircleRight}
-          className={`${collectionStyle.right_arrow} ${
-            rightEnd ? collectionStyle.hide : collectionStyle.show
-          }`}
-          onClick={goRight}
-        />
+      <div className={collectionStyle.video_wrapper}>
+        <img src="/disney.jpg" className={collectionStyle.image} />
       </div>
 
-      <div className={collectionStyle.search_results}>
-        <Collection movies={movies} />
+      <div className={collectionStyle.wrapper}>
+        <div className={collectionStyle.arrow_wrapper}>
+          <FontAwesomeIcon
+            icon={faChevronCircleLeft}
+            className={`${collectionStyle.left_arrow} ${
+              leftEnd ? collectionStyle.hide : collectionStyle.show
+            }`}
+            onClick={goLeft}
+          />
+          <FontAwesomeIcon
+            icon={faChevronCircleRight}
+            className={`${collectionStyle.right_arrow} ${
+              rightEnd ? collectionStyle.hide : collectionStyle.show
+            }`}
+            onClick={goRight}
+          />
+        </div>
+        <div className={collectionStyle.collection_wrapper}>
+          {movies.map((m) => (
+            <Collection movies={m} />
+          ))}
+        </div>
       </div>
     </div>
   );

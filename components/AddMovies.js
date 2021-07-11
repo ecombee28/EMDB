@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectMovies } from "../slices/userSlice";
 import style from "../styles/AddMovie.module.css";
-import { faCheck, faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Cookies from "js-cookie";
+import axios from "axios";
 
-const AddMovies = ({ movie_id, addMovie, removeMovie }) => {
+export default function AddMovies({ movie_id, addMovie, removeMovie }) {
   const [selected, setSelected] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [movies, setMovies] = useState({});
   const [icon, setIcon] = useState(faPlus);
-  const movies = useSelector(selectMovies);
-
-  console.log(movie_id);
+  const id = Cookies.get("id");
 
   useEffect(() => {
-    const checkMovies = async () => {
-      const foundMovie = movies.find((t) => t.movie_id === movie_id);
-      if (foundMovie) {
+    const fetchData = async () => {
+      const fetchData = await axios.get(
+        `https://combeecreations.com/emdbapi/public/api/user/${id}/movie/${movie_id}`
+      );
+
+      const countNumber = await fetchData.data;
+
+      if (countNumber[0].count === 1) {
         setIcon(faCheck);
         setSelected(true);
       } else {
@@ -25,8 +29,8 @@ const AddMovies = ({ movie_id, addMovie, removeMovie }) => {
       }
     };
 
-    checkMovies();
-  });
+    fetchData();
+  }, [movie_id]);
 
   const handleMovie = () => {
     setLoading(true);
@@ -61,6 +65,4 @@ const AddMovies = ({ movie_id, addMovie, removeMovie }) => {
       </div>
     </div>
   );
-};
-
-export default AddMovies;
+}

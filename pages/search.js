@@ -85,7 +85,7 @@ const search = () => {
       >
         Explore
       </h1>
-      <main id="explore" className={searchStyles.search_results}>
+      <main id="explore" className={searchStyles.explore_results}>
         <Link href={"/disney"}>
           <div
             className={`${searchStyles.search_posters} ${searchStyles.explore_posters} ${searchStyles.disney}`}

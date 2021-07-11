@@ -7,6 +7,7 @@ import { loginUser } from "../slices/userSlice";
 import { setUserId } from "../slices/userSlice";
 import { setMovies } from "../slices/userSlice";
 import Head from "next/head";
+import Cookies from "js-cookie";
 
 const login = ({ changeView }) => {
   const [userNameInput, setUserNameInput] = useState("");
@@ -95,6 +96,7 @@ const login = ({ changeView }) => {
           );
           setError(true);
           setPassword("");
+          setLoading(false);
 
           setTimeout(() => {
             setError(false);
@@ -105,12 +107,13 @@ const login = ({ changeView }) => {
     const addUser = (id, username, avatar, movies) => {
       dispatch(setUserId(id));
       dispatch(loginUser(username));
+      Cookies.set("movies", JSON.stringify(movies));
 
-      if (movies) {
-        movies.map((m) => {
-          dispatch(setMovies(m));
-        });
-      }
+      // if (movies) {
+      //   movies.map((m) => {
+      //     dispatch(setMovies(m));
+      //   });
+      // }
     };
   };
 
@@ -169,7 +172,7 @@ const login = ({ changeView }) => {
             <p className={style.signup_txt}>
               New to EMDB?
               <a
-                href="javascript:void(0);"
+                href=""
                 className={style.signup}
                 onClick={() => changeView("signup")}
               >

@@ -3,12 +3,12 @@ import axios from "axios";
 import Head from "next/head";
 import collectionStyle from "../../styles/Collections.module.css";
 import Collection from "../../components/Collection";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faChevronCircleLeft,
   faChevronCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import FetchMovies from "../../components/FetchMovies";
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
@@ -46,6 +46,7 @@ export default function Home() {
       const res = await axios.get(
         `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&vote_count.gte=500&with_companies=420&with_original_language=en`
       );
+
       setMovies(res.data.results);
       setPageCrt(res.data.total_pages);
     };
@@ -53,11 +54,8 @@ export default function Home() {
     fetchPosts();
   }, [page]);
   const style = {
-    backgroundImage: 'url("/marvel_background.jpg")',
+    backgroundImage: 'url("/marvel_2.jpg")',
   };
-
-  console.log("page=" + page);
-  console.log("pageCrt=" + pageCrt);
 
   return (
     <div>
@@ -66,25 +64,32 @@ export default function Home() {
         <meta name="keywords" content="web dev" />
       </Head>
 
-      <div className={collectionStyle.video_wrapper} style={style}>
-        <FontAwesomeIcon
-          icon={faChevronCircleLeft}
-          className={`${collectionStyle.left_arrow} ${
-            leftEnd ? collectionStyle.hide : collectionStyle.show
-          }`}
-          onClick={goLeft}
-        />
-        <FontAwesomeIcon
-          icon={faChevronCircleRight}
-          className={`${collectionStyle.right_arrow} ${
-            rightEnd ? collectionStyle.hide : collectionStyle.show
-          }`}
-          onClick={goRight}
-        />
+      <div className={collectionStyle.video_wrapper}>
+        <img src="/marvel_2.jpg" className={collectionStyle.image} />
       </div>
 
-      <div className={collectionStyle.search_results}>
-        <Collection movies={movies} />
+      <div className={collectionStyle.wrapper}>
+        <div className={collectionStyle.arrow_wrapper}>
+          <FontAwesomeIcon
+            icon={faChevronCircleLeft}
+            className={`${collectionStyle.left_arrow} ${
+              leftEnd ? collectionStyle.hide : collectionStyle.show
+            }`}
+            onClick={goLeft}
+          />
+          <FontAwesomeIcon
+            icon={faChevronCircleRight}
+            className={`${collectionStyle.right_arrow} ${
+              rightEnd ? collectionStyle.hide : collectionStyle.show
+            }`}
+            onClick={goRight}
+          />
+        </div>
+        <div className={collectionStyle.collection_wrapper}>
+          {movies.map((m) => (
+            <Collection movies={m} />
+          ))}
+        </div>
       </div>
     </div>
   );

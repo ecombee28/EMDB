@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import movieInfoStyle from "../../../styles/MovieInfo.module.css";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,11 +16,10 @@ import { setMovies } from "../../../slices/userSlice";
 import { selectId } from "../../../slices/userSlice";
 import { selectMovies } from "../../../slices/userSlice";
 import { resetMovies } from "../../../slices/userSlice";
+import Cookies from "js-cookie";
 
 const movieInfo = ({ movie, trailer, recommended, imdb, castMembersArray }) => {
-  const id = useSelector(selectId);
-  const movies = useSelector(selectMovies);
-  const dispatch = useDispatch();
+  const id = Cookies.get("id");
 
   const getTrailerLink = () => {
     if (trailer.results.length === 0) {
@@ -72,12 +71,10 @@ const movieInfo = ({ movie, trailer, recommended, imdb, castMembersArray }) => {
         type: "movie",
       });
 
-      dispatch(setMovies({ movie_id: movie.id, media_type: "movie" }));
+      //dispatch(setMovies({ movie_id: movie.id, media_type: "movie" }));
     } catch (err) {
       console.log(err);
     }
-
-    console.log("add");
   };
   /**This function is called by the
    * addMovie component. It deletes a movie from the
@@ -96,17 +93,8 @@ const movieInfo = ({ movie, trailer, recommended, imdb, castMembersArray }) => {
 
       const res = await fetchData;
 
-      if (res.data.Movie_Deleted === "Successfully") {
-        localStorage.removeItem("movies");
-        dispatch(resetMovies());
-
-        setTimeout(function () {
-          res.data.movies.map((m) => {
-            dispatch(setMovies(m));
-          });
-        }, 2000);
-      } else {
-        console.log(res.data.Movie_Deleted);
+      if (res.data.Movie_Deleted !== "Successfully") {
+        console.log(res.data.movies);
       }
     } catch (err) {
       console.log(err);
@@ -122,10 +110,12 @@ const movieInfo = ({ movie, trailer, recommended, imdb, castMembersArray }) => {
       </Head>
       <Trailer trailer={getTrailerLink()} />
 
-      <img
-        src={`${ImagePaths.original}${movie.backdrop_path}`}
-        className={movieInfoStyle.backdrop}
-      />
+      <div className={movieInfoStyle.backdrop}>
+        <img
+          src={`${ImagePaths.original}${movie.backdrop_path}`}
+          className={movieInfoStyle.img}
+        />
+      </div>
       <div className={movieInfoStyle.blackout}></div>
       <div className={movieInfoStyle.movie_info_wrapper}>
         <h1 className={movieInfoStyle.title}>{movie.title}</h1>
@@ -234,7 +224,13 @@ export const getServerSideProps = async (context) => {
     }
 
     return {
-      props: { movie, trailer, recommended, imdb, castMembersArray },
+      props: {
+        movie,
+        trailer,
+        recommended,
+        imdb,
+        castMembersArray,
+      },
     };
   } catch (err) {
     console.log(err);

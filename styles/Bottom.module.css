@@ -100,6 +100,18 @@
     }
 }
 
+@media screen and (max-device-height: 480px) and (orientation:landscape) {
+    .nav {
+        width: 100%;
+        height: 60px;
+    }
+    .icons {
+        width: 3.2rem;
+        font-size: 2rem;
+        color: rgb(255, 255, 255);
+    }
+}
+
 @media screen and (max-device-width: 430px) {
     .nav_link_container .nav_links {
         font-size: .8rem;

@@ -4,18 +4,22 @@ import Collection from "../../components/Collection";
 import Requests from "../../components/Requests";
 
 export default function Home({ movies }) {
-  const style = {
-    backgroundImage: 'url("/star_background.jpg")',
-  };
   return (
     <div>
       <Head>
         <title>Star Wars Collection/EMDB</title>
         <meta name="keywords" content="web dev" />
       </Head>
-      <div className={collectionStyle.video_wrapper} style={style}></div>
-      <div className={collectionStyle.search_results}>
-        <Collection movies={movies.parts} />
+      <div className={collectionStyle.video_wrapper}>
+        <img src="/starwars.jpg" className={collectionStyle.image} />
+      </div>
+
+      <div className={collectionStyle.wrapper}>
+        <div className={collectionStyle.collection_wrapper}>
+          {movies.parts.map((m) => (
+            <Collection movies={m} key={m.id} />
+          ))}
+        </div>
       </div>
     </div>
   );
