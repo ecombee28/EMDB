@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../slices/userSlice";
 import { setUserId } from "../slices/userSlice";
-import { setMovies } from "../slices/userSlice";
 import Head from "next/head";
 import Cookies from "js-cookie";
 

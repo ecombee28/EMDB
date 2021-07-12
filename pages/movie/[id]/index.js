@@ -12,7 +12,14 @@ import ImagePaths from "../../../components/ImagePaths";
 import AddMovie from "../../../components/AddMovies";
 import Cookies from "js-cookie";
 
-const movieInfo = ({ movie, trailer, recommended, imdb, castMembersArray }) => {
+const movieInfo = ({
+  countNumber,
+  movie,
+  trailer,
+  recommended,
+  imdb,
+  castMembersArray,
+}) => {
   const id = Cookies.get("id");
 
   const getTrailerLink = () => {
@@ -128,6 +135,7 @@ const movieInfo = ({ movie, trailer, recommended, imdb, castMembersArray }) => {
                 media_type={"movie"}
                 addMovie={addMovie}
                 removeMovie={removeMovie}
+                count={countNumber}
               />
             </div>
           )}
@@ -176,10 +184,17 @@ const movieInfo = ({ movie, trailer, recommended, imdb, castMembersArray }) => {
  * All results from the API calls are collected and sent to movieInfo as props
  */
 
-export const getServerSideProps = async (context) => {
+export async function getServerSideProps(context) {
   var castMembersArray = [];
+  const id = context.req.cookies.id;
 
   try {
+    const fetchData = await axios.get(
+      `https://combeecreations.com/emdbapi/public/api/user/${id}/movie/${context.params.id}`
+    );
+
+    const countNumber = await fetchData.data;
+
     const res = await fetch(
       `https://api.themoviedb.org/3/movie/${context.params.id}?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&append_to_response=release_dates`
     );
@@ -219,6 +234,7 @@ export const getServerSideProps = async (context) => {
 
     return {
       props: {
+        countNumber,
         movie,
         trailer,
         recommended,
@@ -229,6 +245,6 @@ export const getServerSideProps = async (context) => {
   } catch (err) {
     console.log(err);
   }
-};
+}
 
 export default movieInfo;

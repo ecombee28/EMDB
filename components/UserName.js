@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { logOutUser } from "../slices/userSlice";
 import style from "../styles/Username.module.css";
 
-const UserName = ({ id, username }) => {
+const UserName = ({ username }) => {
   const router = useRouter();
   const dispatch = useDispatch();
 

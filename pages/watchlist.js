@@ -1,8 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { selectId } from "../slices/userSlice";
 import Link from "next/link";
-import { selectMovies } from "../slices/userSlice";
 import Movies from "../components/Movies";
 import style from "../styles/WatchList.module.css";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";

@@ -21,23 +21,24 @@
 }
 
 .title_container {
-    width: 90%;
-    margin-left: auto;
+    width: 60%;
+    margin-left: 100px;
     display: flex;
     flex-wrap: wrap;
+    margin-top: 40px;
 }
 
 .title {
     font-size: clamp(1.5rem, 2.5vw, 2.5vw);
     color: #ffffff;
     position: relative;
-    margin-top: 40px;
 }
 
 .search_results {
-    width: 95%;
+    width: 90%;
     min-height: 40vh;
     position: relative;
+    margin: auto;
     margin-top: 3%;
     place-content: center flex-start;
     display: flex;
@@ -45,7 +46,6 @@
     flex-shrink: 0;
     flex-grow: 1;
     gap: 20px;
-    background-color: antiquewhite;
 }
 
 .explore_results {

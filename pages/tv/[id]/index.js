@@ -13,14 +13,17 @@ import { useDispatch } from "react-redux";
 
 import Cookies from "js-cookie";
 
-const TvInfo = ({ movie, trailer, recommended, cast }) => {
+const TvInfo = ({
+  countNumber,
+  movie,
+  trailer,
+  recommended,
+  castMembersArray,
+}) => {
   const inProduction = movie.in_production;
   const firstYear = new Date(movie.first_air_date).getFullYear();
   const lastYear = new Date(movie.last_air_date).getFullYear();
-  var castMembersArray = [];
   const id = Cookies.get("id");
-  //const movies = useSelector(selectMovies);
-  const dispatch = useDispatch();
 
   const getTrailerLink = () => {
     if (trailer.results.length === 0) {
@@ -87,21 +90,21 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
     }
   };
 
-  const createCastArray = () => {
-    if (cast.cast.length > 6) {
-      for (let i = 0; i < 6; i++) {
-        castMembersArray[i] = cast.cast[i];
-      }
-    } else if (cast.cast.length > 1 && cast.cast.length <= 6) {
-      cast.cast.map((item, i) => {
-        castMembersArray[i] = item;
-      });
-    } else if (cast.cast.length == 1) {
-      castMembersArray.push(cast.cast);
-    }
-  };
+  // const createCastArray = () => {
+  //   if (cast.cast.length > 6) {
+  //     for (let i = 0; i < 6; i++) {
+  //       castMembersArray[i] = cast.cast[i];
+  //     }
+  //   } else if (cast.cast.length > 1 && cast.cast.length <= 6) {
+  //     cast.cast.map((item, i) => {
+  //       castMembersArray[i] = item;
+  //     });
+  //   } else if (cast.cast.length == 1) {
+  //     castMembersArray.push(cast.cast);
+  //   }
+  // };
 
-  createCastArray();
+  // createCastArray();
 
   return (
     <div>
@@ -133,6 +136,7 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
                 media_type={"tv"}
                 addMovie={addMovie}
                 removeMovie={removeMovie}
+                count={countNumber}
               />
             </div>
           )}
@@ -193,13 +197,15 @@ const TvInfo = ({ movie, trailer, recommended, cast }) => {
 };
 
 export const getServerSideProps = async (context) => {
-  const id = Cookies.get("id");
+  const id = context.req.cookies.id;
+  var castMembersArray = [];
 
   try {
-    const fetchCount = await fetch(
+    const fetchData = await axios.get(
       `https://combeecreations.com/emdbapi/public/api/user/${id}/movie/${context.params.id}`
     );
-    const movieCount = await fetchCount.json();
+
+    const countNumber = await fetchData.data;
 
     const res = await fetch(
       `https://api.themoviedb.org/3/tv/${context.params.id}?api_key=0f2af5a67e7fbe4db3bc573d65f3724b`
@@ -221,8 +227,20 @@ export const getServerSideProps = async (context) => {
     );
     const cast = await res4.json();
 
+    if (cast.cast.length > 6) {
+      for (let i = 0; i < 6; i++) {
+        castMembersArray[i] = cast.cast[i];
+      }
+    } else if (cast.cast.length > 1 && cast.cast.length <= 6) {
+      cast.cast.map((item, i) => {
+        castMembersArray[i] = item;
+      });
+    } else if (cast.cast.length == 1) {
+      castMembersArray.push(cast.cast[0]);
+    }
+
     return {
-      props: { movieCount, movie, trailer, recommended, cast },
+      props: { countNumber, movie, trailer, recommended, castMembersArray },
     };
   } catch (error) {
     console.log(error);

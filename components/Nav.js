@@ -3,24 +3,13 @@ import navStyles from "../styles/Nav.module.css";
 import Link from "next/link";
 import { faHome, faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector } from "react-redux";
-import { selectId } from "../slices/userSlice";
-import { selectUserName } from "../slices/userSlice";
-import { loginUser } from "../slices/userSlice";
-import { setUserId } from "../slices/userSlice";
-import { useDispatch } from "react-redux";
-import { setMovies } from "../slices/userSlice";
 import Username from "../components/UserName";
 import Cookie from "js-cookie";
 
-const Nav = () => {
+export default function Nav() {
   const [show, setShow] = useState(false);
-  // const id = useSelector(selectId);
-  // const username = useSelector(selectUserName);
   const id = Cookie.get("id");
   const username = Cookie.get("username");
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -30,32 +19,10 @@ const Nav = () => {
         setShow(false);
       }
     });
-  });
-
-  // //This takes the state from local storage and populates the state in our redux
-  // useEffect(() => {
-  //   const localId = localStorage.getItem("id");
-  //   const localUserName = localStorage.getItem("username");
-  //   const localMovies = JSON.parse(localStorage.getItem("movies"));
-
-  //   const restoreData = () => {
-  //     if (localId) {
-  //       dispatch(setUserId(localId));
-  //       dispatch(loginUser(localUserName));
-
-  //       if (localMovies) {
-  //         localMovies.map((m) => {
-  //           dispatch(setMovies(m));
-  //         });
-  //       }
-  //     }
-  //   };
-
-  //   restoreData();
-  // }, []);
+  }, []);
 
   return (
-    <>
+    <div>
       <p className={navStyles.mobile_logo}>EMDB</p>
       <header
         className={`${navStyles.header} ${show && navStyles.header_black}`}
@@ -87,18 +54,20 @@ const Nav = () => {
           </Link>
 
           {id ? (
-            <Username id={id} username={username} />
+            <>
+              <Username username={username} />
+            </>
           ) : (
-            <Link href="/login">
-              <li className={navStyles.nav_links}>
-                <p className={navStyles.nav_text}>Sign In/Sign Up</p>
-              </li>
-            </Link>
+            <>
+              <Link href="/login">
+                <li className={navStyles.nav_links}>
+                  <p className={navStyles.nav_text}>Sign In/Sign Up</p>
+                </li>
+              </Link>
+            </>
           )}
         </nav>
       </header>
-    </>
+    </div>
   );
-};
-
-export default Nav;
+}
