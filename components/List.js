@@ -16,7 +16,11 @@ const MovieList = ({ movies, title, id, type }) => {
     const element = document.getElementById(`${id}`);
     const ttl = element.scrollWidth - element.clientWidth;
 
-    element.scrollLeft += length;
+    element.scrollTo({
+      top: 0,
+      left: (element.scrollLeft += length),
+      behavior: "smooth",
+    });
 
     if (element.scrollLeft == ttl) {
       setRightEnd(true);
@@ -28,7 +32,13 @@ const MovieList = ({ movies, title, id, type }) => {
 
   const slideLeft = () => {
     const element = document.getElementById(`${id}`);
-    element.scrollLeft -= length;
+    //element.scrollLeft -= length;
+
+    element.scrollTo({
+      top: 0,
+      left: (element.scrollLeft -= length),
+      behavior: "smooth",
+    });
 
     if (element.scrollLeft == 0) {
       setLeftEnd(true);
@@ -46,7 +56,7 @@ const MovieList = ({ movies, title, id, type }) => {
         <div
           className={` ${movieStyles.left_arrow} ${
             leftEnd ? movieStyles.hide : movieStyles.show
-          }`}
+          } ${title === "Recommended" && movieStyles.move_left_arrow}`}
         >
           {
             <FontAwesomeIcon
@@ -67,7 +77,7 @@ const MovieList = ({ movies, title, id, type }) => {
         <div
           className={` ${movieStyles.right_arrow} ${
             rightEnd ? movieStyles.hide : movieStyles.show
-          }`}
+          } ${title === "Recommended" && movieStyles.move_right_arrow}`}
         >
           {
             <FontAwesomeIcon

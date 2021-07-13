@@ -76,6 +76,14 @@
     mask-image: linear-gradient(to left, black 72%, transparent 100%);
 }
 
+.move_left_arrow {
+    left: 0;
+}
+
+.move_right_arrow {
+    right: 22px;
+}
+
 .title {
     font-size: 1.5rem;
     color: #ffffff;
@@ -146,6 +154,19 @@
 }
 
 /***************************** 
+   Media query's up to 1450px
+ *******************************/
+
+@media screen and (max-width:1450px) {
+    .move_left_arrow {
+        left: 0;
+    }
+    .move_right_arrow {
+        right: 0px;
+    }
+}
+
+/***************************** 
    Media query's up to 1080px
  *******************************/
 
@@ -193,6 +214,9 @@
     .right_arrow_icon {
         display: none;
     }
+    .posters:hover, .posters:focus, .posters:focus-within {
+        transform: scale(1);
+    }
 }
 
 @media screen and (max-width:780px) {
@@ -218,5 +242,8 @@
     }
     .right_arrow_icon {
         display: none;
+    }
+    .posters:hover, .posters:focus, .posters:focus-within {
+        transform: scale(1);
     }
 }

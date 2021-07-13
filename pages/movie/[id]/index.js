@@ -2,7 +2,6 @@ import React from "react";
 import movieInfoStyle from "../../../styles/MovieInfo.module.css";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Recommended from "../../../components/Recommended";
 import Head from "next/head";
 import axios from "axios";
 import RatingsLogo from "../../../components/RatingsLogo";
@@ -11,6 +10,7 @@ import Trailer from "../../../components/Trailer";
 import ImagePaths from "../../../components/ImagePaths";
 import AddMovie from "../../../components/AddMovies";
 import Cookies from "js-cookie";
+import Recommended from "../../../components/List";
 
 const movieInfo = ({
   countNumber,
@@ -70,9 +70,8 @@ const movieInfo = ({
         userId: id,
         movieId: movie.id,
         type: "movie",
+        name: movie.title,
       });
-
-      //dispatch(setMovies({ movie_id: movie.id, media_type: "movie" }));
     } catch (err) {
       console.log(err);
     }
@@ -168,7 +167,12 @@ const movieInfo = ({
 
         <div className={movieInfoStyle.recommended}>
           {recommended.total_results > 0 && (
-            <Recommended type="movie" item={recommended.results} />
+            <Recommended
+              movies={recommended.results}
+              title="Recommended"
+              id={1}
+              type="movie"
+            />
           )}
         </div>
       </div>

@@ -13,6 +13,7 @@ export default function Watchlist({ movies }) {
   return (
     <div className={style.main_container}>
       <h1 className={style.header}>My list</h1>
+      {movies.map((m) => console.log(m.name))}
       {userId ? (
         movies.length > 0 ? (
           <div className={style.movie_container}>

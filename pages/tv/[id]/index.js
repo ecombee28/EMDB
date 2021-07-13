@@ -2,15 +2,13 @@ import React from "react";
 import movieInfoStyle from "../../../styles/MovieInfo.module.css";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Recommended from "../../../components/Recommended";
+import Recommended from "../../../components/List";
 import Head from "next/head";
 import axios from "axios";
 import Trailer from "../../../components/Trailer";
 import ImagePaths from "../../../components/ImagePaths";
 import Cast from "../../../components/Cast";
 import AddMovie from "../../../components/AddMovies";
-import { useDispatch } from "react-redux";
-
 import Cookies from "js-cookie";
 
 const TvInfo = ({
@@ -58,6 +56,7 @@ const TvInfo = ({
         userId: id,
         movieId: movie.id,
         type: "tv",
+        name: movie.name,
       });
 
       //dispatch(setMovies({ movie_id: movie.id, media_type: "movie" }));
@@ -188,7 +187,12 @@ const TvInfo = ({
 
         <div className={movieInfoStyle.recommended}>
           {recommended.total_results > 0 && (
-            <Recommended type="tv" item={recommended.results} />
+            <Recommended
+              movies={recommended.results}
+              title="Recommended"
+              id={1}
+              type="tv"
+            />
           )}
         </div>
       </div>
