@@ -27,16 +27,20 @@ export default function AddMovies({ movie_id, media_type, name, count }) {
     setLoading(true);
     if (!selected) {
       const { response } = useAddMovie(movie_id, media_type, name);
-      setLoading(false);
-      setIcon(faCheck);
-      setSelected(true);
+      if (response === "Success") {
+        setLoading(false);
+        setIcon(faCheck);
+        setSelected(true);
+      }
     } else {
       const { response } = useRemoveMovie(movie_id);
-      setTimeout(() => {
-        setLoading(false);
-        setIcon(faPlus);
-        setSelected(false);
-      }, 2000);
+      if (response === "Success") {
+        setTimeout(() => {
+          setLoading(false);
+          setIcon(faPlus);
+          setSelected(false);
+        }, 2000);
+      }
     }
   };
 

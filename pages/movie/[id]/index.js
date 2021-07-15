@@ -60,22 +60,6 @@ const movieInfo = ({
     doc.style.display = "block";
   };
 
-  /**This function is called by the
-   * addMovie component. It adds a movie to
-   * the database and to global movie variable
-   */
-  const addMovie = () => {
-    const { response } = useAddMovie(movie.id, "movie", movie.title);
-  };
-  /**This function is called by the
-   * addMovie component. It deletes a movie from the
-   * the database. It also removes it from the
-   * global movie variable and localstorage
-   */
-  const removeMovie = async () => {
-    const { response } = useRemoveMovie(movie.id);
-  };
-
   return (
     <>
       <Head>
