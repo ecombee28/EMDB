@@ -7,6 +7,7 @@ import { loginUser } from "../slices/userSlice";
 import { setUserId } from "../slices/userSlice";
 import { setMovies } from "../slices/userSlice";
 import Head from "next/head";
+import Login from "../components/Login";
 
 const login = ({ changeView }) => {
   const [userNameInput, setUserNameInput] = useState("");
@@ -23,9 +24,7 @@ const login = ({ changeView }) => {
   const dispatch = useDispatch();
 
   const updateName = (e) => {
-    userNameInput.length <= 12
-      ? setUserNameInput(e.target.value)
-      : console.log("error");
+    setUserNameInput(e.target.value);
   };
 
   const updatePassword = (e) => {
@@ -45,7 +44,11 @@ const login = ({ changeView }) => {
     let passValPass = false;
     let conPassValPass = false;
 
-    if (uLen > 3) {
+    if (uLen > 12) {
+      userValPass = false;
+      setUserInput(false);
+      setUserError("Username can't exceed 12 characters");
+    } else if (uLen > 3 && uLen <= 12) {
       userValPass = true;
       setUserInput(true);
     } else {
@@ -55,7 +58,6 @@ const login = ({ changeView }) => {
         setUserError("Username must be at least 4 characters");
       }
     }
-
     if (pLen > 5) {
       if (password !== confirmPassword) {
         passValPass = false;
@@ -192,15 +194,9 @@ const login = ({ changeView }) => {
             )}
           </button>
           <div className={style.signup_wrapper}>
-            <p className={style.signup_txt}>
-              All ready a member?
-              <a
-                href="javascript:void(0);"
-                className={style.signup}
-                onClick={() => changeView("login")}
-              >
-                Sign In
-              </a>
+            <p className={style.signup_txt}>All ready a member?</p>
+            <p className={style.signup} onClick={() => changeView("login")}>
+              Sign In
             </p>
           </div>
         </div>

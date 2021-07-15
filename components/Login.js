@@ -3,10 +3,8 @@ import style from "../styles/Login.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../slices/userSlice";
-import { setUserId } from "../slices/userSlice";
 import Head from "next/head";
-import Cookies from "js-cookie";
+import Cookie from "js-cookie";
 
 const login = ({ changeView }) => {
   const [userNameInput, setUserNameInput] = useState("");
@@ -22,9 +20,7 @@ const login = ({ changeView }) => {
   const dispatch = useDispatch();
 
   const updateName = (e) => {
-    userNameInput.length <= 12
-      ? setUserNameInput(e.target.value)
-      : console.log("error");
+    setUserNameInput(e.target.value);
   };
 
   const updatePassword = (e) => {
@@ -37,7 +33,11 @@ const login = ({ changeView }) => {
     let userValPass = false;
     let passValPass = false;
 
-    if (uLen > 3) {
+    if (uLen > 12) {
+      userValPass = false;
+      setUserInput(false);
+      setUserError("Username can't exceed 12 characters");
+    } else if (uLen > 3 && uLen <= 12) {
       userValPass = true;
       setUserInput(true);
     } else {
@@ -73,21 +73,15 @@ const login = ({ changeView }) => {
       })
       .then((response) => {
         if (response.data.status === "success") {
-          axios
-            .post(`https://combeecreations.com/emdbapi/public/api/movies`, {
-              userId: response.data.id,
-            })
-            .then((res) => {
-              addUser(
-                response.data.id,
-                response.data.user,
-                response.data.avatar_img,
-                res.data.Movies
-              );
+          Cookie.set("id", response.data.id, {
+            expires: 24,
+          });
+          Cookie.set("username", response.data.user, {
+            expires: 24,
+          });
 
-              router.push("/");
-              setLoading(false);
-            });
+          router.push("/");
+          setLoading(false);
         } else {
           localStorage.setItem(
             "error_message",
@@ -102,18 +96,6 @@ const login = ({ changeView }) => {
           }, 4000);
         }
       });
-
-    const addUser = (id, username, avatar, movies) => {
-      dispatch(setUserId(id));
-      dispatch(loginUser(username));
-      Cookies.set("movies", JSON.stringify(movies));
-
-      // if (movies) {
-      //   movies.map((m) => {
-      //     dispatch(setMovies(m));
-      //   });
-      // }
-    };
   };
 
   return (
@@ -168,15 +150,9 @@ const login = ({ changeView }) => {
             )}
           </button>
           <div className={style.signup_wrapper}>
-            <p className={style.signup_txt}>
-              New to EMDB?
-              <a
-                href=""
-                className={style.signup}
-                onClick={() => changeView("signup")}
-              >
-                Sign Up Now
-              </a>
+            <p className={style.signup_txt}>New to EMDB?</p>
+            <p className={style.signup} onClick={() => changeView("signup")}>
+              Sign Up Now
             </p>
           </div>
         </div>

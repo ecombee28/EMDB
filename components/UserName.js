@@ -1,15 +1,16 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { logOutUser } from "../slices/userSlice";
 import style from "../styles/Username.module.css";
+import Cookie from "js-cookie";
 
 const UserName = ({ username }) => {
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const logout = () => {
-    dispatch(logOutUser());
+    Cookie.remove("id");
+    Cookie.remove("username");
+    Cookie.remove("movies");
     router.push("/");
   };
   return (

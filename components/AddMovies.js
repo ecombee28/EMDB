@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import style from "../styles/AddMovie.module.css";
 import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Cookies from "js-cookie";
+import useAddMovie from "./useAddMovie";
+import useRemoveMovie from "./useRemoveMovie";
 
-export default function AddMovies({ movie_id, addMovie, removeMovie, count }) {
+export default function AddMovies({ movie_id, media_type, name, count }) {
   const [selected, setSelected] = useState(false);
   const [loading, setLoading] = useState(false);
   const [icon, setIcon] = useState(faPlus);
@@ -25,12 +26,12 @@ export default function AddMovies({ movie_id, addMovie, removeMovie, count }) {
   const handleMovie = () => {
     setLoading(true);
     if (!selected) {
-      addMovie();
+      const { response } = useAddMovie(movie_id, media_type, name);
       setLoading(false);
       setIcon(faCheck);
       setSelected(true);
     } else {
-      removeMovie();
+      const { response } = useRemoveMovie(movie_id);
       setTimeout(() => {
         setLoading(false);
         setIcon(faPlus);
@@ -38,6 +39,15 @@ export default function AddMovies({ movie_id, addMovie, removeMovie, count }) {
       }, 2000);
     }
   };
+
+  //  const addMovie = () => {
+  //   const { response } = useAddMovie(, media_type, movie.title);
+  // };
+
+  // const removeMovie = async () => {
+  //   const { response } = useRemoveMovie(movie.id);
+
+  // };
 
   return (
     <div>

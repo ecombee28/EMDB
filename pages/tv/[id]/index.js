@@ -46,65 +46,6 @@ const TvInfo = ({
     return genre.substring(0, genre.length - 2);
   };
 
-  /**This function is called by the
-   * addMovie component. It adds a movie to
-   * the database and to global movie variable
-   */
-  const addMovie = () => {
-    try {
-      axios.post(`https://combeecreations.com/emdbapi/public/api/addmovies`, {
-        userId: id,
-        movieId: movie.id,
-        type: "tv",
-        name: movie.name,
-      });
-
-      //dispatch(setMovies({ movie_id: movie.id, media_type: "movie" }));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  /**This function is called by the
-   * addMovie component. It deletes a movie from the
-   * the database. It also removes it from the
-   * global movie variable and localstorage
-   */
-  const removeMovie = async () => {
-    try {
-      const fetchData = await axios.post(
-        `https://combeecreations.com/emdbapi/public/api/deletemovies`,
-        {
-          movieId: movie.id,
-          userId: id,
-        }
-      );
-
-      const res = await fetchData;
-
-      if (res.data.Movie_Deleted !== "Successfully") {
-        console.log(res.data.movies);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  // const createCastArray = () => {
-  //   if (cast.cast.length > 6) {
-  //     for (let i = 0; i < 6; i++) {
-  //       castMembersArray[i] = cast.cast[i];
-  //     }
-  //   } else if (cast.cast.length > 1 && cast.cast.length <= 6) {
-  //     cast.cast.map((item, i) => {
-  //       castMembersArray[i] = item;
-  //     });
-  //   } else if (cast.cast.length == 1) {
-  //     castMembersArray.push(cast.cast);
-  //   }
-  // };
-
-  // createCastArray();
-
   return (
     <div>
       <Head>
@@ -133,8 +74,7 @@ const TvInfo = ({
               <AddMovie
                 movie_id={movie.id}
                 media_type={"tv"}
-                addMovie={addMovie}
-                removeMovie={removeMovie}
+                name={movie.name}
                 count={countNumber}
               />
             </div>

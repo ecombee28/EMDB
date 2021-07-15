@@ -65,16 +65,7 @@ const movieInfo = ({
    * the database and to global movie variable
    */
   const addMovie = () => {
-    try {
-      axios.post(`https://combeecreations.com/emdbapi/public/api/addmovies`, {
-        userId: id,
-        movieId: movie.id,
-        type: "movie",
-        name: movie.title,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    const { response } = useAddMovie(movie.id, "movie", movie.title);
   };
   /**This function is called by the
    * addMovie component. It deletes a movie from the
@@ -82,23 +73,7 @@ const movieInfo = ({
    * global movie variable and localstorage
    */
   const removeMovie = async () => {
-    try {
-      const fetchData = await axios.post(
-        `https://combeecreations.com/emdbapi/public/api/deletemovies`,
-        {
-          movieId: movie.id,
-          userId: id,
-        }
-      );
-
-      const res = await fetchData;
-
-      if (res.data.Movie_Deleted !== "Successfully") {
-        console.log(res.data.movies);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    const { response } = useRemoveMovie(movie.id);
   };
 
   return (
@@ -132,8 +107,7 @@ const movieInfo = ({
               <AddMovie
                 movie_id={movie.id}
                 media_type={"movie"}
-                addMovie={addMovie}
-                removeMovie={removeMovie}
+                name={movie.title}
                 count={countNumber}
               />
             </div>
