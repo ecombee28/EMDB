@@ -14,7 +14,7 @@ const useRemoveMovie = async (movieId) => {
       }
     );
 
-    if (fetchData.data.Movie_added === "Successful") {
+    if (fetchData.data.Movie_Deleted === "Successfully") {
       response = "Success";
     } else {
       response = "failed";

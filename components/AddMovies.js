@@ -44,15 +44,6 @@ export default function AddMovies({ movie_id, media_type, name, count }) {
     }
   };
 
-  //  const addMovie = () => {
-  //   const { response } = useAddMovie(, media_type, movie.title);
-  // };
-
-  // const removeMovie = async () => {
-  //   const { response } = useRemoveMovie(movie.id);
-
-  // };
-
   return (
     <div>
       <div className={style.movie_container}>
