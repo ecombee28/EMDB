@@ -76,6 +76,7 @@ const TvInfo = ({
                 media_type={"tv"}
                 name={movie.name}
                 count={countNumber}
+                imagePath={movie.backdrop_path}
               />
             </div>
           )}

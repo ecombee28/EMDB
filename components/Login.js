@@ -74,10 +74,10 @@ const login = ({ changeView }) => {
       .then((response) => {
         if (response.data.status === "success") {
           Cookie.set("id", response.data.id, {
-            expires: 24,
+            expires: 1,
           });
           Cookie.set("username", response.data.user, {
-            expires: 24,
+            expires: 1,
           });
 
           router.push("/");

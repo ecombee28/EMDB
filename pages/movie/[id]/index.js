@@ -93,6 +93,7 @@ const movieInfo = ({
                 media_type={"movie"}
                 name={movie.title}
                 count={countNumber}
+                imagePath={movie.backdrop_path}
               />
             </div>
           )}
@@ -118,14 +119,15 @@ const movieInfo = ({
         </div>
 
         <div className={movieInfoStyle.cast_wrapper}>
-          {castMembersArray.map((list) => (
-            <Cast castMember={list} />
+          {castMembersArray.map((list, i) => (
+            <Cast key={i} castMember={list} />
           ))}
         </div>
 
         <div className={movieInfoStyle.recommended}>
           {recommended.total_results > 0 && (
             <Recommended
+              key={recommended.results.id}
               movies={recommended.results}
               title="Recommended"
               id={1}

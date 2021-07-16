@@ -1,9 +1,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const useAddMovie = async (movieId, type, name) => {
+const useAddMovie = async (movieId, type, name, imagePath) => {
   const id = Cookies.get("id");
-  var response = "";
 
   try {
     const fetchData = await axios.post(
@@ -13,18 +12,17 @@ const useAddMovie = async (movieId, type, name) => {
         movieId: movieId,
         type: type,
         name: name,
+        imagePath: imagePath,
       }
     );
 
     if (fetchData.data.Movie_added === "Successful") {
-      response = "Success";
+      return { response: console.log(fetchData.data.Movie_added) };
     } else {
-      response = "failed";
+      return { response: console.log(fetchData.data.Movie_added) };
     }
-
-    return response;
   } catch (err) {
-    throw error(err);
+    console.log(err);
   }
 };
 

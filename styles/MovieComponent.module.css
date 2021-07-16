@@ -14,15 +14,32 @@
     cursor: pointer;
 }
 
-.image_container:hover {
-    transform: scale(1.07);
+.image_container:hover .name_container {
+    transform: scale(1, 1);
 }
 
-@media screen and (max-width:1000px) {
-    .image_container {
-        width: 280px;
-        object-fit: cover;
-        justify-content: center;
+.name_container {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+    transform: scale(1, 0);
+}
+
+@media screen and (max-width:1024px) {
+    .name_container {
+        display: none;
     }
 }
 
@@ -30,5 +47,8 @@
     .image_container {
         width: 280px;
         object-fit: cover;
+    }
+    .name_container {
+        display: none;
     }
 }

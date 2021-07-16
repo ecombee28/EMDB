@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   faHome,
   faSearch,
@@ -8,21 +8,24 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import style from "../styles/Bottom.module.css";
-import { useSelector } from "react-redux";
-import { selectId } from "../slices/userSlice";
-import { selectUserName } from "../slices/userSlice";
-import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { logOutUser } from "../slices/userSlice";
+import Cookie from "js-cookie";
 
 const BottomNav = () => {
-  const id = useSelector(selectId);
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const username = useSelector(selectUserName);
+  const [id, setId] = useState("");
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const id = Cookie.get("id");
+    const user = Cookie.get("username");
+
+    setId(id);
+    setUsername(user);
+  });
 
   const logout = () => {
-    dispatch(logOutUser());
+    Cookie.remove("id");
+    Cookie.remove("username");
+
     router.push("/");
   };
 

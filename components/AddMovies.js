@@ -5,8 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAddMovie from "./useAddMovie";
 import useRemoveMovie from "./useRemoveMovie";
 
-export default function AddMovies({ movie_id, media_type, name, count }) {
-  const [selected, setSelected] = useState(false);
+export default function AddMovies({
+  movie_id,
+  media_type,
+  name,
+  count,
+  imagePath,
+}) {
+  const [selected, setSelected] = useState();
   const [loading, setLoading] = useState(false);
   const [icon, setIcon] = useState(faPlus);
 
@@ -17,22 +23,28 @@ export default function AddMovies({ movie_id, media_type, name, count }) {
         setSelected(true);
       } else {
         setIcon(faPlus);
+        setSelected(false);
       }
     };
 
     fetchData();
   }, [movie_id]);
 
-  const handleMovie = () => {
+  const handleMovie = async () => {
     setLoading(true);
     if (!selected) {
-      const { response } = useAddMovie(movie_id, media_type, name);
+      const { response } = await useAddMovie(
+        movie_id,
+        media_type,
+        name,
+        imagePath
+      );
 
       setLoading(false);
       setIcon(faCheck);
       setSelected(true);
     } else {
-      const { response } = useRemoveMovie(movie_id);
+      const { response } = await useRemoveMovie(movie_id);
 
       setTimeout(() => {
         setLoading(false);

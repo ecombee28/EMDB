@@ -10,9 +10,9 @@ const UserName = ({ username }) => {
   const logout = () => {
     Cookie.remove("id");
     Cookie.remove("username");
-    Cookie.remove("movies");
     router.push("/");
   };
+
   return (
     <div>
       <div className={style.container}>

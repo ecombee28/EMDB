@@ -8,8 +8,16 @@ import Cookie from "js-cookie";
 
 export default function Nav() {
   const [show, setShow] = useState(false);
-  const id = Cookie.get("id");
-  const username = Cookie.get("username");
+  const [id, setId] = useState("");
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const id = Cookie.get("id");
+    const user = Cookie.get("username");
+
+    setId(id);
+    setUsername(user);
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -54,17 +62,13 @@ export default function Nav() {
           </Link>
 
           {id ? (
-            <>
-              <Username username={username} />
-            </>
+            <Username username={username} />
           ) : (
-            <>
-              <Link href="/login">
-                <li className={navStyles.nav_links}>
-                  <p className={navStyles.nav_text}>Sign In/Sign Up</p>
-                </li>
-              </Link>
-            </>
+            <Link href="/login">
+              <li className={navStyles.nav_links}>
+                <p className={navStyles.nav_text}>Sign In/Sign Up</p>
+              </li>
+            </Link>
           )}
         </nav>
       </header>
