@@ -9,10 +9,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import style from "../styles/Bottom.module.css";
 import Cookie from "js-cookie";
+import { useRouter } from "next/router";
 
 const BottomNav = () => {
   const [id, setId] = useState("");
   const [username, setUsername] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     const id = Cookie.get("id");
@@ -25,8 +27,9 @@ const BottomNav = () => {
   const logout = () => {
     Cookie.remove("id");
     Cookie.remove("username");
-
-    router.push("/");
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
   };
 
   return (
@@ -34,24 +37,24 @@ const BottomNav = () => {
       <nav className={style.nav}>
         <Link href="/">
           <div className={style.nav_link_container}>
-            {<FontAwesomeIcon icon={faHome} className={style.icons} />}
+            <FontAwesomeIcon icon={faHome} className={style.icons} />
             <li className={style.nav_links}>Home</li>
           </div>
         </Link>
         <Link href="/search">
           <div className={style.nav_link_container}>
-            {<FontAwesomeIcon icon={faSearch} className={style.icons} />}
+            <FontAwesomeIcon icon={faSearch} className={style.icons} />
             <li className={style.nav_links}>Search</li>
           </div>
         </Link>
         <Link href="/watchlist">
           <div className={style.nav_link_container}>
-            {<FontAwesomeIcon icon={faPlus} className={style.icons} />}
+            <FontAwesomeIcon icon={faPlus} className={style.icons} />
             <li className={style.nav_links}>Watch List</li>
           </div>
         </Link>
         <div className={style.nav_link_container}>
-          {<FontAwesomeIcon icon={faUser} className={style.icons} />}
+          <FontAwesomeIcon icon={faUser} className={style.icons} />
           {id ? (
             <li className={style.username} onClick={logout}>
               {username}

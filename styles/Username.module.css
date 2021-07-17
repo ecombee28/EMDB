@@ -22,7 +22,7 @@
 
 .logout {
     display: none;
-    color: rgb(243, 2, 2);
+    color: rgb(255, 255, 255);
     transition: all .4s ease-in-out;
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ImagePaths from "../../../components/ImagePaths";
 import style from "../../../styles/person.module.css";
 import FilmRoles from "../../../components/FilmRoles";
@@ -24,18 +24,43 @@ const index = ({ person, personDetail }) => {
     year = date.substr(0, 4);
     month = date.substr(5, 2).replace(/^0+/, "");
     day = date.substr(8).replace(/^0+/, "");
-    month = monthsArr[month];
+    month = monthsArr[month - 1];
 
     return `${month} ${day}, ${year}`;
   };
 
   const getAgeOfDeath = (birth, death) => {
-    let birthYear, deathYear;
+    let birthYear,
+      deathYear,
+      ageOfDeath,
+      deathMonth,
+      birthMonth,
+      birthDay,
+      deathDay;
 
     birthYear = parseInt(birth.substr(0, 4));
     deathYear = parseInt(death.substr(0, 4));
+    birthMonth = parseInt(birth.substr(5, 2));
+    deathMonth = parseInt(death.substr(5, 2));
+    birthDay = parseInt(birth.substr(8));
+    deathDay = parseInt(death.substr(8));
 
-    return deathYear - birthYear;
+    //if they died on their birth month
+    if (deathMonth == birthMonth) {
+      //if they died before there birthday
+      if (deathDay < birthDay) {
+        ageOfDeath = deathYear - birthYear - 1;
+      } else {
+        ageOfDeath = deathYear - birthYear;
+      }
+      //if they died before there birthday
+    } else if (deathMonth < birthMonth) {
+      ageOfDeath = deathYear - birthYear - 1;
+    } else {
+      ageOfDeath = deathYear - birthYear;
+    }
+
+    return ageOfDeath;
   };
 
   return (

@@ -4,11 +4,11 @@ import BottomNav from "./BottomNav";
 const Layout = ({ children }) => {
   return (
     <div>
-      <Nav />
       <div>
+        <Nav />
         <main>{children}</main>
+        <BottomNav />
       </div>
-      <BottomNav />
     </div>
   );
 };
