@@ -73,12 +73,8 @@ const login = ({ changeView }) => {
       })
       .then((response) => {
         if (response.data.status === "success") {
-          Cookie.set("id", response.data.id, {
-            expires: 1,
-          });
-          Cookie.set("username", response.data.user, {
-            expires: 1,
-          });
+          Cookie.set("id", response.data.id, { expires: 1 });
+          Cookie.set("username", response.data.user, { expires: 1 });
 
           router.push("/");
           setLoading(false);
