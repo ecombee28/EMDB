@@ -73,7 +73,7 @@ export default function Home({
   );
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   try {
     const res = await fetch(Requests.fetchTrending);
     const movies = await res.json();

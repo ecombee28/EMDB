@@ -1,6 +1,5 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 import style from "../styles/Username.module.css";
 import Cookie from "js-cookie";
 
@@ -10,7 +9,9 @@ const UserName = ({ username }) => {
   const logout = () => {
     Cookie.remove("id");
     Cookie.remove("username");
-    router.push("/");
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
   };
 
   return (

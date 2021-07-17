@@ -2,60 +2,45 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Movies from "../components/Movies";
 import style from "../styles/WatchList.module.css";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Cookies from "js-cookie";
+import Loading from "../components/Loading";
 
 export default function Watchlist() {
   const [movies, setMovies] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const userId = Cookies.get("id");
 
   useEffect(() => {
+    setLoading(true);
     const getMovies = async () => {
       try {
-        const fetchMovies = await axios.post(
-          `https://combeecreations.com/emdbapi/public/api/movies`,
-          {
+        await axios
+          .post(`https://combeecreations.com/emdbapi/public/api/movies`, {
             userId: userId,
-          }
-        );
-
-        const movieList = await fetchMovies.data.Movies;
-        setMovies(movieList);
+          })
+          .then((res) => {
+            setMovies(res.data.Movies);
+          });
+        setLoading(false);
       } catch (err) {
         console.log(err);
       }
     };
-
     getMovies();
   }, []);
+
+  console.log(userId);
 
   return (
     <div className={style.main_container}>
       <h1 className={style.header}>My list</h1>
 
       {userId ? (
-        movies.length > 0 ? (
-          <div className={style.movie_container}>
-            {movies.map((m, i) => (
-              <Movies
-                key={i}
-                id={m.movie_id}
-                type={m.media_type}
-                imagePath={m.image_path}
-                name={m.name}
-              />
-            ))}
-          </div>
+        loading ? (
+          <Loading />
         ) : (
-          <div className={style.empty_list}>
-            <FontAwesomeIcon icon={faPlus} className={style.icons} />
-            You haven't added any titles to your list yet
-            <br />
-            Add your favorite movies or tv shows to your WatchList
-          </div>
+          <Movies movie={movies} />
         )
       ) : (
         <div>
@@ -73,24 +58,3 @@ export default function Watchlist() {
     </div>
   );
 }
-
-// export async function getServerSideProps({ req }) {
-//   try {
-//     const fetchMovies = await axios.post(
-//       `https://combeecreations.com/emdbapi/public/api/movies`,
-//       {
-//         userId: req.cookies.id,
-//       }
-//     );
-
-//     const movies = await fetchMovies.data.Movies;
-
-//     return {
-//       props: {
-//         movies: movies,
-//       },
-//     };
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }

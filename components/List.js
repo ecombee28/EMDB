@@ -32,7 +32,6 @@ const MovieList = ({ movies, title, id, type }) => {
 
   const slideLeft = () => {
     const element = document.getElementById(`${id}`);
-    //element.scrollLeft -= length;
 
     element.scrollTo({
       top: 0,
