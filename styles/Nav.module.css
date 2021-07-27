@@ -11,8 +11,6 @@
     left: 0;
     transition-timing-function: ease-in;
     transition: all.5s;
-    /* -webkit-mask-image: linear-gradient(to bottom, black 72%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 72%, transparent 100%); */
 }
 
 .header_black {

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import style from "../styles/AddMovie.module.css";
 import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useAddMovie from "./useAddMovie";
-import useRemoveMovie from "./useRemoveMovie";
+import useAddMovie from "../custom hooks/useAddMovie";
+import useRemoveMovie from "../custom hooks/useRemoveMovie";
 
 export default function AddMovies({
   movie_id,
@@ -40,9 +40,9 @@ export default function AddMovies({
         imagePath
       );
 
-      setLoading(false);
-      setIcon(faCheck);
-      setSelected(true);
+      await setLoading(false);
+      await setIcon(faCheck);
+      await setSelected(true);
     } else {
       const { response } = await useRemoveMovie(movie_id);
 

@@ -468,6 +468,13 @@
 /* MEDIA QUERY MAX-WIDTH:480 */
 
 @media screen and (max-width:480px) {
+    .backdrop {
+        width: 100%;
+        height: 100vh;
+    }
+    .img {
+        width: 100vw;
+    }
     .trailer {
         width: 95%;
         height: 60vh;
