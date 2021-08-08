@@ -1,40 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import movieInfoStyle from "../styles/MovieInfo.module.css";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Iframe from "react-iframe";
 
 const Trailer = ({ trailer }) => {
-  const [showMe, setShowMe] = useState(false);
+  const [showMe, setShowMe] = useState(true);
+  const [trailerUrl, setTrailerUrl] = useState("");
 
-  function toggle() {
-    const doc = document.getElementById("trailer");
-    const containerElement = document.getElementById("trailer");
-    const iframe_tag = containerElement.querySelector("iframe");
-    const iframeSrc = iframe_tag.src;
+  useEffect(() => {
+    const getTrailerUrl = () => {
+      if (trailer.length === 0) {
+        setTrailerUrl("");
+      } else {
+        setTrailerUrl(`https://www.youtube.com/embed/${trailer[0].key}`);
+      }
+    };
 
-    !showMe
-      ? ((doc.style.display = "none"), (iframe_tag.src = iframeSrc))
-      : (doc.style.display = "block");
-    setShowMe(!showMe);
-  }
+    getTrailerUrl();
+  }, [trailer]);
 
   return (
-    <div id="trailer" className={movieInfoStyle.trailer}>
-      <span id="closeVideo" className={movieInfoStyle.close} onClick={toggle}>
-        <FontAwesomeIcon
-          icon={faTimesCircle}
-          className={movieInfoStyle.close}
-        />
-      </span>
-      <iframe
-        id="ytVideo"
+    <div className={movieInfoStyle.iframe_wrapper}>
+      <Iframe
+        url={trailerUrl}
         width="100%"
         height="100%"
-        src={trailer}
-        frameBorder="0"
-        gesture="media"
+        id="ytVideo"
+        display="initial"
         allow="encrypted-media"
-      ></iframe>
+        frameBorder="0"
+      />
     </div>
   );
 };

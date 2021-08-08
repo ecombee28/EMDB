@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import movieInfoStyle from "../../../styles/MovieInfo.module.css";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import axios from "axios";
@@ -21,14 +22,7 @@ const movieInfo = ({
   castMembersArray,
 }) => {
   const id = Cookies.get("id");
-
-  const getTrailerLink = () => {
-    if (trailer.results.length === 0) {
-      return " ";
-    } else {
-      return `https://www.youtube.com/embed/${trailer.results[0].key}`;
-    }
-  };
+  const [showTrailer, setShowTrailer] = useState(false);
 
   // getGenre retrieves and returns a string of genres fetch
   // from the API
@@ -55,11 +49,6 @@ const movieInfo = ({
     return year;
   };
 
-  const showTrailer = () => {
-    const doc = document.getElementById("trailer");
-    doc.style.display = "block";
-  };
-
   return (
     <>
       <Head>
@@ -67,7 +56,25 @@ const movieInfo = ({
         <meta name="keywords" content="web dev" />
         <link rel="shortcut icon" href="logo.ico" />
       </Head>
-      <Trailer trailer={getTrailerLink()} />
+      {showTrailer && (
+        <div
+          className={`${movieInfoStyle.trailer} ${
+            !showTrailer && movieInfoStyle.hide
+          }`}
+        >
+          <span
+            id="closeVideo"
+            className={movieInfoStyle.close}
+            onClick={() => setShowTrailer(!showTrailer)}
+          >
+            <FontAwesomeIcon
+              icon={faTimesCircle}
+              className={movieInfoStyle.close}
+            />
+          </span>
+          <Trailer trailer={trailer} />
+        </div>
+      )}
 
       <div className={movieInfoStyle.backdrop}>
         <img
@@ -81,7 +88,7 @@ const movieInfo = ({
         <div className={movieInfoStyle.trailer_wrapper}>
           <button
             className={movieInfoStyle.trailer_button}
-            onClick={showTrailer}
+            onClick={() => setShowTrailer(!showTrailer)}
           >
             <FontAwesomeIcon icon={faPlay} className={movieInfoStyle.icon} />
             Trailer
@@ -165,9 +172,9 @@ export async function getServerSideProps(context) {
     const movie = await res.json();
 
     const res3 = await fetch(
-      `https://api.themoviedb.org/3/movie/${context.params.id}/videos?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-U`
+      `https://api.themoviedb.org/3/movie/${context.params.id}/videos?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-US`
     );
-    const trailer = await res3.json();
+    const trailerResults = await res3.json();
 
     const res4 = await fetch(
       `https://api.themoviedb.org/3/movie/${context.params.id}/recommendations?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&with_original_language=en&language=en-US&page=1`
@@ -195,6 +202,10 @@ export async function getServerSideProps(context) {
     } else if (cast.cast.length == 1) {
       castMembersArray.push(cast.cast[0]);
     }
+
+    const trailer = await trailerResults.results.filter((t) => {
+      return t.type === "Trailer" && t.site === "YouTube";
+    });
 
     return {
       props: {

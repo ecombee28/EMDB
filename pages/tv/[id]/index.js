@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import movieInfoStyle from "../../../styles/MovieInfo.module.css";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Recommended from "../../../components/List";
 import Head from "next/head";
@@ -22,19 +23,20 @@ const TvInfo = ({
   const firstYear = new Date(movie.first_air_date).getFullYear();
   const lastYear = new Date(movie.last_air_date).getFullYear();
   const id = Cookies.get("id");
+  const [showTrailer, setShowTrailer] = useState(false);
 
-  const getTrailerLink = () => {
-    if (trailer.results.length === 0) {
-      return " ";
-    } else {
-      return `https://www.youtube.com/embed/${trailer.results[0].key}`;
-    }
-  };
+  // const getTrailerLink = () => {
+  //   if (trailer.results.length === 0) {
+  //     return " ";
+  //   } else {
+  //     return `https://www.youtube.com/embed/${trailer.results[0].key}`;
+  //   }
+  // };
 
-  const showTrailer = () => {
-    const doc = document.getElementById("trailer");
-    doc.style.display = "block";
-  };
+  // const showTrailer = () => {
+  //   const doc = document.getElementById("trailer");
+  //   doc.style.display = "block";
+  // };
 
   const getGenre = () => {
     let genre = "";
@@ -46,6 +48,8 @@ const TvInfo = ({
     return genre.substring(0, genre.length - 2);
   };
 
+  console.log(trailer);
+
   return (
     <div>
       <Head>
@@ -53,7 +57,25 @@ const TvInfo = ({
         <meta name="keywords" content="web dev" />
         <link rel="shortcut icon" href="logo.ico" />
       </Head>
-      <Trailer trailer={getTrailerLink()} />
+      {showTrailer && (
+        <div
+          className={`${movieInfoStyle.trailer} ${
+            !showTrailer && movieInfoStyle.hide
+          }`}
+        >
+          <span
+            id="closeVideo"
+            className={movieInfoStyle.close}
+            onClick={() => setShowTrailer(!showTrailer)}
+          >
+            <FontAwesomeIcon
+              icon={faTimesCircle}
+              className={movieInfoStyle.close}
+            />
+          </span>
+          <Trailer trailer={trailer} />
+        </div>
+      )}
       <img
         src={`${ImagePaths.original}${movie.backdrop_path}`}
         className={movieInfoStyle.backdrop}
@@ -64,7 +86,7 @@ const TvInfo = ({
         <div className={movieInfoStyle.trailer_wrapper}>
           <button
             className={movieInfoStyle.trailer_button}
-            onClick={showTrailer}
+            onClick={() => setShowTrailer(!showTrailer)}
           >
             <FontAwesomeIcon icon={faPlay} className={movieInfoStyle.icon} />
             Trailer
@@ -157,20 +179,20 @@ export const getServerSideProps = async (context) => {
     );
     const movie = await res.json();
 
-    const res2 = await fetch(
-      `https://api.themoviedb.org/3/tv/${context.params.id}/videos?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-U`
-    );
-    const trailer = await res2.json();
-
     const res3 = await fetch(
-      `https://api.themoviedb.org/3/tv/${context.params.id}/recommendations?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&with_original_language=en&language=en-US&page=1`
+      `https://api.themoviedb.org/3/tv/${context.params.id}/videos?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-US`
     );
-    const recommended = await res3.json();
+    const trailerResults = await res3.json();
 
     const res4 = await fetch(
+      `https://api.themoviedb.org/3/tv/${context.params.id}/recommendations?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&with_original_language=en&language=en-US&page=1`
+    );
+    const recommended = await res4.json();
+
+    const res5 = await fetch(
       `https://api.themoviedb.org/3/tv/${context.params.id}/credits?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-US`
     );
-    const cast = await res4.json();
+    const cast = await res5.json();
 
     if (cast.cast.length > 6) {
       for (let i = 0; i < 6; i++) {
@@ -183,6 +205,10 @@ export const getServerSideProps = async (context) => {
     } else if (cast.cast.length == 1) {
       castMembersArray.push(cast.cast[0]);
     }
+
+    const trailer = await trailerResults.results.filter((t) => {
+      return t.type === "Trailer" && t.site === "YouTube";
+    });
 
     return {
       props: { countNumber, movie, trailer, recommended, castMembersArray },
