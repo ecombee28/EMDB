@@ -91,8 +91,8 @@ const index = ({ person, personDetail }) => {
         <section className={style.bottom_container}>
           <h2 className={style.header}>Filmography</h2>
           <h2 className={style.header}>{`Actor (${person.length}) credits`}</h2>
-          {person.map((p) => (
-            <FilmRoles key={p.id} movie={p} />
+          {person.map((p, i) => (
+            <FilmRoles key={i} movie={p} />
           ))}
         </section>
       </div>

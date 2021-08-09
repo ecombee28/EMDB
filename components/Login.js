@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import style from "../styles/Login.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 import Head from "next/head";
 import Cookie from "js-cookie";
 
@@ -17,7 +16,6 @@ const login = ({ changeView }) => {
   const [passError, setPassError] = useState("");
 
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const updateName = (e) => {
     setUserNameInput(e.target.value);

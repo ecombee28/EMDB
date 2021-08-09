@@ -14,6 +14,7 @@ const Movies = ({ movie }) => {
           <Link
             href={`/${m.media_type}/[id]`}
             as={`/${m.media_type}/${m.movie_id}`}
+            key={m.movie_id}
           >
             <div className={style.image_container}>
               <img

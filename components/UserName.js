@@ -21,19 +21,17 @@ const UserName = ({ username }) => {
   };
 
   return (
-    <div>
-      <div className={style.container}>
-        {loading ? (
-          <Loader type="ThreeDots" color="#fff" height="50" width="50" />
-        ) : (
-          <div>
-            <p className={style.p}>{username}</p>
-            <p className={style.logout} onClick={logout}>
-              Sign Out
-            </p>
-          </div>
-        )}
-      </div>
+    <div className={style.container}>
+      {loading ? (
+        <Loader type="ThreeDots" color="#fff" height="50" width="50" />
+      ) : (
+        <div>
+          <p className={style.p}>{username}</p>
+          <p className={style.logout} onClick={logout}>
+            Sign Out
+          </p>
+        </div>
+      )}
     </div>
   );
 };

@@ -67,9 +67,7 @@ const MovieList = ({ movies, title, id, type }) => {
         </div>
         <div id={`${id}`} className={movieStyles.row_posters}>
           {movies.map((movie) => (
-            <>
-              <Poster key={movie.id} type={type} item={movie} />
-            </>
+            <Poster key={movie.id} type={type} item={movie} />
           ))}
         </div>
 

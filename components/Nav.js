@@ -8,10 +8,13 @@ import Cookie from "js-cookie";
 
 export default function Nav() {
   const [show, setShow] = useState(false);
-  const id = Cookie.get("id");
-  const username = Cookie.get("username");
+  const [id, setId] = useState("");
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
+    setId(Cookie.get("id"));
+    setUsername(Cookie.get("username"));
+
     window.addEventListener("scroll", () => {
       if (window.scrollY > 100) {
         setShow(true);
@@ -22,7 +25,7 @@ export default function Nav() {
   }, []);
 
   return (
-    <div>
+    <>
       <p className={navStyles.mobile_logo}>EMDB</p>
       <header
         className={`${navStyles.header} ${show && navStyles.header_black}`}
@@ -64,6 +67,6 @@ export default function Nav() {
           )}
         </nav>
       </header>
-    </div>
+    </>
   );
 }
