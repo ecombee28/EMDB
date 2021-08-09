@@ -3,7 +3,6 @@ import axios from "axios";
 import Head from "next/head";
 import collectionStyle from "../../styles/Collections.module.css";
 import Collection from "../../components/Collection";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faChevronCircleLeft,
   faChevronCircleRight,
@@ -55,8 +54,6 @@ export default function Home() {
   const style = {
     backgroundImage: 'url("/dc.jpg")',
   };
-  console.log("page=" + page);
-  console.log("pageCrt=" + pageCrt);
 
   return (
     <div>
@@ -87,8 +84,8 @@ export default function Home() {
           />
         </div>
         <div className={collectionStyle.collection_wrapper}>
-          {movies.map((m) => (
-            <Collection movies={m} />
+          {movies.map((m, i) => (
+            <Collection movies={m} key={i} />
           ))}
         </div>
       </div>

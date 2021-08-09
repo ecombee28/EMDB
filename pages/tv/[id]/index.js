@@ -25,19 +25,6 @@ const TvInfo = ({
   const id = Cookies.get("id");
   const [showTrailer, setShowTrailer] = useState(false);
 
-  // const getTrailerLink = () => {
-  //   if (trailer.results.length === 0) {
-  //     return " ";
-  //   } else {
-  //     return `https://www.youtube.com/embed/${trailer.results[0].key}`;
-  //   }
-  // };
-
-  // const showTrailer = () => {
-  //   const doc = document.getElementById("trailer");
-  //   doc.style.display = "block";
-  // };
-
   const getGenre = () => {
     let genre = "";
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ImagePaths from "../../../components/ImagePaths";
 import style from "../../../styles/person.module.css";
 import FilmRoles from "../../../components/FilmRoles";

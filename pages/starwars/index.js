@@ -1,3 +1,4 @@
+import React from "react";
 import Head from "next/head";
 import collectionStyle from "../../styles/Collections.module.css";
 import Collection from "../../components/Collection";
@@ -25,7 +26,7 @@ export default function Home({ movies }) {
   );
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const res = await fetch(Requests.fetchStarWarsMovies);
   const movies = await res.json();
 

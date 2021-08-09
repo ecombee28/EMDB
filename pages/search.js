@@ -20,7 +20,7 @@ const search = () => {
     if (query.length >= 1) {
       explore.style.display = "none";
       title.style.display = "none";
-      let done = false;
+
       setSearch(query);
 
       let movie;

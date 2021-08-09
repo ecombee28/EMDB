@@ -8,7 +8,6 @@ import {
   faChevronCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import FetchMovies from "../../components/FetchMovies";
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
@@ -53,6 +52,7 @@ export default function Home() {
 
     fetchPosts();
   }, [page]);
+
   const style = {
     backgroundImage: 'url("/marvel_2.jpg")',
   };
@@ -86,8 +86,8 @@ export default function Home() {
           />
         </div>
         <div className={collectionStyle.collection_wrapper}>
-          {movies.map((m) => (
-            <Collection movies={m} />
+          {movies.map((m, i) => (
+            <Collection movies={m} key={i} />
           ))}
         </div>
       </div>
