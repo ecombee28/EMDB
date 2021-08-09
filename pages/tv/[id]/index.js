@@ -67,7 +67,7 @@ const TvInfo = ({
         src={`${ImagePaths.original}${movie.backdrop_path}`}
         className={movieInfoStyle.backdrop}
       />
-      <div className={movieInfoStyle.blackout}></div>
+
       <div className={movieInfoStyle.movie_info_wrapper}>
         <h1 className={movieInfoStyle.title}>{movie.name}</h1>
         <div className={movieInfoStyle.trailer_wrapper}>

@@ -82,7 +82,7 @@ const movieInfo = ({
           className={movieInfoStyle.img}
         />
       </div>
-      <div className={movieInfoStyle.blackout}></div>
+
       <div className={movieInfoStyle.movie_info_wrapper}>
         <h1 className={movieInfoStyle.title}>{movie.title}</h1>
         <div className={movieInfoStyle.trailer_wrapper}>
