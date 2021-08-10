@@ -11,14 +11,15 @@ import ImagePaths from "../../../components/ImagePaths";
 import Cast from "../../../components/Cast";
 import AddMovie from "../../../components/AddMovies";
 import Cookies from "js-cookie";
+import {
+  getDetails,
+  getTrailer,
+  getRecommended,
+  getCredits,
+  getMovieCount,
+} from "../../../lib/api";
 
-const TvInfo = ({
-  countNumber,
-  movie,
-  trailer,
-  recommended,
-  castMembersArray,
-}) => {
+const TvInfo = ({ countNumber, movie, trailer, recommended, cast }) => {
   const inProduction = movie.in_production;
   const firstYear = new Date(movie.first_air_date).getFullYear();
   const lastYear = new Date(movie.last_air_date).getFullYear();
@@ -35,7 +36,7 @@ const TvInfo = ({
     return genre.substring(0, genre.length - 2);
   };
 
-  console.log(trailer);
+  console.log(cast);
 
   return (
     <div>
@@ -130,7 +131,7 @@ const TvInfo = ({
         </div>
 
         <div className={movieInfoStyle.cast_wrapper}>
-          {castMembersArray.map((list) => (
+          {cast.slice(0, 6).map((list) => (
             <Cast castMember={list} />
           ))}
         </div>
@@ -152,57 +153,16 @@ const TvInfo = ({
 
 export const getServerSideProps = async (context) => {
   const id = context.req.cookies.id;
-  var castMembersArray = [];
 
-  try {
-    const fetchData = await axios.get(
-      `https://combeecreations.com/emdbapi/public/api/user/${id}/movie/${context.params.id}`
-    );
+  const countNumber = await getMovieCount(id, context.params.id);
+  const movie = await getDetails("tv", context.params.id);
+  const trailer = await getTrailer("tv", context.params.id);
+  const recommended = await getRecommended("tv", context.params.id);
+  const cast = await getCredits("tv", context.params.id);
 
-    const countNumber = await fetchData.data;
-
-    const res = await fetch(
-      `https://api.themoviedb.org/3/tv/${context.params.id}?api_key=0f2af5a67e7fbe4db3bc573d65f3724b`
-    );
-    const movie = await res.json();
-
-    const res3 = await fetch(
-      `https://api.themoviedb.org/3/tv/${context.params.id}/videos?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-US`
-    );
-    const trailerResults = await res3.json();
-
-    const res4 = await fetch(
-      `https://api.themoviedb.org/3/tv/${context.params.id}/recommendations?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&with_original_language=en&language=en-US&page=1`
-    );
-    const recommended = await res4.json();
-
-    const res5 = await fetch(
-      `https://api.themoviedb.org/3/tv/${context.params.id}/credits?api_key=0f2af5a67e7fbe4db3bc573d65f3724b&language=en-US`
-    );
-    const cast = await res5.json();
-
-    if (cast.cast.length > 6) {
-      for (let i = 0; i < 6; i++) {
-        castMembersArray[i] = cast.cast[i];
-      }
-    } else if (cast.cast.length > 1 && cast.cast.length <= 6) {
-      cast.cast.map((item, i) => {
-        castMembersArray[i] = item;
-      });
-    } else if (cast.cast.length == 1) {
-      castMembersArray.push(cast.cast[0]);
-    }
-
-    const trailer = await trailerResults.results.filter((t) => {
-      return t.type === "Trailer" && t.site === "YouTube";
-    });
-
-    return {
-      props: { countNumber, movie, trailer, recommended, castMembersArray },
-    };
-  } catch (error) {
-    console.log(error);
-  }
+  return {
+    props: { countNumber, movie, trailer, recommended, cast },
+  };
 };
 
 export default TvInfo;

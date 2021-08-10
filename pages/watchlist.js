@@ -30,8 +30,6 @@ export default function Watchlist() {
     getMovies();
   }, []);
 
-  console.log(userId);
-
   return (
     <div className={style.main_container}>
       <h1 className={style.header}>My list</h1>

@@ -1,29 +1,18 @@
-import axios from "axios";
 import Cookies from "js-cookie";
+import { removeMovieToWatchList } from "../lib/api";
 
 const useRemoveMovie = async (movieId) => {
   var response = "";
   const id = Cookies.get("id");
 
-  try {
-    const fetchData = await axios.post(
-      `https://combeecreations.com/emdbapi/public/api/deletemovies`,
-      {
-        movieId: movieId,
-        userId: id,
-      }
-    );
-
-    if (fetchData.data.Movie_Deleted === "Successfully") {
-      response = "Success";
-    } else {
-      response = "failed";
-    }
-
-    return response;
-  } catch (err) {
-    throw error(err);
+  const removeMovie = await removeMovieToWatchList(movieId, id);
+  if (removeMovie.Movie_Deleted === "Successfully") {
+    return "Success";
+  } else {
+    return "Failed";
   }
+
+  //return response;
 };
 
 export default useRemoveMovie;

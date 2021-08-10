@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import movieStyles from "../styles/Movie.module.css";
 import Poster from "./Poster";
 import {
@@ -46,6 +46,23 @@ const MovieList = ({ movies, title, id, type }) => {
       setRightEnd(false);
     }
   };
+
+  useEffect(() => {
+    const resetSlider = () => {
+      const element = document.getElementById(`${id}`);
+
+      element.scrollTo({
+        top: 0,
+        left: element.scrollLeft == 1000,
+        behavior: "smooth",
+      });
+
+      setLeftEnd(true);
+      setRightEnd(false);
+    };
+
+    resetSlider();
+  }, [movies]);
 
   return (
     <>
