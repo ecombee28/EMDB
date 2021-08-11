@@ -17,6 +17,7 @@ export default function Home({
   romance,
   randomMovie,
 }) {
+  console.log(process.env.NEXT_PUBLIC_API_KEY);
   return (
     <div>
       <Head>
