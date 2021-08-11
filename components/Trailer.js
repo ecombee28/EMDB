@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import movieInfoStyle from "../styles/MovieInfo.module.css";
-import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Iframe from "react-iframe";
 
 const Trailer = ({ trailer }) => {
