@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { removeMovieToWatchList } from "../lib/api";
+import { removeMovieToWatchList } from "../pages/api/api";
 
 const useRemoveMovie = async (movieId) => {
   var response = "";

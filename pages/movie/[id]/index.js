@@ -18,7 +18,7 @@ import {
   getCredits,
   getMovieCount,
   getImdbRatings,
-} from "../../../lib/api";
+} from "../../api/api";
 
 const movieInfo = ({ countNumber, movie, trailer, recommended, cast }) => {
   const id = Cookies.get("id");

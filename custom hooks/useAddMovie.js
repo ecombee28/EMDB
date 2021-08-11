@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { addMovieToWatchList } from "../lib/api";
+import { addMovieToWatchList } from "../pages/api/api";
 
 const useAddMovie = async (movieId, type, name, imagePath) => {
   const id = Cookies.get("id");

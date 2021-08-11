@@ -17,7 +17,7 @@ import {
   getRecommended,
   getCredits,
   getMovieCount,
-} from "../../../lib/api";
+} from "../../api/api";
 
 const TvInfo = ({ countNumber, movie, trailer, recommended, cast }) => {
   const inProduction = movie.in_production;
