@@ -5,11 +5,21 @@ import LandingImage from "../components/LandingImage";
 import TvList from "../components/List";
 import Head from "next/head";
 import style from "../styles/MainPage.module.css";
+import {
+  getTrending,
+  getPopular,
+  getTrendingOnNetflix,
+  getPopularTv,
+  getActionMovies,
+  getComedyMovies,
+  getRomanceMovies,
+  getTopRatedMovies,
+} from "../pages/api/api";
 
 export default function Home({
   movies,
   popularMovies,
-  topRatedMovies,
+  trendingOnNetflix,
   bestMovies,
   bestTv,
   action,
@@ -17,7 +27,6 @@ export default function Home({
   romance,
   randomMovie,
 }) {
-  console.log(process.env.NEXT_PUBLIC_API_KEY);
   return (
     <div>
       <Head>
@@ -46,7 +55,7 @@ export default function Home({
           type="movie"
         />
         <TvList
-          movies={topRatedMovies.results}
+          movies={trendingOnNetflix.results}
           title="Trending on Netflix"
           id={4}
           type="tv"
@@ -76,49 +85,29 @@ export default function Home({
 }
 
 export const getServerSideProps = async () => {
-  try {
-    const res = await fetch(Requests.fetchTrending);
-    const movies = await res.json();
+  const movies = await getTrending();
+  const popularMovies = await getPopular();
+  const trendingOnNetflix = await getTrendingOnNetflix();
+  const bestTv = await getPopularTv();
+  const action = await getActionMovies();
+  const comedies = await getComedyMovies();
+  const romance = await getRomanceMovies();
+  const bestMovies = await getTopRatedMovies();
 
-    const res2 = await fetch(Requests.fetchPopularMovie);
-    const popularMovies = await res2.json();
+  const randomMovie =
+    movies.results[Math.floor(Math.random() * movies.results.length - 1)];
 
-    const res3 = await fetch(Requests.fetchTrendingOnNetflix);
-    const topRatedMovies = await res3.json();
-
-    const res4 = await fetch(Requests.fetchTopRatedMovies);
-    const bestMovies = await res4.json();
-
-    const res5 = await fetch(Requests.fetchPopularTv);
-    const bestTv = await res5.json();
-
-    const res6 = await fetch(Requests.fetchActionMovies);
-    const action = await res6.json();
-
-    const res7 = await fetch(Requests.fetchComedyMovies);
-    const comedies = await res7.json();
-
-    const res8 = await fetch(Requests.fetchRomanceMovies);
-    const romance = await res8.json();
-
-    //Randomly selects a movie for the landingImage component
-    const randomMovie =
-      movies.results[Math.floor(Math.random() * movies.results.length - 1)];
-
-    return {
-      props: {
-        movies,
-        popularMovies,
-        topRatedMovies,
-        bestMovies,
-        bestTv,
-        action,
-        comedies,
-        romance,
-        randomMovie,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-  }
+  return {
+    props: {
+      movies,
+      popularMovies,
+      trendingOnNetflix,
+      bestMovies,
+      bestTv,
+      action,
+      comedies,
+      romance,
+      randomMovie,
+    },
+  };
 };

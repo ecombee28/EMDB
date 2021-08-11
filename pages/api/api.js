@@ -1,4 +1,5 @@
 import axios from "axios";
+import Requests from "../../components/Requests";
 
 const TMDB_API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -148,6 +149,62 @@ export async function removeMovieToWatchList(movieId, id) {
         userId: id,
       }
     );
+    return fetchData.data;
+  } catch (error) {}
+}
+
+export async function getTrending() {
+  try {
+    const fetchData = await axios.get(Requests.fetchTrending);
+    return fetchData.data;
+  } catch (error) {}
+}
+
+export async function getPopular() {
+  try {
+    const fetchData = await axios.get(Requests.fetchPopularMovie);
+    return fetchData.data;
+  } catch (error) {}
+}
+
+export async function getTrendingOnNetflix() {
+  try {
+    const fetchData = await axios.get(Requests.fetchTrendingOnNetflix);
+    return fetchData.data;
+  } catch (error) {}
+}
+
+export async function getPopularTv() {
+  try {
+    const fetchData = await axios.get(Requests.fetchPopularTv);
+    return fetchData.data;
+  } catch (error) {}
+}
+
+export async function getActionMovies() {
+  try {
+    const fetchData = await axios.get(Requests.fetchActionMovies);
+    return fetchData.data;
+  } catch (error) {}
+}
+
+export async function getComedyMovies() {
+  try {
+    const fetchData = await axios.get(Requests.fetchComedyMovies);
+    return fetchData.data;
+  } catch (error) {}
+}
+
+export async function getRomanceMovies() {
+  try {
+    const fetchData = await axios.get(Requests.fetchRomanceMovies);
+    return fetchData.data;
+  } catch (error) {}
+}
+
+export async function getTopRatedMovies() {
+  try {
+    const fetchData = await axios.get(Requests.fetchTopRatedMovies);
     return fetchData.data;
   } catch (error) {}
 }
