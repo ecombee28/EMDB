@@ -64,39 +64,48 @@ const index = ({ person, personDetail }) => {
   };
 
   return (
-    <div className={style.main_wrapper}>
-      <div className={style.main_container}>
-        <section className={style.top_container}>
-          <img
-            src={`${ImagePaths.w500}${personDetail.profile_path}`}
-            className={style.profile_img}
-          />
-          <div className={style.info_container}>
-            <p className={style.title}>{personDetail.name}</p>
-            <p className={style.birth_date}>{`Born: ${getDate(
-              personDetail.birthday
-            )} in ${personDetail.place_of_birth}`}</p>
-            {personDetail.deathday !== null && (
-              <p className={style.birth_date}>{`Death: ${getDate(
-                personDetail.deathday
-              )} (age ${getAgeOfDeath(
-                personDetail.birthday,
-                personDetail.deathday
-              )})`}</p>
-            )}
-            <h2 className={style.header}>Biography</h2>
-            <p className={style.bio}>{personDetail.biography}</p>
-          </div>
-        </section>
-        <section className={style.bottom_container}>
-          <h2 className={style.header}>Filmography</h2>
-          <h2 className={style.header}>{`Actor (${person.length}) credits`}</h2>
-          {person.map((p, i) => (
-            <FilmRoles key={i} movie={p} />
-          ))}
-        </section>
+    <>
+      <Head>
+        <title>{`${personDetail.name} Bio/EMDB`}</title>
+        <meta name="keywords" content="web dev" />
+        <link rel="shortcut icon" href="logo.ico" />
+      </Head>
+      <div className={style.main_wrapper}>
+        <div className={style.main_container}>
+          <section className={style.top_container}>
+            <img
+              src={`${ImagePaths.w500}${personDetail.profile_path}`}
+              className={style.profile_img}
+            />
+            <div className={style.info_container}>
+              <p className={style.title}>{personDetail.name}</p>
+              <p className={style.birth_date}>{`Born: ${getDate(
+                personDetail.birthday
+              )} in ${personDetail.place_of_birth}`}</p>
+              {personDetail.deathday !== null && (
+                <p className={style.birth_date}>{`Death: ${getDate(
+                  personDetail.deathday
+                )} (age ${getAgeOfDeath(
+                  personDetail.birthday,
+                  personDetail.deathday
+                )})`}</p>
+              )}
+              <h2 className={style.header}>Biography</h2>
+              <p className={style.bio}>{personDetail.biography}</p>
+            </div>
+          </section>
+          <section className={style.bottom_container}>
+            <h2 className={style.header}>Filmography</h2>
+            <h2
+              className={style.header}
+            >{`Actor (${person.length}) credits`}</h2>
+            {person.map((p, i) => (
+              <FilmRoles key={i} movie={p} />
+            ))}
+          </section>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
