@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import ImagePaths from "../../../components/ImagePaths";
 import style from "../../../styles/person.module.css";
 import FilmRoles from "../../../components/FilmRoles";
