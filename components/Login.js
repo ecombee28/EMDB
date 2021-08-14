@@ -64,6 +64,7 @@ const login = ({ changeView }) => {
 
   const signIn = () => {
     setLoading(true);
+
     axios
       .post(`https://combeecreations.com/emdbapi/public/api/login`, {
         username: userNameInput,

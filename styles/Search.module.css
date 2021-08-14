@@ -126,6 +126,21 @@
     display: none;
 }
 
+.no_results {
+    width: 90%;
+    padding: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.no_results p {
+    font-size: 2rem;
+    color: #ffffff;
+}
+
 @media screen and (max-device-width: 1410px) {
     .search_results {
         width: 95%;
@@ -157,6 +172,16 @@
         display: flex;
         place-content: center space-around;
     }
+    .title_container {
+        width: 80%;
+        margin-left: 50px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .title {
+        font-size: 1.4rem;
+    }
     .explore_results {
         margin-bottom: 120px;
     }
@@ -173,12 +198,26 @@
         width: 60%;
         object-fit: contain;
     }
+    .no_results p {
+        padding: 0;
+        font-size: 1.5rem;
+    }
 }
 
 @media screen and (max-width:480px) {
     .search_bar {
         height: 70px;
         font-size: 20px;
+    }
+    .title_container {
+        width: 100%;
+        margin-left: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .title {
+        font-size: 1.2rem;
     }
     .explore_results {
         margin-bottom: 80px;
@@ -194,12 +233,26 @@
         width: 60%;
         object-fit: contain;
     }
+    .no_results p {
+        padding: 0;
+        font-size: 1rem;
+    }
 }
 
 @media screen and (max-width:320px) {
     .search_bar {
         height: 70px;
         font-size: 20px;
+    }
+    .title_container {
+        width: 100%;
+        margin-left: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .title {
+        font-size: 1rem;
     }
     .explore_results {
         margin-bottom: 80px;
@@ -215,5 +268,8 @@
     .dc_img {
         width: 70%;
         object-fit: contain;
+    }
+    .no_results p {
+        font-size: .9rem;
     }
 }

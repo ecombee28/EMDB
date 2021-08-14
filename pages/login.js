@@ -6,8 +6,7 @@ import SignUp from "../components/SignUp";
 const login = () => {
   const [signUp, setSignUp] = useState(false);
 
-  const changeModule = (model, e) => {
-    console.log(e);
+  const changeModule = (model) => {
     model === "login" ? setSignUp(false) : setSignUp(true);
   };
 

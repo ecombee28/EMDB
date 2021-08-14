@@ -3,66 +3,14 @@ import Head from "next/head";
 import ImagePaths from "../../../components/ImagePaths";
 import style from "../../../styles/person.module.css";
 import FilmRoles from "../../../components/FilmRoles";
+import { getAgeOfDeath, getDate } from "../../../lib/getAges";
 
 const index = ({ person, personDetail }) => {
-  const getDate = (date) => {
-    let year, day, month;
-    const monthsArr = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-
-    year = date.substr(0, 4);
-    month = date.substr(5, 2).replace(/^0+/, "");
-    day = date.substr(8).replace(/^0+/, "");
-    month = monthsArr[month - 1];
-
-    return `${month} ${day}, ${year}`;
-  };
-
-  const getAgeOfDeath = (birth, death) => {
-    let birthYear,
-      deathYear,
-      ageOfDeath,
-      deathMonth,
-      birthMonth,
-      birthDay,
-      deathDay;
-
-    birthYear = parseInt(birth.substr(0, 4));
-    deathYear = parseInt(death.substr(0, 4));
-    birthMonth = parseInt(birth.substr(5, 2));
-    deathMonth = parseInt(death.substr(5, 2));
-    birthDay = parseInt(birth.substr(8));
-    deathDay = parseInt(death.substr(8));
-
-    //if they died on their birth month
-    if (deathMonth == birthMonth) {
-      //if they died before there birthday
-      if (deathDay < birthDay) {
-        ageOfDeath = deathYear - birthYear - 1;
-      } else {
-        ageOfDeath = deathYear - birthYear;
-      }
-      //if they died before there birthday
-    } else if (deathMonth < birthMonth) {
-      ageOfDeath = deathYear - birthYear - 1;
-    } else {
-      ageOfDeath = deathYear - birthYear;
-    }
-
-    return ageOfDeath;
-  };
+  const deathAge =
+    personDetail.deathday &&
+    getAgeOfDeath(personDetail.birthday, personDetail.deathday);
+  const birthDay = getDate(personDetail.birthday);
+  const deathDay = personDetail.deathday && getDate(personDetail.deathday);
 
   return (
     <>
@@ -80,16 +28,13 @@ const index = ({ person, personDetail }) => {
             />
             <div className={style.info_container}>
               <p className={style.title}>{personDetail.name}</p>
-              <p className={style.birth_date}>{`Born: ${getDate(
-                personDetail.birthday
-              )} in ${personDetail.place_of_birth}`}</p>
-              {personDetail.deathday !== null && (
-                <p className={style.birth_date}>{`Death: ${getDate(
-                  personDetail.deathday
-                )} (age ${getAgeOfDeath(
-                  personDetail.birthday,
-                  personDetail.deathday
-                )})`}</p>
+              <p
+                className={style.birth_date}
+              >{`Born: ${birthDay} in ${personDetail.place_of_birth}`}</p>
+              {personDetail.deathday && (
+                <p className={style.birth_date}>
+                  {`Death: ${deathDay} (${deathAge})`}
+                </p>
               )}
               <h2 className={style.header}>Biography</h2>
               <p className={style.bio}>{personDetail.biography}</p>

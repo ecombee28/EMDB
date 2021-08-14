@@ -14,7 +14,6 @@ export default function Nav() {
   useEffect(() => {
     setId(Cookie.get("id"));
     setUsername(Cookie.get("username"));
-
     window.addEventListener("scroll", () => {
       if (window.scrollY > 100) {
         setShow(true);
@@ -22,7 +21,7 @@ export default function Nav() {
         setShow(false);
       }
     });
-  }, []);
+  });
 
   return (
     <>

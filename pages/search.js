@@ -3,43 +3,39 @@ import React, { useState } from "react";
 import SearchPosters from "../components/SearchPosters";
 import searchStyles from "../styles/Search.module.css";
 import Link from "next/link";
+import axios from "axios";
 
 const search = () => {
   const [movies, setMovies] = useState(false);
-  const [div, setDiv] = useState(false);
-  const [search, setSearch] = useState();
+  const [searchComponent, setSearchComponent] = useState(false);
+
+  const [title, setTitle] = useState("Explore");
 
   let i = 0;
 
   const check = async (event) => {
     let query = event.target.value;
-    const explore = document.getElementById("explore");
-    const search_results = document.getElementById("search_results");
-    const title = document.getElementById("title");
 
-    if (query.length >= 1) {
-      explore.style.display = "none";
-      title.style.display = "none";
+    query = query.trim();
 
-      setSearch(query);
+    if (query.length >= 2) {
+      setTitle(query);
 
-      let movie;
       try {
-        const res = await fetch(
+        const res = await axios.get(
           `https://api.themoviedb.org/3/search/multi?api_key=${process.env.NEXT_PUBLIC_API_KEY}&with_original_language=en&language=en-US&query=${query}&page=1&include_adult=false`
         );
 
-        movie = await res.json();
-        setMovies(movie.results);
+        await setMovies(res.data.results);
       } catch (err) {
         console.log(err);
       }
 
-      setDiv(true);
+      setSearchComponent(true);
     } else {
-      explore.style.display = "flex";
-      title.style.display = "block";
-      setDiv(false);
+      // explore.style.display = "flex";
+      setTitle("Explore");
+      setSearchComponent(false);
     }
   };
 
@@ -62,75 +58,79 @@ const search = () => {
         />
       </div>
 
-      {div === true ? (
+      {searchComponent ? (
         <>
           <h1
             id="search_title"
             className={`${searchStyles.title} ${searchStyles.title_container}`}
           >
-            {`Search Results for: ${search}`}
+            {`Search Results for: ${title}`}
           </h1>
 
           <main id="search_results" className={searchStyles.search_results}>
-            <SearchPosters movies={movies} />
+            <SearchPosters movies={movies} title={title} />
           </main>
         </>
       ) : (
-        ""
+        <>
+          <h1
+            id="title"
+            className={`${searchStyles.title} ${searchStyles.title_container}`}
+          >
+            {title}
+          </h1>
+          <main id="explore" className={searchStyles.explore_results}>
+            <Link href={"/disney"}>
+              <div
+                className={`${searchStyles.search_posters} ${searchStyles.explore_posters} ${searchStyles.disney}`}
+              >
+                <img
+                  src="/pixar.png"
+                  alt=""
+                  className={searchStyles.explore_img}
+                />
+                <p className={searchStyles.explore_text}>Movie Collection</p>
+              </div>
+            </Link>
+            <Link href={"/marvel"}>
+              <div
+                className={`${searchStyles.search_posters} ${searchStyles.explore_posters} ${searchStyles.marvel}`}
+              >
+                <img
+                  src="/marvel.png"
+                  alt=""
+                  className={searchStyles.explore_img}
+                />
+                <p className={searchStyles.explore_text}>Movie Collection</p>
+              </div>
+            </Link>
+            <Link href={"/dc"}>
+              <div
+                className={`${searchStyles.search_posters} ${searchStyles.explore_posters} ${searchStyles.dc}`}
+              >
+                <img
+                  src="/dc.png"
+                  alt=""
+                  className={`${searchStyles.explore_img} ${searchStyles.dc_img}`}
+                />
+                <p className={searchStyles.explore_text}>Movie Collection</p>
+              </div>
+            </Link>
+            <Link href={"/starwars"}>
+              <div
+                className={`${searchStyles.search_posters} ${searchStyles.explore_posters} ${searchStyles.starwars}`}
+              >
+                <img
+                  src="/starwars.png"
+                  alt=""
+                  className={searchStyles.explore_img}
+                />
+                <p className={searchStyles.explore_text}>Movie Collection</p>
+              </div>
+            </Link>
+          </main>
+        </>
       )}
-
-      <h1
-        id="title"
-        className={`${searchStyles.title} ${searchStyles.title_container}`}
-      >
-        Explore
-      </h1>
-      <main id="explore" className={searchStyles.explore_results}>
-        <Link href={"/disney"}>
-          <div
-            className={`${searchStyles.search_posters} ${searchStyles.explore_posters} ${searchStyles.disney}`}
-          >
-            <img src="/pixar.png" alt="" className={searchStyles.explore_img} />
-            <p className={searchStyles.explore_text}>Movie Collection</p>
-          </div>
-        </Link>
-        <Link href={"/marvel"}>
-          <div
-            className={`${searchStyles.search_posters} ${searchStyles.explore_posters} ${searchStyles.marvel}`}
-          >
-            <img
-              src="/marvel.png"
-              alt=""
-              className={searchStyles.explore_img}
-            />
-            <p className={searchStyles.explore_text}>Movie Collection</p>
-          </div>
-        </Link>
-        <Link href={"/dc"}>
-          <div
-            className={`${searchStyles.search_posters} ${searchStyles.explore_posters} ${searchStyles.dc}`}
-          >
-            <img
-              src="/dc.png"
-              alt=""
-              className={`${searchStyles.explore_img} ${searchStyles.dc_img}`}
-            />
-            <p className={searchStyles.explore_text}>Movie Collection</p>
-          </div>
-        </Link>
-        <Link href={"/starwars"}>
-          <div
-            className={`${searchStyles.search_posters} ${searchStyles.explore_posters} ${searchStyles.starwars}`}
-          >
-            <img
-              src="/starwars.png"
-              alt=""
-              className={searchStyles.explore_img}
-            />
-            <p className={searchStyles.explore_text}>Movie Collection</p>
-          </div>
-        </Link>
-      </main>
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import style from "../styles/Username.module.css";
-import Cookie from "js-cookie";
 import Loader from "react-loader-spinner";
+import Cookie from "js-cookie";
 
 const UserName = ({ username }) => {
   const [loading, setLoading] = useState(false);
@@ -12,12 +12,14 @@ const UserName = ({ username }) => {
     setLoading(true);
     Cookie.remove("id");
     Cookie.remove("username");
+
     setTimeout(() => {
       router.push("/");
-    }, 2000);
+    }, 3000);
+
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 4000);
   };
 
   return (
