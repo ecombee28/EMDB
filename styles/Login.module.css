@@ -51,7 +51,7 @@
 
 .title {
     font-size: clamp(1.2rem, 1.2rem, 1.2vw);
-    color: rgb(255, 255, 255);
+    color: var(--white);
 }
 
 .input_wrapper {
@@ -61,7 +61,7 @@
     padding-right: 10px;
     margin-bottom: 30px;
     border-radius: 9px;
-    background-color: #fff;
+    background-color: var(--white);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -72,7 +72,7 @@
     width: 100%;
     height: 30px;
     font-size: 1rem;
-    color: #000;
+    color: var(--black);
     border: none;
     outline: none;
 }
@@ -82,8 +82,8 @@
     font-size: 1.4rem;
     padding: 5px 15px;
     margin-top: 45px;
-    color: #fff;
-    background-color: rgb(255, 0, 0);
+    color: var(--white);
+    background-color: var(--red);
     border-radius: 10px;
     border: none;
     outline: none;
@@ -93,7 +93,7 @@
 }
 
 .submit_btn:hover {
-    background-color: rgb(255, 53, 53);
+    background-color: var(--redHover);
 }
 
 .signup_wrapper {
@@ -108,7 +108,7 @@
 }
 
 .error {
-    color: rgb(255, 0, 0);
+    color: var(--red);
     font-size: .9rem;
     margin-left: 10px;
     margin-top: 10px;
@@ -116,7 +116,7 @@
 }
 
 .invalid_login {
-    color: rgb(255, 0, 0);
+    color: var(--red);
     font-size: .9rem;
     margin-top: 10px;
     position: absolute;
@@ -126,13 +126,13 @@
 
 .signup_txt {
     font-size: clamp(1.2rem, 1.2rem, 1.2vw);
-    color: rgb(134, 134, 134);
+    color: var(--grayText);
     margin: auto;
 }
 
 .signup {
     font-size: clamp(1.2rem, 1.2rem, 1.2vw);
-    color: #fff;
+    color: var(--white);
     margin: auto;
     cursor: pointer;
 }
@@ -155,7 +155,7 @@
         height: 400px;
         top: 60%;
         left: 50%;
-        background-color: #fff;
+        background-color: var(--white);
     }
     .login_container {
         width: 300px;
@@ -188,11 +188,10 @@
     }
     .signup_txt {
         font-size: 1rem;
-        color: rgb(134, 134, 134);
     }
     .signup {
         font-size: 1rem;
-        color: #fff;
+        color: var(--white);
         margin-left: 10px;
     }
     .loader {
@@ -269,13 +268,9 @@
         font-size: 1.2rem;
         margin-top: 25px;
     }
-    .signup_txt {
-        font-size: 1rem;
-        color: rgb(134, 134, 134);
-    }
     .signup {
         font-size: 1rem;
-        color: #fff;
+        color: var(--white);
         margin-left: 10px;
     }
     .loader {

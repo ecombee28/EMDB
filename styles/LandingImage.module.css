@@ -11,14 +11,14 @@
     position: absolute;
     top: 0;
     left: 0;
-    -webkit-mask-image: linear-gradient(to bottom, black 42%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 42%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, var(--black) 42%, transparent 100%);
+    mask-image: linear-gradient(to bottom, var(--black) 42%, transparent 100%);
 }
 
 .image {
     width: 100vw;
-    -webkit-mask-image: linear-gradient(to bottom, black 42%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 42%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, var(--black) 42%, transparent 100%);
+    mask-image: linear-gradient(to bottom, var(--black) 42%, transparent 100%);
 }
 
 .movie_info {
@@ -32,14 +32,14 @@
 
 .title {
     font-size: 4.3rem;
-    color: #ffffff;
+    color: var(--white);
     font-weight: bold;
     margin: 0;
 }
 
 .btn_more_info {
     font-size: 1.7rem;
-    color: white;
+    color: var(--white);
     padding: 3px 13px;
     background-color: rgba(61, 61, 61, .7);
     border-radius: 12px;
@@ -64,7 +64,7 @@
 
 .plot {
     font-size: 1.3rem;
-    color: #ffffff;
+    color: var(--white);
 }
 
 .wrap {
@@ -91,13 +91,13 @@
     }
     .title {
         font-size: 3.5rem;
-        color: #ffffff;
+        color: var(--white);
         font-weight: bold;
         margin: 0;
     }
     .trailer {
         font-size: 1.8rem;
-        color: white;
+        color: var(--white);
         padding: 3px 13px;
         background-color: rgba(61, 61, 61, .8);
     }
@@ -124,13 +124,13 @@
     }
     .title {
         font-size: 4rem;
-        color: #ffffff;
+        color: var(--white);
         font-weight: bold;
         margin: 0;
     }
     .trailer {
         font-size: 1.8rem;
-        color: white;
+        color: var(--white);
         padding: 3px 13px;
         background-color: rgba(61, 61, 61, .8);
     }
@@ -157,13 +157,13 @@
     }
     .title {
         font-size: 4rem;
-        color: #ffffff;
+        color: var(--white);
         font-weight: bold;
         margin: 0;
     }
     .trailer {
         font-size: 1.8rem;
-        color: white;
+        color: var(--white);
         padding: 3px 13px;
         background-color: rgba(61, 61, 61, .8);
     }
@@ -194,7 +194,7 @@
     }
     .title {
         font-size: 1.7rem;
-        color: #ffffff;
+        color: var(--white);
         font-weight: bold;
         margin: 0;
     }
@@ -203,7 +203,7 @@
     }
     .trailer {
         font-size: 1.3rem;
-        color: white;
+        color: var(--white);
         padding: 3px 13px;
         background-color: rgba(61, 61, 61, .8);
     }
@@ -233,7 +233,7 @@
     }
     .title {
         font-size: 1.7rem;
-        color: #ffffff;
+        color: var(--white);
         font-weight: bold;
         margin: 0;
     }
@@ -242,7 +242,7 @@
     }
     .trailer {
         font-size: 1.3rem;
-        color: white;
+        color: var(--white);
         padding: 3px 13px;
         background-color: rgba(61, 61, 61, .8);
     }

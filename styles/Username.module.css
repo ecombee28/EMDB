@@ -16,17 +16,12 @@
 }
 
 .p {
-    color: rgb(255, 255, 255);
+    color: var(--white);
     transition: all .4s ease-in-out;
 }
 
 .logout {
     display: none;
-    color: rgb(255, 255, 255);
+    color: var(--white);
     transition: all .4s ease-in-out;
-}
-
-.drop_down {
-    height: 50px;
-    background-color: beige;
 }

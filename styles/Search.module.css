@@ -16,7 +16,7 @@
     font-size: 1em;
     font-weight: bolder;
     outline: none;
-    background-color: rgb(235, 235, 235);
+    background-color: var(--white);
     color: rgb(83, 83, 83);
 }
 
@@ -30,7 +30,7 @@
 
 .title {
     font-size: clamp(1.5rem, 2.5vw, 2.5vw);
-    color: #ffffff;
+    color: var(--white);
     position: relative;
 }
 
@@ -111,7 +111,7 @@
 }
 
 .marvel {
-    background-color: #ebebeb;
+    background-color: var(--arrowWhite);
 }
 
 .starwars {
@@ -138,7 +138,7 @@
 
 .no_results p {
     font-size: 2rem;
-    color: #ffffff;
+    color: var(--white);
 }
 
 @media screen and (max-device-width: 1410px) {

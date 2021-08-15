@@ -27,7 +27,7 @@
     left: 50px;
     top: 12%;
     z-index: 20;
-    color: #ffffff;
+    color: var(--white);
     font-size: 50px;
 }
 
@@ -40,7 +40,7 @@
     right: 0;
     top: 12%;
     z-index: 20;
-    color: #ffffff;
+    color: var(--white);
     font-size: 50px;
 }
 
@@ -49,7 +49,7 @@
     object-fit: contain;
     font-size: 40px;
     margin-top: 20%;
-    color: rgb(221, 221, 221);
+    color: var(--arrowWhite);
     z-index: 30;
     cursor: pointer;
 }
@@ -59,21 +59,21 @@
     object-fit: contain;
     font-size: 40px;
     margin-top: 20%;
-    color: rgb(221, 221, 221);
+    color: var(--arrowWhite);
     z-index: 30;
     cursor: pointer;
 }
 
 .left_arrow:hover {
     background-color: rgba(0, 0, 0, .7);
-    -webkit-mask-image: linear-gradient(to right, black 72%, transparent 100%);
-    mask-image: linear-gradient(to right, black 72%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, var(--black) 72%, transparent 100%);
+    mask-image: linear-gradient(to right, var(--black) 72%, transparent 100%);
 }
 
 .right_arrow:hover {
     background-color: rgba(0, 0, 0, .7);
-    -webkit-mask-image: linear-gradient(to left, black 72%, transparent 100%);
-    mask-image: linear-gradient(to left, black 72%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, var(--black) 72%, transparent 100%);
+    mask-image: linear-gradient(to left, var(--black) 72%, transparent 100%);
 }
 
 .move_left_arrow {
@@ -86,7 +86,7 @@
 
 .title {
     font-size: 1.5rem;
-    color: #ffffff;
+    color: var(--white);
     margin-top: 10px;
     margin-bottom: 5px;
 }
@@ -126,7 +126,7 @@
 .poster::before {
     content: "";
     display: block;
-    border-top: 2px solid rgb(255, 0, 0);
+    border-top: 2px solid var(--red);
     opacity: 1;
     transform: scale(0, 1);
     transition: all ease-in 400ms;

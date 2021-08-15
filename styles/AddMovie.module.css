@@ -1,8 +1,8 @@
 .movie_container .tooltiptext {
     visibility: hidden;
     width: 150px;
-    background-color: black;
-    color: #fff;
+    background-color: var(--white);
+    color: var(--white);
     font-size: 16px;
     text-align: center;
     border-radius: 6px;
@@ -31,23 +31,23 @@
 .movie_container {
     width: 40px;
     height: 40px;
-    border: 3px solid rgb(248, 3, 3);
-    background-color: rgba(3, 3, 3, .7);
+    border: 3px solid var(--red);
+    background-color: var(--movieConBlack);
     border-radius: 50%;
     cursor: pointer;
     font-size: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
+    color: var(--white);
     z-index: 40;
     transition: all .4s ease-in-out;
     position: relative;
 }
 
 .movie_container:hover {
-    background-color: #fff;
-    color: #ff0000;
+    background-color: var(--white);
+    color: var(--red);
 }
 
 .icons {

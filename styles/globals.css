@@ -11,7 +11,7 @@
 html, body {
   padding: 0;
   margin: 0;
-  background-color: rgb(0, 0, 0);
+  background-color: var(--black);
   scroll-behavior: smooth;
 }
 
@@ -22,4 +22,17 @@ a {
 
 ::-webkit-scrollbar {
   background: transparent;
+}
+
+:root {
+  --white: #fff;
+  --black: #000;
+  --red: rgb(248, 3, 3);
+  --logoRed: rgb(218, 10, 10);
+  --redHover: rgb(255, 53, 53);
+  --movieConBlack: rgba(3, 3, 3, .7);
+  --borderGray: rgb(187, 187, 187);
+  --blue: rgb(21, 93, 248);
+  --grayText: rgb(134, 134, 134);
+  --arrowWhite: rgb(221, 221, 221);
 }

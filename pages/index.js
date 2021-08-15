@@ -1,6 +1,5 @@
 import React from "react";
 import MovieList from "../components/List";
-import Requests from "../components/Requests";
 import LandingImage from "../components/LandingImage";
 import TvList from "../components/List";
 import Head from "next/head";

@@ -26,7 +26,7 @@
 }
 
 .title {
-    color: #ffffff;
+    color: var(--white);
     margin-top: 10%;
 }
 
@@ -68,8 +68,8 @@
 
 .image {
     width: 100vw;
-    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, var(--black) 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, var(--black) 80%, transparent 100%);
 }
 
 .arrow_wrapper {
@@ -124,8 +124,8 @@
     bottom: 15px;
     width: 40px;
     height: 10px;
-    background-color: #ffffff;
-    border: 2px solid black;
+    background-color: var(--white);
+    border: 2px solid var(--black);
 }
 
 .hide {
