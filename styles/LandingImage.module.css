@@ -1,6 +1,6 @@
 .wrapper {
     width: 100%;
-    height: 100vh;
+    height: 80vh;
     position: relative;
 }
 
@@ -11,12 +11,13 @@
     position: absolute;
     top: 0;
     left: 0;
-    -webkit-mask-image: linear-gradient(to bottom, var(--black) 42%, transparent 100%);
-    mask-image: linear-gradient(to bottom, var(--black) 42%, transparent 100%);
+    /* -webkit-mask-image: linear-gradient(to bottom, var(--black) 42%, transparent 100%);
+    mask-image: linear-gradient(to bottom, var(--black) 42%, transparent 100%); */
 }
 
 .image {
     width: 100vw;
+    object-fit: contain;
     -webkit-mask-image: linear-gradient(to bottom, var(--black) 42%, transparent 100%);
     mask-image: linear-gradient(to bottom, var(--black) 42%, transparent 100%);
 }
@@ -113,7 +114,7 @@
     }
 }
 
-@media screen and (max-device-width: 1024px) and (orientation:portrait) {
+/* @media screen and (max-device-width: 1024px) and (orientation:portrait) {
     .movie_info {
         width: 90%;
         height: auto;
@@ -177,7 +178,7 @@
     .icon {
         font-size: 15px;
     }
-}
+} */
 
 /***************************** 
    Media query's up to 800px
@@ -186,6 +187,7 @@
 @media screen and (max-device-width: 800px) and (orientation:landscape) {
     .wrapper {
         background-position: center center;
+        margin-top: 50px;
     }
     .movie_info {
         width: 97%;
@@ -224,12 +226,15 @@
         background-position: center center;
     }
     .image {
-        height: 55vh;
+        height: 100vw;
+        object-fit: cover;
+        -webkit-mask-image: linear-gradient(to bottom, var(--black) 72%, transparent 100%);
+        mask-image: linear-gradient(to bottom, var(--black) 72%, transparent 100%);
     }
     .movie_info {
         width: 97%;
         height: auto;
-        top: 30vh;
+        top: 20vh;
     }
     .title {
         font-size: 1.7rem;
@@ -258,8 +263,4 @@
     }
 }
 
-@media screen and (max-device-width: 500px) and (orientation:portrait) {
-    .image {
-        height: 50vh;
-    }
-}
+@media screen and (max-device-width: 500px) and (orientation:portrait) {}
