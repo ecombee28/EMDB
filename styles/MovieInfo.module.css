@@ -26,7 +26,7 @@
 
 .img {
     width: 100%;
-    height: 100%;
+    object-fit: cover;
     opacity: .6;
     -webkit-mask-image: linear-gradient(to bottom, var(--black) 42%, transparent 100%);
     mask-image: linear-gradient(to bottom, var(--black) 42%, transparent 100%);
@@ -325,10 +325,6 @@
     .title {
         font-size: 2.2em;
     }
-    .img {
-        width: 100vw;
-        height: 80vh;
-    }
     .movie_info_wrapper {
         padding: 15px;
         position: absolute;
@@ -374,10 +370,6 @@
         top: 15%;
         left: 2%;
         font-size: 16px;
-    }
-    .img {
-        width: 100vw;
-        height: 60vh;
     }
     .movie_info {
         width: 100%;
@@ -450,16 +442,20 @@
     }
 }
 
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+    .recommended {
+        margin-bottom: 80px;
+    }
+}
+
 /* MEDIA QUERY MAX-WIDTH:480 */
 
 @media screen and (max-width:480px) {
     .backdrop {
         width: 100%;
         height: 100vh;
-    }
-    .img {
-        min-width: 100%;
-        height: 50vh;
     }
     .trailer_button {
         padding: 6px 10px;
