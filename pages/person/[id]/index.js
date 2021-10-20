@@ -11,7 +11,6 @@ const index = ({ person, personDetail }) => {
     getAgeOfDeath(personDetail.birthday, personDetail.deathday);
   const birthDay = getDate(personDetail.birthday);
   const deathDay = personDetail.deathday && getDate(personDetail.deathday);
-  console.log(personDetail);
 
   return (
     <>
