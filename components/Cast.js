@@ -7,6 +7,8 @@ const Cast = ({ castMember }) => {
   const castImage = ImagePaths.w500 + castMember.profile_path;
   const blankImage = "/blank-profile-picture.png";
 
+  console.log(castMember);
+
   return (
     <Link href="/person/[id]" as={`/person/${castMember.id}`}>
       <div className={style.cast_node_wrapper}>

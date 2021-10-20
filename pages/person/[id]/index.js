@@ -11,6 +11,7 @@ const index = ({ person, personDetail }) => {
     getAgeOfDeath(personDetail.birthday, personDetail.deathday);
   const birthDay = getDate(personDetail.birthday);
   const deathDay = personDetail.deathday && getDate(personDetail.deathday);
+  console.log(personDetail);
 
   return (
     <>
@@ -28,9 +29,11 @@ const index = ({ person, personDetail }) => {
             />
             <div className={style.info_container}>
               <p className={style.title}>{personDetail.name}</p>
-              <p
-                className={style.birth_date}
-              >{`Born: ${birthDay} in ${personDetail.place_of_birth}`}</p>
+              <p className={style.birth_date}>{`Born: ${birthDay} in ${
+                personDetail.place_of_birth
+                  ? personDetail.place_of_birth
+                  : `unknown`
+              }`}</p>
               {personDetail.deathday && (
                 <p className={style.birth_date}>
                   {`Death: ${deathDay} (${deathAge})`}
