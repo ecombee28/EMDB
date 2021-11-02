@@ -2,7 +2,6 @@ import Cookies from "js-cookie";
 import { removeMovieToWatchList } from "../pages/api/api";
 
 const useRemoveMovie = async (movieId) => {
-  var response = "";
   const id = Cookies.get("id");
 
   const removeMovie = await removeMovieToWatchList(movieId, id);
