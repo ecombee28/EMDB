@@ -88,7 +88,7 @@ const login = ({ changeView }) => {
 
           setTimeout(() => {
             setError(false);
-          }, 4000);
+          }, 6000);
         }
       });
   };
