@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "../styles/Login.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";

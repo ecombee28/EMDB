@@ -5,7 +5,6 @@ import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Recommended from "../../../components/List";
 import Head from "next/head";
-import axios from "axios";
 import Trailer from "../../../components/Trailer";
 import ImagePaths from "../../../components/ImagePaths";
 import Cast from "../../../components/Cast";
@@ -36,8 +35,6 @@ const TvInfo = ({ countNumber, movie, trailer, recommended, cast }) => {
     return genre.substring(0, genre.length - 2);
   };
 
-  console.log(cast);
-
   return (
     <div>
       <Head>
@@ -64,11 +61,12 @@ const TvInfo = ({ countNumber, movie, trailer, recommended, cast }) => {
           <Trailer trailer={trailer} />
         </div>
       )}
-      <img
-        src={`${ImagePaths.original}${movie.backdrop_path}`}
-        className={movieInfoStyle.backdrop}
-      />
-
+      <div className={movieInfoStyle.backdrop}>
+        <img
+          src={`${ImagePaths.original}${movie.backdrop_path}`}
+          className={movieInfoStyle.img}
+        />
+      </div>
       <div className={movieInfoStyle.movie_info_wrapper}>
         <h1 className={movieInfoStyle.title}>{movie.name}</h1>
         <div className={movieInfoStyle.trailer_wrapper}>
