@@ -120,7 +120,8 @@ const movieInfo = ({ countNumber, movie, trailer, recommended, cast }) => {
         </div>
 
         <div className={movieInfoStyle.movie_info}>
-          <li className={movieInfoStyle.rated}>{imdb.Rated}</li>
+          {imdb && <li className={movieInfoStyle.rated}>{imdb.Rated}</li>}
+
           <li className={movieInfoStyle.year}>{getYear()}</li>
           <li
             className={movieInfoStyle.runtime}
