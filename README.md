@@ -6,15 +6,15 @@ Erics Movie Database
 
 This application uses the TMDB(The movie database) API together with all of its data. The home page displays trending movies, tv shows, popular movies, trending on Netflix's, and top-rated movies of all time.
 
-![](home.png)
+![](EMDB pics/Main.png)
 
 When a title is clicked on you will be able to view details of that selected movie. You will see the rating, year, genre, trailer, plot, and even recommended movies all from the TMDB api.
 
-![](movie_main.png)
+![](EMDB pics/index.png)
 
 The search function of this application brings you to a landing page that displays 4 movie collections Marvel, DC, Disney, and Star Wars. I have used state and useEffect to dynamically update your search results for a more natural feel.
 
-![](search_1.png)
+![](EMDB pics/search.png)
 
 # Languages and Frameworks used
 
