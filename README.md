@@ -16,6 +16,10 @@ The search function of this application brings you to a landing page that displa
 
 ![](/Images/search.png)
 
+The user can also create and login to their account. When the use has logged in, they can then save movies to their watch list. 
+
+![](/Images/login.png)
+
 # Languages and Frameworks used
 
 I used the Next.js framework to build this application. It is also fully mobile responsive.
