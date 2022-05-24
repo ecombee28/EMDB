@@ -22,7 +22,7 @@ The user can also create and login to their account. When the use has logged in,
 
 # Languages and Frameworks used
 
-I used the Next.js framework to build this application. It is also fully mobile responsive.
+I used the Next.js framework to build this application. The application is also connected to a MySQL database which allows the user to create a user account. Other technologies used where HTML, CSS, and TMDB API for all the movie content. It is also fully mobile responsive.
 
 # Things I learned
 
